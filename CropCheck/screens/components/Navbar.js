@@ -1,11 +1,13 @@
 import React from 'react';
-import { View, TouchableOpacity, Text, Image, StyleSheet } from 'react-native'; // Import Image
-import { SvgUri } from 'react-native-svg';
-
+import { View, TouchableOpacity, Text, Image, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const Navbar = () => {
+  const navigation = useNavigation();
+
   const handleScanNow = () => {
-    // Handle the Scan Now button click
+    // Navigate to the ScanScreen for capturing images
+    navigation.navigate('ScanScreen');
   };
 
   const handleHome = () => {
@@ -32,25 +34,21 @@ const Navbar = () => {
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.button} onPress={handleDiagnose}>
-        {/* Replace 'blank' with the actual image name for Diagnose button */}
         <Image source={require('../../assets/search.png')} style={styles.icon} />
         <Text style={styles.buttonText}>Diagnose</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.scanButton} onPress={handleScanNow}>
-        {/* Replace 'blank' with the actual image name for Scan Now button */}
         <Image source={require('../../assets/scan.png')} style={styles.scanIcon} />
         <Text style={styles.scanButtonText}>Scan Now</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.button} onPress={handleAskAI}>
-        {/* Replace 'blank' with the actual image name for Ask AI button */}
         <Image source={require('../../assets/ai.png')} style={styles.icon} />
         <Text style={styles.buttonText}>Ask AI</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.button} onPress={handleWaterCalculator}>
-        {/* Replace 'blank' with the actual image name for Water Calculator button */}
         <Image source={require('../../assets/water.png')} style={styles.icon} />
         <Text style={styles.buttonText}>Water Calculator</Text>
       </TouchableOpacity>
@@ -77,7 +75,6 @@ const styles = StyleSheet.create({
     marginTop: -45,
     marginLeft: 15,
     alignItems: 'center',
-    // backgroundColor: '#2ecc71',
     padding: 10,
     borderRadius: 10,
   },
