@@ -1,89 +1,42 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { View, TouchableOpacity, Text, Image } from 'react-native';
+// PlantAddScreen.js
+import React, { useState, useEffect } from 'react';
+import { View, Image } from 'react-native';
 import { Camera } from 'expo-camera';
+import * as ImagePicker from 'expo-image-picker';
 
-const App = () => {
-  const [hasPermission, setHasPermission] = useState(null);
-  const [capturedPhoto, setCapturedPhoto] = useState(null);
-  const cameraRef = useRef(null);
-
-  const askForCameraPermission = async () => {
-    const { status } = await Camera.requestPermissionsAsync();
-    setHasPermission(status === 'granted');
-  };
+const PlantAddScreen = () => {
+  const [capturedImage, setCapturedImage] = useState(null);
+  const [hasCameraPermission, setHasCameraPermission] = useState(null);
 
   useEffect(() => {
-    askForCameraPermission();
+    (async () => {
+      const { status } = await Camera.requestPermissionsAsync();
+      setHasCameraPermission(status === 'granted');
+    })();
   }, []);
 
-  const takePicture = async () => {
-    if (cameraRef.current) {
-      const photo = await cameraRef.current.takePictureAsync();
-      setCapturedPhoto(photo);
-    }
-  };
+  useEffect(() => {
+    const openCamera = async () => {
+      if (hasCameraPermission) {
+        const result = await ImagePicker.launchCameraAsync({
+          allowsEditing: true,
+          aspect: [4, 3],
+        });
 
-  const sendToServer = () => {
-    // Implement your logic for sending the captured photo to the server
-    console.log('Sending to server:', capturedPhoto.uri);
-  };
+        if (!result.cancelled) {
+          setCapturedImage(result);
+        }
+      }
+    };
+
+    openCamera();
+  }, [hasCameraPermission]);
 
   return (
-    <View style={{ flex: 1 }}>
-      {hasPermission === null ? (
-        <Text>Requesting camera permission</Text>
-      ) : hasPermission === false ? (
-        <Text>No access to camera</Text>
-      ) : capturedPhoto ? (
-        // Display the captured photo with "Send to Server" button
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <Image source={{ uri: capturedPhoto.uri }} style={{ width: 300, height: 400 }} />
-          <TouchableOpacity onPress={sendToServer} style={{ marginTop: 20 }}>
-            <Text style={{ fontSize: 18, color: 'blue' }}>Send to Server</Text>
-          </TouchableOpacity>
-        </View>
-      ) : (
-        // Camera view with larger shutter button at the bottom center
-        <Camera style={{ flex: 1 }} type={Camera.Constants.Type.back} ref={cameraRef}>
-          <View
-            style={{
-              flex: 1,
-              backgroundColor: 'transparent',
-              flexDirection: 'row',
-              justifyContent: 'center',
-              alignItems: 'flex-end',
-            }}
-          >
-            <TouchableOpacity style={{ marginBottom: 30 }} onPress={takePicture}>
-              <View
-                style={{
-                  borderWidth: 2,
-                  borderRadius: 50,
-                  borderColor: 'white',
-                  height: 100,
-                  width: 100,
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-              >
-                <View
-                  style={{
-                    borderWidth: 2,
-                    borderRadius: 50,
-                    borderColor: 'white',
-                    height: 70,
-                    width: 70,
-                    backgroundColor: 'white',
-                  }}
-                />
-              </View>
-            </TouchableOpacity>
-          </View>
-        </Camera>
-      )}
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      {capturedImage && <Image source={{ uri: capturedImage.uri }} style={{ width: 200, height: 200 }} />}
     </View>
   );
 };
 
-export default App;
+export default PlantAddScreen;

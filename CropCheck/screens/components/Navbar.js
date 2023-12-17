@@ -12,6 +12,7 @@ const Navbar = () => {
 
   const handleHome = () => {
     // Handle the Home button click
+    navigation.navigate('PlantAddScreen');
   };
 
   const handleDiagnose = () => {
