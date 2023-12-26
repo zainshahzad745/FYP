@@ -17,6 +17,7 @@ const Navbar = () => {
 
   const handleDiagnose = () => {
     // Handle the Diagnose button click
+    navigation.navigate('RecentScans');
   };
 
   const handleAskAI = () => {

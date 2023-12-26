@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, TextInput, TouchableOpacity, Text, Image, Button, Alert } from 'react-native';
+import { View, TextInput, TouchableOpacity, Text, Image, Button, Alert, ImageBackground, StyleSheet } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { Camera } from 'expo-camera';
 import Axios from 'axios';
@@ -44,7 +44,7 @@ const PlantAddScreen = () => {
           name: 'plant_image.jpg',
         });
     
-        const response = await Axios.post('your_server_endpoint', formData, {
+        const response = await Axios.post('http://192.168.1.5:5000/detect', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
@@ -61,7 +61,10 @@ const PlantAddScreen = () => {
     
 
   return (
+
+    <ImageBackground source={require('../assets/main1.png')} style={styles.Background}> 
     <View style={{ flex: 1, padding: 20 }}>
+
       {/* Image Box */}
       <TouchableOpacity onPress={openCamera} style={{ alignItems: 'center', marginBottom: 20 }}>
         {capturedImage ? (
@@ -92,7 +95,16 @@ const PlantAddScreen = () => {
       {/* Send Data Button */}
       <Button title="Send Data" onPress={sendData} />
     </View>
+    </ImageBackground>
   );
 };
+
+const styles = StyleSheet.create({
+  Background: {
+    width: '100%', 
+    height: '100%',
+    resizeMode: 'contain',
+  },
+});
 
 export default PlantAddScreen;
