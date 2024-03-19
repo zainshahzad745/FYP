@@ -60,12 +60,12 @@ const Navbar = () => {
 
 const styles = StyleSheet.create({
   navbar: {
-    marginTop: 60,
+    marginTop: 0,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     width: '100%',
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    // justifyContent: 'space-around',
     alignItems: 'center',
     backgroundColor: '#b3b6b4',
     padding: 10,
