@@ -6,6 +6,8 @@ import {
   Alert,
   ActivityIndicator,
   Text,
+  ImageBackground,
+  TouchableOpacity,
 } from "react-native";
 import { Camera } from "expo-camera";
 import * as ImagePicker from "expo-image-picker";
@@ -58,7 +60,7 @@ const PlantAddScreen = () => {
         // navigation.navigate('Analyze');
         navigation.navigate("MainScan", { savedImageUri: capturedImage.uri });
         const response = await axios.post(
-          "http://192.168.1.9:5000/detect",
+          "http://192.168.1.7:5000/detect",
           formData,
           {
             headers: {
@@ -106,15 +108,54 @@ const PlantAddScreen = () => {
   };
 
   return (
+    <ImageBackground source={require('../../assets/backgroundimg.jpg')} style={{    flex: 1,
+      resizeMode: "contain",}} >
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      
       {capturedImage && (
         <Image
           source={{ uri: capturedImage.uri }}
-          style={{ width: 200, height: 200 }}
+          style={{ width: 300, height: 300, borderRadius: 50, margin: 50 }}
         />
       )}
-      <Button title="Upload Image" onPress={handleUploadImage} />
+      <TouchableOpacity
+          onPress={handleUploadImage}
+          style={{
+            backgroundColor: "green", // Green background color
+            opacity: 0.8, // Semi-transparent
+            borderRadius: 50, // Custom border radius
+            width: "80%", // Custom width
+            height: "6%",
+            marginLeft: "10%",
+            marginRight: "10%",
+            marginTop: "8%", // Custom height
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Text style={{ color: "white", fontWeight: "bold" }}>Upload Image</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={saveCapturedImage}
+          style={{
+            backgroundColor: "green", // Green background color
+            opacity: 0.8, // Semi-transparent
+            borderRadius: 50, // Custom border radius
+            width: "80%", // Custom width
+            height: "6%",
+            marginLeft: "10%",
+            marginRight: "10%",
+            marginTop: "8%", // Custom height
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Text style={{ color: "white", fontWeight: "bold" }}>Save Image</Text>
+        </TouchableOpacity>
+      {/* <Button title="Upload Image" onPress={handleUploadImage} />
+      <Button title="Save Image" onPress={saveCapturedImage} /> */}
     </View>
+    </ImageBackground>
   );
 };
 

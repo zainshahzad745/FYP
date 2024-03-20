@@ -60,14 +60,15 @@ const Navbar = () => {
 
 const styles = StyleSheet.create({
   navbar: {
-    marginTop: 0,
+    marginBottom: "2%",
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     width: '100%',
     flexDirection: 'row',
-    // justifyContent: 'space-around',
+    justifyContent: 'space-around',
     alignItems: 'center',
-    backgroundColor: '#b3b6b4',
+    backgroundColor: 'white',
+    opacity: 0.85,
     padding: 10,
   },
   button: {
@@ -79,6 +80,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
     borderRadius: 10,
+    
   },
   icon: {
     padding: 15,
@@ -96,7 +98,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   scanButtonText: {
-    color: '#fff',
+    color: 'black',
     fontWeight: 'bold',
     marginTop: 5,
   },
