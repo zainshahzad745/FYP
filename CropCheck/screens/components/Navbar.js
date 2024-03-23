@@ -12,12 +12,12 @@ const Navbar = () => {
 
   const handleHome = () => {
     // Handle the Home button click
-    navigation.navigate('PlantAddScreen');
+    navigation.navigate('MainScreen');
   };
 
   const handleDiagnose = () => {
     // Handle the Diagnose button click
-    navigation.navigate('RecentScans');
+    navigation.navigate('PlantAddScreen');
   };
 
   const handleAskAI = () => {
@@ -37,7 +37,7 @@ const Navbar = () => {
 
       <TouchableOpacity style={styles.button} onPress={handleDiagnose}>
         <Image source={require('../../assets/search.png')} style={styles.icon} />
-        <Text style={styles.buttonText}>Diagnose</Text>
+        <Text style={styles.buttonText}>Contribute</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.scanButton} onPress={handleScanNow}>
