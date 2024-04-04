@@ -6,7 +6,7 @@ const SplashScreen = ({ navigation }) => {
   useEffect(() => {
     // Delay for 5 seconds and then navigate to the MainScreen
     const timer = setTimeout(() => {
-      navigation.replace('MainScreen');
+      navigation.replace('Signin');
     }, 3000);
 
     // Clear the timeout if the component is unmounted
@@ -15,7 +15,7 @@ const SplashScreen = ({ navigation }) => {
 
   return (
     <ImageBackground
-      source={require('../assets/main1.png')}
+      source={require('../assets/backgroundimg.jpg')}
       style={styles.background}
     >
       

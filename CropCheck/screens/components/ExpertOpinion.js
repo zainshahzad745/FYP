@@ -17,14 +17,16 @@ const ExpertOpinion = () => {
 
 const styles = StyleSheet.create({
   container: {
+    padding: 10,
     width: '100%', // Adjust the width as needed
     height: 105, // Adjust the height as needed
-    marginTop: 20, // Adjust the margin as needed
+    marginTop: '10%', // Adjust the margin as needed
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'white',
-    opacity: 0.5,
+    opacity: 0.75,
     borderRadius: 20,
+    justifyContent: 'space-between',
   },
   logo: {
     width: 100, // Adjust the width based on your logo size
