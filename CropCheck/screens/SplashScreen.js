@@ -6,7 +6,7 @@ const SplashScreen = ({ navigation }) => {
   useEffect(() => {
     // Delay for 5 seconds and then navigate to the MainScreen
     const timer = setTimeout(() => {
-      navigation.replace('RecentScans');
+      navigation.replace('MainScreen');
     }, 3000);
 
     // Clear the timeout if the component is unmounted

@@ -40,7 +40,7 @@ const RecentScans = ({navigation}) => {
           </TouchableOpacity>
           </View>
         </View>
-      <Navbar />
+      <Navbar  style={styles.nav}/>
       </ImageBackground>
   );
 }

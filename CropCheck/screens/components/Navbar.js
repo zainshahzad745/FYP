@@ -17,6 +17,7 @@ const Navbar = () => {
 
   const handleDiagnose = () => {
     // Handle the Diagnose button click
+    navigation.navigate('RecentScans');
   };
 
   const handleAskAI = () => {
@@ -59,13 +60,13 @@ const Navbar = () => {
 
 const styles = StyleSheet.create({
   navbar: {
-    marginTop: 'auto',
+    marginTop: 60,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-around',
-    alignItems: 'flex-end',
+    alignItems: 'center',
     backgroundColor: '#b3b6b4',
     padding: 10,
   },
