@@ -14,6 +14,7 @@ import MainScan from './screens/MainScan';
 import PossibleSol  from './screens/PossibleSol';
 import Signin from './screens/Signin';
 import Signup from './screens/Signup';
+//import ForgetPassword from './screens/ForgetPassword';
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -24,6 +25,7 @@ const App = () => {
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name="SplashScreen" component={SplashScreen} />
+        {/* <Stack.Screen name="ForgetPassword" component={ForgetPassword} /> */}
         <Stack.Screen name="Signup" component={Signup} />
         <Stack.Screen name="Signin" component={Signin} />
         <Stack.Screen name="MainScreen" component={MainScreen} />

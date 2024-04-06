@@ -14,7 +14,7 @@ import ExpertOpinion from "./components/ExpertOpinion";
 const backgroundimg = require("../assets/backgroundimg.jpg");
 const MainScreen = ({ navigation }) => {
   const handleImageClick = () => {
-    navigation.navigate("DetailedScreen");
+    navigation.navigate("PossibleSol");
   };
 
   return (

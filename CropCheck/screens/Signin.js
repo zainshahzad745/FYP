@@ -189,7 +189,7 @@ const Signin = ({navigation}) => {
           <Text style={{ color: "white", fontWeight: "bold" }}>SignIn</Text>
         </TouchableOpacity>
           <Text
-            style={{ width: "100%", fontSize: 18, height: "5%", textAlign: "center", marginTop: '12%' }}
+            style={{ width: "100%", fontSize: 18, height: "5%", textAlign: "center", marginTop: '2%' }}
           >
             Don't have an account?
             <Text style={{ color: "green" }} onPress={navigateLogin}>
