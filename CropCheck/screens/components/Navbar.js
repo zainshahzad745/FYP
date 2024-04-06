@@ -12,12 +12,12 @@ const Navbar = () => {
 
   const handleHome = () => {
     // Handle the Home button click
-    navigation.navigate('MainScreen');
+    navigation.navigate('PlantAddScreen');
   };
 
   const handleDiagnose = () => {
     // Handle the Diagnose button click
-    navigation.navigate('PlantAddScreen');
+    navigation.navigate('RecentScans');
   };
 
   const handleAskAI = () => {
@@ -37,7 +37,7 @@ const Navbar = () => {
 
       <TouchableOpacity style={styles.button} onPress={handleDiagnose}>
         <Image source={require('../../assets/search.png')} style={styles.icon} />
-        <Text style={styles.buttonText}>Contribute</Text>
+        <Text style={styles.buttonText}>Diagnose</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.scanButton} onPress={handleScanNow}>
@@ -60,15 +60,14 @@ const Navbar = () => {
 
 const styles = StyleSheet.create({
   navbar: {
-    marginBottom: "2%",
+    marginTop: 60,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    backgroundColor: 'white',
-    opacity: 0.85,
+    backgroundColor: '#b3b6b4',
     padding: 10,
   },
   button: {
@@ -80,7 +79,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
     borderRadius: 10,
-    
   },
   icon: {
     padding: 15,
@@ -98,7 +96,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   scanButtonText: {
-    color: 'black',
+    color: '#fff',
     fontWeight: 'bold',
     marginTop: 5,
   },

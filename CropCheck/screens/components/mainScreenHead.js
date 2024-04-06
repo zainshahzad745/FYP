@@ -2,7 +2,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Dimensions, ImageBackground } from 'react-native';
 import moment from 'moment';
-const footerimg = require('../../assets/head1.png');
 
 const MainScreenHead = () => {
   // Get the current date and day using moment
@@ -11,7 +10,7 @@ const MainScreenHead = () => {
 
   return (
     <ImageBackground
-      source={footerimg} // Set the path to your background image
+      source={require('../../assets/head1.png')} // Set the path to your background image
       style={styles.backgroundImage}
       resizeMode="cover"
     >
@@ -44,7 +43,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     height: componentHeight,
-    // backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
     padding: 10,
   },
   leftContainer: {
@@ -61,13 +60,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     marginBottom: 5,
-    color: 'black',
+    color: 'white',
   },
   textRight: {
     fontSize: 16,
     fontWeight: 'bold',
     marginBottom: 5,
-    color: 'black',
+    color: 'white',
   },
 });
 

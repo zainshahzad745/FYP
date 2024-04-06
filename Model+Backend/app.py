@@ -91,7 +91,7 @@ def run_yolov5_inference(image_file):
         image_file.save(image_path)
 
         # Run YOLOv5 inferencer
-        command = ["python", "detect.py", "--weights", "best.pt", "--img", "640", "480", "--conf", "0.25", "--source", image_path]
+        command = ["python", "Model+Backend/yolov5/detect.py", "--weights", "Model+Backend/yolov5/best.pt", "--img", "640", "480", "--conf", "0.25", "--source", image_path]
         print(command)
 
 

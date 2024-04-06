@@ -7,8 +7,6 @@ import Disease from './screens/Disease';
 import Analyzing from './screens/AnalyzingImage';
 import MainScan from './screens/MainScan';
 import PossibleSol  from './screens/PossibleSol';
-import Signin from './screens/Signin';
-import Signup from './screens/Signup';
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -19,6 +17,10 @@ const App = () => {
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name="SplashScreen" component={SplashScreen} />
+        <Stack.Screen name="MainScreen" component={MainScreen} />
+        <Stack.Screen name="DetailedScreen" component={DetailedScreen} />
+        <Stack.Screen name="ScanScreen" component={ScanScreen} />
+        <Stack.Screen name="PlantAddScreen" component={PlantAddScreen} />
         <Stack.Screen name="RecentScans" component={RecentScans} />
         <Stack.Screen name="Disease" component={Disease} />
         <Stack.Screen name="Analyze" component={Analyzing} />
