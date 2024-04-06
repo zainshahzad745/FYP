@@ -22,12 +22,10 @@ const Navbar = () => {
 
   const handleAskAI = () => {
     // Handle the Ask AI button click
-    navigation.navigate('Chatbot');
   };
 
   const handleWaterCalculator = () => {
     // Handle the Water Calculator button click
-    naviagation.navigate('WaterModule');
   };
 
   return (
