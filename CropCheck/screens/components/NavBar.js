@@ -12,11 +12,12 @@ const Navbar = () => {
 
   const handleHome = () => {
     // Handle the Home button click
-    navigation.navigate('PlantAddScreen');
+    navigation.navigate('MainScreen');
   };
 
   const handleDiagnose = () => {
     // Handle the Diagnose button click
+    navigation.navigate('PlantAddScreen');
   };
 
   const handleAskAI = () => {
@@ -30,27 +31,27 @@ const Navbar = () => {
   return (
     <View style={styles.navbar}>
       <TouchableOpacity style={styles.button} onPress={handleHome}>
-        {/* <Image source={require('../../assets/home.png')} style={styles.icon} /> */}
+        <Image source={require('../../assets/home.png')} style={styles.icon} />
         <Text style={styles.buttonText}>Home</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.button} onPress={handleDiagnose}>
-        {/* <Image source={require('../../assets/search.png')} style={styles.icon} /> */}
-        <Text style={styles.buttonText}>Diagnose</Text>
+        <Image source={require('../../assets/search.png')} style={styles.icon} />
+        <Text style={styles.buttonText}>Contribute</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.scanButton} onPress={handleScanNow}>
-        {/* <Image source={require('../../assets/scan.png')} style={styles.scanIcon} /> */}
+        <Image source={require('../../assets/scan.png')} style={styles.scanIcon} />
         <Text style={styles.scanButtonText}>Scan Now</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.button} onPress={handleAskAI}>
-        {/* <Image source={require('../../assets/ai.png')} style={styles.icon} /> */}
+        <Image source={require('../../assets/ai.png')} style={styles.icon} />
         <Text style={styles.buttonText}>Ask AI</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.button} onPress={handleWaterCalculator}>
-        {/* <Image source={require('../../assets/water.png')} style={styles.icon} /> */}
+        <Image source={require('../../assets/water.png')} style={styles.icon} />
         <Text style={styles.buttonText}>Water Calculator</Text>
       </TouchableOpacity>
     </View>
@@ -59,14 +60,15 @@ const Navbar = () => {
 
 const styles = StyleSheet.create({
   navbar: {
-    marginTop: 60,
+    marginBottom: "2%",
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    backgroundColor: '#b3b6b4',
+    backgroundColor: 'white',
+    opacity: 0.85,
     padding: 10,
   },
   button: {
@@ -78,6 +80,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
     borderRadius: 10,
+    
   },
   icon: {
     padding: 15,
@@ -95,7 +98,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   scanButtonText: {
-    color: '#fff',
+    color: 'black',
     fontWeight: 'bold',
     marginTop: 5,
   },
