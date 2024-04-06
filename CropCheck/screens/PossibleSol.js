@@ -1,12 +1,13 @@
 import { StyleSheet, Text, View, Image, ImageBackground } from 'react-native';
-import NavBar from './components/NavBar.js';
+import Navbar from './components/Navbar.js';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 const backgroundimg = require('../assets/backgroundimg.jpg');
 const potspic= require("../assets/pots.png");
 const Home = require('../assets/Homeicon.png');
 
 const PossibleSol = ({navigation}) => {
   const Homie = () => {
-    navigation.navigate('MainScan');
+    navigation.navigate('MainScreen');
   };
   
   return (
@@ -14,7 +15,9 @@ const PossibleSol = ({navigation}) => {
       <View style={styles.container}>
       <ImageBackground source={backgroundimg} style={styles.Bg_img}>
         <View>
-          <Image source={Home} style={styles.icon} onPress={Homie}></Image>
+          <TouchableOpacity onPress={Homie}> 
+          <Image source={Home} style={styles.icon} ></Image>
+          </TouchableOpacity>
         </View>
         <View>  
           <Image source={potspic} style={styles.img}/>
@@ -28,7 +31,7 @@ const PossibleSol = ({navigation}) => {
           icduyo iewqc utop wwdx and this plant is full of problems and issues. Green vegetables can't grow dklds kmfdlkd ksslv, kfk 
           mdkfl dkfk kdmvk kdmc gkev kdkf kldkflv odkfl sdkl</Text>
         </View>
-        <NavBar/>
+        <Navbar/>
       </ImageBackground>
       </View>
   );
@@ -36,37 +39,42 @@ const PossibleSol = ({navigation}) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
   Bg_img: {
-    width: 450, 
-    height: 770,
+    width: '100%', 
+    height: '100%',
   },
   img: {
-    width: 350, 
-    height: 120,
-    marginLeft: 50,
+    width: '90%', 
+    height: '30%',
+    // marginLeft: 10,
+    // alignItems: 'center',
+    margin: '5%'
   },
   TextBold: {
     fontSize: 50, 
     fontWeight: 'medium', 
     color: 'black',
+
     // paddingLeft: 40, 
     // paddingTop: 20,
   },
-  TextBOLD: {
-    justifyContent: 'flex-start',
-    paddingLeft: 45, 
-    paddingTop: 7,
-  },
+  // TextBOLD: {
+  //   justifyContent: 'flex-start',
+  //   // paddingLeft: 45, 
+  //   textAlign: 'center',
+  //   margin: '5%',
+  //   // paddingTop: 7,
+  // },
   Textlite: {
     justifyContent: 'center', 
     alignItems: 'center',
-    marginLeft: 25,
-    padding: 25,
+    // marginLeft: 25,
+    // padding: 25,
     textAlign: 'center',
   },
   icon: {

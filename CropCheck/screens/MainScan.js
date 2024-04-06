@@ -1,106 +1,207 @@
-import React from 'react';
-import { StyleSheet, Text, View, ImageBackground, Image, Button} from 'react-native';
-import NavBar from './components/NavBar.js';
-const backgroundimg = require('../assets/backgroundimg.jpg');
-const imgIcon = require('../assets/Planticon.png');
-const Home = require('../assets/Homeicon.png');
+import React, { useState, useEffect } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ImageBackground,
+  Image,
+  Button,
+  Alert,
+  ActivityIndicator,
+  TouchableOpacity,
+} from "react-native";
+import * as FileSystem from "expo-file-system";
+import { useRoute } from "@react-navigation/native";
+
+const imgIcon = require("../assets/Planticon.png");
+const Home = require("../assets/Homeicon.png");
+
+import Modal from "react-native-modal";
+import MainScreen from "./MainScreen";
+
+const backgroundimg = require("../assets/backgroundimg.jpg");
+const HomeIcon = require("../assets/Homeicon.png");
 
 const Main = ({ navigation }) => {
-  const Homie = () => {
-    navigation.navigate('AnalyzingImage');
-  };
-  
+  const [loading, setLoading] = useState(true);
+  const route = useRoute(); // Use useRoute hook to access route object
+  const { savedImageUri } = route.params || {}; // Destructure savedImageUri from params
+
+  const [localSavedImageUri, setLocalSavedImageUri] = useState(null);
+
+  useEffect(() => {
+    const fetchSavedImage = async () => {
+      try {
+        const fileUri = FileSystem.documentDirectory + "photo.jpg";
+        const fileExists = await FileSystem.getInfoAsync(fileUri);
+        if (fileExists.exists) {
+          setLocalSavedImageUri(fileUri);
+        }
+      } catch (error) {
+        console.error("Error fetching saved image:", error);
+        Alert.alert("Error", "Failed to fetch saved image.");
+      }
+    };
+    fetchSavedImage();
+  }, []);
+
+  // UseEffect to hide the modal after a certain duration
+  useEffect(() => {
+    console.log("Loading:", loading);
+    if (loading) {
+      const hideModalTimer = setTimeout(() => {
+        setLoading(false);
+        console.log("Modal hidden");
+      }, 5000); // Set the duration here (e.g., 10 seconds)
+      console.log("Modal shown");
+      // Clear timeout if component unmounts or when loading is false
+      return () => clearTimeout(hideModalTimer);
+    }
+  }, [loading]);
+
   const GetSol = () => {
-    navigation.navigate('PossibleSol');
+    navigation.navigate("PossibleSol");
   };
 
+  const handleHome = () => {
+    navigation.replace("MainScreen");
+  };
   return (
-    // <ImageBackground source={backgroundimg} style={styles.Bg_img}>
-      <View style={styles.container}>
-      <ImageBackground source={backgroundimg} style={styles.Bg_img}>
+    <View style={{ display: "flex" }}>
+      <ImageBackground
+        source={backgroundimg}
+        style={{ width: "100%", height: "100%" }}
+      >
+        <TouchableOpacity onPress={handleHome}>
+          <Image
+            source={Home}
+            style={{
+              width: 40,
+              height: 40,
+              alignContent: "center",
+              marginLeft: 25,
+              marginTop: "15%",
+            }}
+          ></Image>
+        </TouchableOpacity>
 
-        <View>
-          <Image source={Home} style={styles.icon} onPress={Homie}></Image>
-        </View>
-        <View style={styles.TextBOLD}>
-        <Text style={styles.TextBold} >Results</Text>
-        </View>
-        <View style={styles.Textlite}>
-          <Text style={{fontWeight: 'medium', fontSize: 35}}>Your Plant is</Text>
-          <Image source={imgIcon} style={styles.img} imageText={'Wheat'}/>
-          <Text style={{fontWeight: 'medium', fontSize: 25}}>Wheat</Text>
-        </View>
-        <View style={styles.Text}>
-          <Text>Recognized Disease</Text>
-          <Text style={{color: 'red'}}>Wheat Rust</Text>
-        </View>
-        <View style={styles.Text}> 
-          <Text>Crop Type</Text>
-          <Text style={{color: 'blue'}}>Rabi Crops</Text>
-        </View>
-        <View style={styles.button}>
-          <Button title="Get Solution" onPress={GetSol}/>
-        </View>
-        <NavBar/>
+        <Text
+          style={{
+            fontSize: 40,
+            fontWeight: "bold",
+            color: "green",
+            marginLeft: 25,
+          }}
+        >
+          Results
+        </Text>
+
+        <Text
+          style={{
+            fontWeight: "bold",
+            fontSize: 35,
+            color: "green",
+            marginLeft: 25,
+          }}
+        >
+          Your Plant is
+        </Text>
+
+        {(savedImageUri || localSavedImageUri) && (
+          <Image
+            source={{ uri: savedImageUri || localSavedImageUri }}
+            style={{
+              marginLeft: "5%",
+              marginRight: "5%",
+              width: "90%",
+              height: "40%",
+              margin: 20,
+              borderRadius: 20,
+            }}
+          />
+        )}
+
+        <Text
+          style={{
+            width: "100%",
+            fontWeight: "bold",
+            fontSize: 35,
+            textAlign: "center",
+          }}
+        >
+          Wheat
+        </Text>
+
+        <Text style={{ width: "100%", fontSize: 25, marginLeft: "6%" }}>
+          Recognized Disease {""}
+          <Text style={{ color: "red", fontSize: 20 }}>Wheat Rust</Text>
+        </Text>
+
+        <Text style={{ width: "100%", fontSize: 25, marginLeft: "6%" }}>
+          Crop Type{" "}
+          <Text style={{ color: "blue", fontSize: 20 }}>Rabi Crops</Text>
+        </Text>
+
+        <TouchableOpacity
+          onPress={GetSol}
+          style={{
+            backgroundColor: "green", // Green background color
+            opacity: 0.8, // Semi-transparent
+            borderRadius: 50, // Custom border radius
+            width: "80%", // Custom width
+            height: "6%",
+            marginLeft: "10%",
+            marginRight: "10%",
+            marginTop: "8%", // Custom height
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Text style={{ fontSize: 25, color: "white" }}>Get Solution</Text>
+        </TouchableOpacity>
+        {/* </View> */}
+        <Modal
+          isVisible={loading}
+          animationIn="zoomIn"
+          animationOut="zoomOut"
+          backdropOpacity={0.4}
+        >
+          <View
+            style={{
+              flexDirection: "column",
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <View
+              style={{
+                backgroundColor: "white",
+                padding: 40,
+                borderRadius: 20,
+              }}
+            >
+              <ActivityIndicator size="70" color="green" />
+              <Image
+                source={require("../assets/cactusicon.png")}
+                style={{ width: 250, height: 250, marginTop: 20 }}
+              />
+              <Text
+                style={{
+                  color: "green",
+                  fontWeight: "bold",
+                  fontSize: 20,
+                  textAlign: "center",
+                }}
+              >
+                Analyzing.....
+              </Text>
+            </View>
+          </View>
+        </Modal>
       </ImageBackground>
-      </View>
+    </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  Bg_img: {
-    width: 450, 
-    height: 770,
-  },
-  img: {
-    width: 150, 
-    height: 150,
-    padding: 10,
-  },
-  TextBold: {
-    fontSize: 50, 
-    fontWeight: 'medium', 
-    color: 'black',
-    paddingLeft: 45, 
-  },
-  TextBOLD: {
-    justifyContent: 'flex-start',
-    // flex: 1,
-    // padding: 50,
-  },
-  Textlite: {
-    justifyContent: 'center', 
-    alignItems: 'center',
-    padding: 25,
-  },
-  Text: {
-    justifyContent: 'flex-start', 
-    alignItems: 'flex-start',
-    flexDirection: 'row',
-    marginLeft: 45,
-    padding: 7,
-  },
-  button: {
-    marginTop: 60,
-    padding: 6,
-    // borderRadius: 20,
-    // borderWidth: 3,
-    color: 'green',
-    width: 190,
-    marginLeft: 140,
-  },
-  icon: {
-    margin: 30,
-    width: 45,
-    height:50,
-    alignItems: 'flex-start',
-  },
-});
 
 export default Main;
