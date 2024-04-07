@@ -14,6 +14,8 @@ import MainScan from './screens/MainScan';
 import PossibleSol  from './screens/PossibleSol';
 import Signin from './screens/Signin';
 import Signup from './screens/Signup';
+import Chatbot from './screens/Chatbot';
+import WaterModule from './screens/WaterModule';
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -35,6 +37,8 @@ const App = () => {
         <Stack.Screen name="Analyze" component={Analyzing} />
         <Stack.Screen name="MainScan" component={MainScan} />
         <Stack.Screen name="PossibleSol" component={PossibleSol} />
+        <Stack.Screen name="Chatbot" component={Chatbot} />
+        <Stack.Screen name="WaterModule" component={WaterModule} />
       </Stack.Navigator>
     </NavigationContainer>
   );
