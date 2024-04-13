@@ -9,15 +9,31 @@ import {
   TextInput,
 } from "react-native";
 import CheckBox from "expo-checkbox";
+import { FIREBASE_AUTH } from "../Auth/FirebaseConfig";
+import { signInWithEmailAndPassword } from "firebase/auth";
 const backgroundimg = require("../assets/backgroundimg.jpg");
+
 
 const Signin = ({navigation}) => {
   const [email, onChangeEmail] = useState("");
   const [password, onChangePassword] = useState("");
   const [show, setShow] = useState(true);
+  const [ loading, setLoading ] = useState(false);
   const [isChecked, setChecked] = useState(false);
-
+  const auth = FIREBASE_AUTH;
   const handleSignin = () => {
+    // setLoading(true);
+    // try{
+    //   const response = signInWithEmailAndPassword(auth, email, password);
+    //   console.log(response);
+    //   alert("Signin Successful");
+    // }
+    // catch(error){
+    //   console.log(error);
+    //   alert("Signin Failed" + error.message);
+    // } finally {
+    //   setLoading(false);
+    // }
     navigation.replace("MainScreen");
   }
   

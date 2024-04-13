@@ -7,22 +7,40 @@ import {
   Image,
   TouchableOpacity,
   TextInput,
+  Alert,
 } from "react-native";
+import { FIREBASE_AUTH } from "../Auth/FirebaseConfig";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 const backgroundimg = require("../assets/backgroundimg.jpg");
 
 const Signup = ({navigation}) => {
   const [email, onChangeEmail] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
   const [password, onChangePassword] = React.useState("");
   const [show, setShow] = React.useState(true);
+  const auth = FIREBASE_AUTH;
 
   const showPass = () => {
     setShow(!show);
   };
 
-  const handleSignup = () => {
-    navigation.replace("Signin");
-  }
-
+  const handleSignup = async () => {
+    setLoading(true);
+    try {
+      const response = await createUserWithEmailAndPassword(auth, email, password);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+      Alert.alert("Signup Failed", error.message); // Separate the message with a comma
+    } finally {
+      Alert.alert("Signup Successful");
+      setLoading(false);
+      setTimeout(() => {navigation.replace("Signin");}, 2000);
+      
+    }
+    // 
+  };
+  
   const navigateLogin = () => {
     navigation.replace("Signin");
   };
