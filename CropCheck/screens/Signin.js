@@ -7,10 +7,12 @@ import {
   Image,
   TouchableOpacity,
   TextInput,
+  Alert,
+  ActivityIndicator,
 } from "react-native";
 import CheckBox from "expo-checkbox";
 import { FIREBASE_AUTH } from "../Auth/FirebaseConfig";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
 const backgroundimg = require("../assets/backgroundimg.jpg");
 
 
@@ -21,20 +23,28 @@ const Signin = ({navigation}) => {
   const [ loading, setLoading ] = useState(false);
   const [isChecked, setChecked] = useState(false);
   const auth = FIREBASE_AUTH;
-  const handleSignin = () => {
-    // setLoading(true);
-    // try{
-    //   const response = signInWithEmailAndPassword(auth, email, password);
-    //   console.log(response);
-    //   alert("Signin Successful");
-    // }
-    // catch(error){
-    //   console.log(error);
-    //   alert("Signin Failed" + error.message);
-    // } finally {
-    //   setLoading(false);
-    // }
-    navigation.replace("MainScreen");
+  const handleSignin = async () => {
+    setLoading(true);
+    try{
+      const response = await signInWithEmailAndPassword(auth, email, password);
+      const currentUser = getAuth().currentUser;
+      console.log('current user data',currentUser);
+      console.log('email verified?', currentUser.emailVerified)
+      if (!currentUser.emailVerified) {
+        // console.log(response);
+      Alert.alert("Email Not Verified", "Please verify your email before signing in.", [{ text: "OK" }]);
+      setLoading(false);
+      return;
+      }
+      console.log(response);
+      Alert.alert("Success", "Signin Successful", [{ text: "OK", onPress: () => navigation.replace("MainScreen") }]);
+    }
+    catch(error){
+      console.log(error);
+      Alert.alert("Signin Failed" + error.message);
+    } finally {
+      setLoading(false);
+    }
   }
   
 
@@ -214,6 +224,11 @@ const Signin = ({navigation}) => {
           </Text>
 
         </View>
+        {loading && (
+        <View style={styles.activityIndicatorContainer}>
+          <ActivityIndicator size={120} color="green" />
+        </View>
+      )}
       </ImageBackground>
     </View>
   );
@@ -260,6 +275,16 @@ const styles = StyleSheet.create({
     height: 107,
     alignSelf: "center",
     marginTop: "10%",
+  },
+  activityIndicatorContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0,0,0,0.2)', // semi-transparent background
   },
 });
 

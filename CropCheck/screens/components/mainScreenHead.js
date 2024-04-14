@@ -19,7 +19,7 @@ const MainScreenHead = () => {
         {/* Left side */}
         <View style={styles.leftContainer}>
           <Text style={styles.textLeft}>Hi There!</Text>
-          <Text style={styles.textLeft}>Zain! 😆</Text>
+          <Text style={styles.textLeft}>Have a great day ! 🌱</Text>
         </View>
 
         {/* Right side */}

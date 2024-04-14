@@ -8,9 +8,10 @@ import {
   TouchableOpacity,
   TextInput,
   Alert,
+  ActivityIndicator,
 } from "react-native";
 import { FIREBASE_AUTH } from "../Auth/FirebaseConfig";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 const backgroundimg = require("../assets/backgroundimg.jpg");
 
 const Signup = ({navigation}) => {
@@ -28,21 +29,21 @@ const Signup = ({navigation}) => {
     setLoading(true);
     try {
       const response = await createUserWithEmailAndPassword(auth, email, password);
+      const user = response.user;
+      // const user = userCredential.user;
+      sendEmailVerification(user);
       console.log(response);
+      Alert.alert("Success", "Signup Successful Please verify your email", [{ text: "OK", onPress: () => navigation.replace("Signin") }]);
     } catch (error) {
       console.log(error);
-      Alert.alert("Signup Failed", error.message); // Separate the message with a comma
+      Alert.alert("Signup Failed", error.message);
     } finally {
-      Alert.alert("Signup Successful");
       setLoading(false);
-      setTimeout(() => {navigation.replace("Signin");}, 2000);
-      
     }
-    // 
   };
-  
+
   const navigateLogin = () => {
-    navigation.replace("Signin");
+    navigation.navigate("Signin");
   };
   return (
     <View style={styles.container}>
@@ -96,7 +97,7 @@ const Signup = ({navigation}) => {
             style={{ width: "100%", height: "3%", marginTop: "12%" }}
           />
           {/* email button */}
-
+            
           <TouchableOpacity
             // onPress={handleSignUpGoogle}
             style={{
@@ -206,6 +207,11 @@ const Signup = ({navigation}) => {
           <Text style={{ color: "white", fontWeight: "bold" }}>Create Account</Text>
         </TouchableOpacity>
         </View>
+        {loading && (
+        <View style={styles.activityIndicatorContainer}>
+          <ActivityIndicator size={120} color="green" />
+        </View>
+      )}
       </ImageBackground>
     </View>
   );
@@ -252,6 +258,16 @@ const styles = StyleSheet.create({
     height: 107,
     alignSelf: "center",
     marginTop: "10%",
+  },
+  activityIndicatorContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0,0,0,0.2)', // semi-transparent background
   },
 });
 
