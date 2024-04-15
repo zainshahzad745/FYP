@@ -21,6 +21,7 @@ const PlantAddScreen = ({navigation}) => {
   const [diseaseType, setDiseaseType] = useState("");
   const [capturedImage, setCapturedImage] = useState(null);
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
+  const [isModalVisible, setIsModalVisible] = useState(false); // State for plant modal visibility
   const [isModalVisibleDisease, setIsModalVisibleDisease] = useState(false); // State for disease modal visibility
   const [selectedPlant, setSelectedPlant] = useState(null); // State for selected plant
   const [selectedDisease, setSelectedDisease] = useState(null); // State for selected disease
