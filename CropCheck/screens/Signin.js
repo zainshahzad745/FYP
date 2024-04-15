@@ -147,7 +147,6 @@ const Signin = ({navigation}) => {
                 width: "80%",
                 height: "100%",
                 textAlign: "center",
-                shadowColor: "#000, ",
               }}
               onChangeText={onChangePassword}
               value={password}
