@@ -3,10 +3,31 @@ import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet, View, Text, ImageBackground, Image, Button, Dimensions, TouchableOpacity } from 'react-native';
 import Modal from "react-native-modal";
 import Navbar from "./components/Navbar";
-
+import axios from 'axios'
 const backgroundimg = require("../assets/backgroundimg.jpg");
 
 const WaterModule = () => {
+
+
+  const [weatherData, setWeatherData] = useState(null);
+
+  const fetchWeatherData = async () => {
+    try {
+      const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Karachi,pk&appid=38046aa8b3800991fcc53f7007d058a3`;
+      
+      const response = await axios.get(apiUrl);
+      setWeatherData(response.data);
+      console.log('Weather data:', weatherData);
+    } catch (error) {
+      console.error('Error fetching weather data:', error);
+    }
+  };
+
+  const handleCalculateNow = () => {
+    fetchWeatherData();
+    setIsModalVisible(true);
+  }
+
   const [isModalVisible, setIsModalVisible] = useState(false); // State for plant modal visibility
   const [isDataModalVisible, setIsDataModalVisible] = useState(false); //State for data modal
   const hideModal = (whichModal, delay) => {
@@ -23,7 +44,7 @@ const WaterModule = () => {
 
   return (
     <View style={{width: Dimensions.get("window").width,
-        height: "100%",
+        height: Dimensions.get("window").height,
         display: "flex", justifyContent: "center",}}>
       <ImageBackground
         source={backgroundimg}
@@ -32,11 +53,11 @@ const WaterModule = () => {
           flex: 1,
         }}
       > 
-      <View style={{justifyContent: "center", height: "96%", paddingLeft: "5%", paddingRight: "5%",}}>
-        <Text style={{fontSize: 22, marginBottom: 10, fontWeight:"bold", marginHorizontal: "5%",}}>
+      <View style={{justifyContent: "center", height: "96%", paddingLeft: "5%", paddingRight: "5%", height: '80%'}}>
+        <Text style={{fontSize: 22, marginBottom: 10, fontWeight:"bold", marginHorizontal: "5%", marginLeft: '15%', marginRight: "15%"}}>
           Elevating Plant Health with Tailored Watering Guidelines
         </Text>
-        <TouchableOpacity onPress={() => setIsModalVisible(true)} style={{
+        <TouchableOpacity onPress={handleCalculateNow} style={{
             backgroundColor: "green", // Green background color
             opacity: 0.8, // Semi-transparent
             borderRadius: 50, // Custom border radius
@@ -47,8 +68,9 @@ const WaterModule = () => {
             justifyContent: "center",
             alignItems: "center",
             flexDirection: "row",
+
           }}>
-          <Text style={{fontSize: 18,}}>Calculate Now!</Text><Image source={require("../assets/water.png")}></Image>
+          <Text style={{fontSize: 18, color: 'white'}}>Calculate Now!</Text><Image style={{}} source={require("../assets/water.png")}></Image>
         </TouchableOpacity>
 
         {/* Snail Modal */}
@@ -56,7 +78,7 @@ const WaterModule = () => {
           animationType="slide"
           transparent={true}
           visible={isModalVisible}
-          onShow={() => { hideModal(setIsModalVisible,3000), showModal(setIsDataModalVisible,4000); }}
+          onShow={() => { hideModal(setIsModalVisible,3000), showModal(setIsDataModalVisible,3000); }}
           >
             <View style={{
               flex: 1,
@@ -138,7 +160,7 @@ const WaterModule = () => {
             </View>
           </Modal>
       </View>
-      <View>
+      <View style={{marginTop: Dimensions.get("window").height*0.16}}>
         <Navbar />
       </View>
       </ImageBackground>
