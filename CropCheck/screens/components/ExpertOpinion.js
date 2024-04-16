@@ -1,9 +1,17 @@
 import React from 'react';
-import { View, Image, Text, StyleSheet } from 'react-native';
+import { View, Image, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const ExpertOpinion = () => {
+  const navigation = useNavigation();
+
+  const handleClick = () => {
+    //navigate to Chatbot
+    navigation.navigate('Chatbot');
+  };
+  
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={handleClick}>
       {/* Left side - Logo */}
       <Image source={require('../../assets/expert.png')} style={styles.logo} />
 
@@ -11,7 +19,7 @@ const ExpertOpinion = () => {
       <View style={styles.textContainer}>
         <Text style={styles.text}>Get Expert Opinion</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
