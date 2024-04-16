@@ -1,31 +1,44 @@
-// WaterModule.js
+// // WaterModule.js
 import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet, View, Text, ImageBackground, Image, Button, Dimensions, TouchableOpacity, TextInput } from 'react-native';
 import Modal from "react-native-modal";
 import Navbar from "./components/Navbar";
-import { Dropdown } from 'react-native-material-dropdown-v2';
+// import {Dropdown} from "react-native-material-dropdown-v2-fixed";
 import axios from 'axios'
 const backgroundimg = require("../assets/backgroundimg.jpg");
 
 const WaterModule = () => {
+  const [temp, setTemp ] = useState('')
+  const [humidity, setHumidity] = useState('')
+  const [location, setLocation] = useState('')
 
-
-  const [weatherData, setWeatherData] = useState(null);
-
+  // const [weatherData, setWeatherData] = useState(null);
+  // let weather = {}
+  const fahrenheitToCelsius = (fahrenheit) => {
+    return ((fahrenheit - 32) * 5) / 9;
+  };
   const fetchWeatherData = async () => {
     try {
       const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Karachi,pk&appid=38046aa8b3800991fcc53f7007d058a3`;
-      
       const response = await axios.get(apiUrl);
-      setWeatherData(response.data);
-      console.log('Weather data:', weatherData);
+      const tempInKelvin = response.data.main.temp;
+      const humidity = response.data.main.humidity;
+      const location = response.data.name; 
+      console.log('temp:', tempInKelvin, 'humidity:', humidity, 'location:', location)
+      setHumidity(humidity)
+      setLocation(location)
+      const tempInCelsius = fahrenheitToCelsius((tempInKelvin - 273.15) * 9/5 + 32); // Convert Kelvin to Celsius
+      setTemp(tempInCelsius.toFixed(2)); // Set temperature in Celsius with 2 decimal places
     } catch (error) {
       console.error('Error fetching weather data:', error);
     }
   };
+  
 
   const handleCalculateNow = () => {
     fetchWeatherData();
+    celsius = 
+    // const temp = weatherData.main.temp;
     setIsModalVisible(true);
   }
 
@@ -34,10 +47,7 @@ const WaterModule = () => {
   const [isResultModalVisible, setIsResultModalVisible] = useState(false); //State for result modal
   const [diameter, inputDiameter] = useState(''); // State and function to handle diameter input field
   const [selectedPlace, setSelectedPlace] = useState(null);
-  const places = [{
-    value: "Karachi"}, { value: "Lahore"}, { value: "Islamabad"}, { value: "Peshawar"}, 
-    { value: "Quetta"}, { value: "Faisalabad"}, { value: "Sialkot"}
-  ];
+
 
   const test = () => {
     setIsDataModalVisible(false)
@@ -104,7 +114,7 @@ const WaterModule = () => {
               marginVertical: "12%",
             }}>
               <View style={{
-                backgroundColor: "#A5CEA7",
+                backgroundColor: 'rgba(0, 128, 0, 0.9)',
                 padding: 8,
                 borderRadius: 28,
               }}>
@@ -112,10 +122,12 @@ const WaterModule = () => {
                     marginTop: "8%",
                     fontSize: 22,
                     fontWeight: "bold",
+                    color: "white",
                   }}>Hold Tight!</Text>
                   <Text style={{
                     fontSize: 20,
                     fontWeight: "bold",
+                    color: "white",
                   }}>Fetching Temperature and Humidity Levels</Text>
                   <Image source={require("../assets/snail.png")} style={{
                     width: 300,
@@ -155,12 +167,12 @@ const WaterModule = () => {
                 <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginTop: 9,}}>
                   <Text style={{fontSize: 20,}}>Temperature</Text>
                   <Image source={require("../assets/temp.png")} style={{height: 50, width: 50, marginHorizontal: 5,}}></Image>
-                  <Text style={{fontSize: 20,}}>Result</Text>
+                  <Text style={{fontSize: 20,}}>{temp}°C</Text>
                 </View>
                 <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginTop: 9,}}>
                   <Text style={{fontSize: 20,}}>Humidity</Text>
                   <Image source={require("../assets/humidity.png")} style={{height: 50, width: 50, marginHorizontal: 5,}}></Image>
-                  <Text style={{fontSize: 20,}}>Result</Text>
+                  <Text style={{fontSize: 20,}}>{humidity}%</Text>
                 </View>
                 <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginTop: 9,}}>
                   <Text style={{fontSize: 20, }}>Pot Diameter</Text>
@@ -171,7 +183,8 @@ const WaterModule = () => {
                 <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginTop: 9, }}>
                   <Text style={{fontSize: 20, }}>Location</Text>
                   <Image source={require("../assets/location.png")} style={{height: 60, width: 48,}}></Image>
-                  <Dropdown label="Enter here" data={places} style={{padding:0, backgroundColor: "#A5CEA7",}}></Dropdown>
+                  <Text style={{fontSize: 20,}}>{location}.</Text>
+                  {/* <Dropdown label="Enter here" data={places} style={{padding:0, backgroundColor: "#A5CEA7",}}></Dropdown> */}
                 </View>
                 <View style={{marginTop: "5%", height: "10%", marginTop: "7%",}}>
                 <TouchableOpacity onPress={test}
@@ -182,18 +195,34 @@ const WaterModule = () => {
           </Modal>
 
           {/* Result Modal */}
-          <Modal
+          {/* <Modal
           animationType="slide"
           transparent={false}
           visible={isResultModalVisible}
           // onShow={setIsDataModalVisible(false)}
           // onShow={() => { hideModal(setIsModalVisible,3000), showModal(setIsDataModalVisible,4000); }}
-          // onRequestClose={() => {setIsModalVisible(false), setIsDataModalVisible(false)}}
+          onRequestClose={() => setIsResultModalVisible(false)}
           >
-            <View style={{backgroundColor: "red",}}>
-
+            <View style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+              height: "60%",
+              width: "100%",
+              marginVertical: "12%",
+              backgroundColor: "red",}}>
+                <View style={{
+                  backgroundColor: "#d9e3db",
+                  borderRadius: 28,
+                  paddingHorizontal: 15,
+                  width: "100%",
+                }}>
+                  <Text>Result</Text>
+                  <Image source={require("../assets/tick.png")}></Image>
+                    <View style={{backgroundColor: "white"}}></View>
+                </View>
             </View>
-          </Modal>
+          </Modal> */}
       </View>
       <View style={{marginTop: Dimensions.get("window").height*0.16}}>
         <Navbar />
