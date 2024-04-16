@@ -11,7 +11,8 @@ const WaterModule = () => {
   const [temp, setTemp ] = useState('')
   const [humidity, setHumidity] = useState('')
   const [location, setLocation] = useState('')
-
+  const windowWidth = Dimensions.get("window").width;
+  const windowHeight = Dimensions.get("window").height;
   // const [weatherData, setWeatherData] = useState(null);
   // let weather = {}
   const fahrenheitToCelsius = (fahrenheit) => {
@@ -78,7 +79,7 @@ const WaterModule = () => {
           flex: 1,
         }}
       > 
-      <View style={{justifyContent: "center", height: "96%", paddingLeft: "5%", paddingRight: "5%", height: '80%'}}>
+      <View style={{justifyContent: "center", height: "96%", paddingLeft: "5%", paddingRight: "5%", height: windowHeight*0.94}}>
         <Text style={{fontSize: 22, marginBottom: 10, fontWeight:"bold", marginHorizontal: "5%", marginLeft: '15%', marginRight: "15%"}}>
           Elevating Plant Health with Tailored Watering Guidelines
         </Text>
@@ -231,7 +232,7 @@ const WaterModule = () => {
             </View>
           </Modal>
       </View>
-      <View style={{marginTop: Dimensions.get("window").height*0.16}}>
+      <View style={{height: Dimensions.get("window").height*0.06}}>
         <Navbar />
       </View>
       </ImageBackground>
