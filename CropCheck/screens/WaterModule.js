@@ -3,11 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet, View, Text, ImageBackground, Image, Button, Dimensions, TouchableOpacity, TextInput } from 'react-native';
 import Modal from "react-native-modal";
 import Navbar from "./components/Navbar";
-<<<<<<< Updated upstream
 // import {Dropdown} from "react-native-material-dropdown-v2-fixed";
-=======
-import {Dropdown} from "react-native-material-dropdown-v2-fixed";
->>>>>>> Stashed changes
 import axios from 'axios'
 const backgroundimg = require("../assets/backgroundimg.jpg");
 
@@ -16,16 +12,11 @@ const WaterModule = () => {
   const [humidity, setHumidity] = useState('')
   const [location, setLocation] = useState('')
 
-<<<<<<< Updated upstream
   // const [weatherData, setWeatherData] = useState(null);
   // let weather = {}
   const fahrenheitToCelsius = (fahrenheit) => {
     return ((fahrenheit - 32) * 5) / 9;
   };
-=======
-  const [weatherData, setWeatherData] = useState(null);
-
->>>>>>> Stashed changes
   const fetchWeatherData = async () => {
     try {
       const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Karachi,pk&appid=38046aa8b3800991fcc53f7007d058a3`;
@@ -33,7 +24,7 @@ const WaterModule = () => {
       const tempInKelvin = response.data.main.temp;
       const humidity = response.data.main.humidity;
       const location = response.data.name; 
-      console.log('temp:', tempInKelvin, 'humidity:', humidity, 'location:', location)
+      // console.log('temp:', tempInKelvin, 'humidity:', humidity, 'location:', location)
       setHumidity(humidity)
       setLocation(location)
       const tempInCelsius = fahrenheitToCelsius((tempInKelvin - 273.15) * 9/5 + 32); // Convert Kelvin to Celsius
@@ -123,7 +114,7 @@ const WaterModule = () => {
               marginVertical: "12%",
             }}>
               <View style={{
-                backgroundColor: 'rgba(0, 128, 0, 0.9)',
+                backgroundColor: "#bcdac2",
                 padding: 8,
                 borderRadius: 28,
               }}>
@@ -131,12 +122,12 @@ const WaterModule = () => {
                     marginTop: "8%",
                     fontSize: 22,
                     fontWeight: "bold",
-                    color: "white",
+                    // color: "white",
                   }}>Hold Tight!</Text>
                   <Text style={{
                     fontSize: 20,
                     fontWeight: "bold",
-                    color: "white",
+                    // color: "white",
                   }}>Fetching Temperature and Humidity Levels</Text>
                   <Image source={require("../assets/snail.png")} style={{
                     width: 300,
@@ -166,7 +157,7 @@ const WaterModule = () => {
               // backgroundColor: "red",
             }}>
               <View style={{
-                backgroundColor: "#d9e3db",
+                backgroundColor: "#bcdac2",
                 borderRadius: 28,
                 paddingHorizontal: 15,
                 width: "100%",
@@ -204,7 +195,7 @@ const WaterModule = () => {
           </Modal>
 
           {/* Result Modal */}
-          {/* <Modal
+          <Modal
           animationType="slide"
           transparent={true}
           visible={isResultModalVisible}
@@ -217,40 +208,28 @@ const WaterModule = () => {
               justifyContent: "center",
               alignItems: "center",
               height: "60%",
-<<<<<<< Updated upstream
-              width: "100%",
-              marginVertical: "12%",
-              backgroundColor: "red",}}>
-=======
               width: "94%",
               marginHorizontal: "3%",
               marginVertical: "12%",
               // backgroundColor: "red",
               }}>
->>>>>>> Stashed changes
                 <View style={{
-                  backgroundColor: "#d9e3db",
+                  backgroundColor: "#bcdac2",
                   borderRadius: 28,
                   paddingHorizontal: 15,
                   width: "100%",
                 }}>
-<<<<<<< Updated upstream
-                  <Text>Result</Text>
-                  <Image source={require("../assets/tick.png")}></Image>
-                    <View style={{backgroundColor: "white"}}></View>
-=======
                   <View style={{flexDirection: "row", justifyContent: "flex-start", alignItems: "center", marginTop: "8%", marginBottom: "12%",}}>
                     <Text style={{fontSize: 28, fontWeight: "bold",}}>Result</Text>
                     <Image source={require("../assets/tick.png")} style={{height: 65, width: 70, marginLeft: "8%",}}></Image>
                   </View>
-                    <View style={{backgroundColor: "white", marginBottom: "10%", alignItems: "center", borderRadius: 20, padding: 17,}}>
-                      <Text style={{fontSize: 19, marginTop: "4%",}}>Your Plant needs <Text style={{color: "lightblue",}}>10 Liters</Text> of Water Per Week!</Text>
+                    <View style={{backgroundColor: "#ECF3FA", marginBottom: "10%", alignItems: "center", borderRadius: 20, padding: 17,}}>
+                      <Text style={{fontSize: 19, marginTop: "4%",}}>Your Plant needs <Text style={{color: "#49a3d7",}}>10 Liters</Text> of Water Per Week!</Text>
                       <Image source={require("../assets/droplets.png")} style={{height: 135, width: 90, marginBottom: "4%",}}></Image>
                     </View>
->>>>>>> Stashed changes
                 </View>
             </View>
-          </Modal> */}
+          </Modal>
       </View>
       <View style={{marginTop: Dimensions.get("window").height*0.16}}>
         <Navbar />
