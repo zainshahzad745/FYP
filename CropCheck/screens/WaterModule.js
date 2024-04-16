@@ -3,7 +3,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet, View, Text, ImageBackground, Image, Button, Dimensions, TouchableOpacity, TextInput } from 'react-native';
 import Modal from "react-native-modal";
 import Navbar from "./components/Navbar";
+<<<<<<< Updated upstream
 // import {Dropdown} from "react-native-material-dropdown-v2-fixed";
+=======
+import {Dropdown} from "react-native-material-dropdown-v2-fixed";
+>>>>>>> Stashed changes
 import axios from 'axios'
 const backgroundimg = require("../assets/backgroundimg.jpg");
 
@@ -12,11 +16,16 @@ const WaterModule = () => {
   const [humidity, setHumidity] = useState('')
   const [location, setLocation] = useState('')
 
+<<<<<<< Updated upstream
   // const [weatherData, setWeatherData] = useState(null);
   // let weather = {}
   const fahrenheitToCelsius = (fahrenheit) => {
     return ((fahrenheit - 32) * 5) / 9;
   };
+=======
+  const [weatherData, setWeatherData] = useState(null);
+
+>>>>>>> Stashed changes
   const fetchWeatherData = async () => {
     try {
       const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Karachi,pk&appid=38046aa8b3800991fcc53f7007d058a3`;
@@ -188,7 +197,7 @@ const WaterModule = () => {
                 </View>
                 <View style={{marginTop: "5%", height: "10%", marginTop: "7%",}}>
                 <TouchableOpacity onPress={test}
-                style={{backgroundColor: "red", width: "45%", height: "77%", marginLeft: "55%",}}></TouchableOpacity>
+                style={{backgroundColor: "green", width: "40%", height: "88%", marginLeft: "60%", borderRadius: 20, justifyContent: "center", alignItems: "center", flexDirection: "row"}}><Text style={{fontSize: 18, color: "white"}}>Next</Text><Image source={require("../assets/arrow.png")} style={{marginLeft: "6%"}}></Image></TouchableOpacity>
                 </View>
               </View>
             </View>
@@ -197,7 +206,7 @@ const WaterModule = () => {
           {/* Result Modal */}
           {/* <Modal
           animationType="slide"
-          transparent={false}
+          transparent={true}
           visible={isResultModalVisible}
           // onShow={setIsDataModalVisible(false)}
           // onShow={() => { hideModal(setIsModalVisible,3000), showModal(setIsDataModalVisible,4000); }}
@@ -208,18 +217,37 @@ const WaterModule = () => {
               justifyContent: "center",
               alignItems: "center",
               height: "60%",
+<<<<<<< Updated upstream
               width: "100%",
               marginVertical: "12%",
               backgroundColor: "red",}}>
+=======
+              width: "94%",
+              marginHorizontal: "3%",
+              marginVertical: "12%",
+              // backgroundColor: "red",
+              }}>
+>>>>>>> Stashed changes
                 <View style={{
                   backgroundColor: "#d9e3db",
                   borderRadius: 28,
                   paddingHorizontal: 15,
                   width: "100%",
                 }}>
+<<<<<<< Updated upstream
                   <Text>Result</Text>
                   <Image source={require("../assets/tick.png")}></Image>
                     <View style={{backgroundColor: "white"}}></View>
+=======
+                  <View style={{flexDirection: "row", justifyContent: "flex-start", alignItems: "center", marginTop: "8%", marginBottom: "12%",}}>
+                    <Text style={{fontSize: 28, fontWeight: "bold",}}>Result</Text>
+                    <Image source={require("../assets/tick.png")} style={{height: 65, width: 70, marginLeft: "8%",}}></Image>
+                  </View>
+                    <View style={{backgroundColor: "white", marginBottom: "10%", alignItems: "center", borderRadius: 20, padding: 17,}}>
+                      <Text style={{fontSize: 19, marginTop: "4%",}}>Your Plant needs <Text style={{color: "lightblue",}}>10 Liters</Text> of Water Per Week!</Text>
+                      <Image source={require("../assets/droplets.png")} style={{height: 135, width: 90, marginBottom: "4%",}}></Image>
+                    </View>
+>>>>>>> Stashed changes
                 </View>
             </View>
           </Modal> */}
