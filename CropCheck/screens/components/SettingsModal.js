@@ -1,56 +1,38 @@
-// MainScreenHead.js
-import React from 'react';
-import {useState} from "react";
-import { View, Text, StyleSheet, Dimensions, ImageBackground, TouchableOpacity, Image} from 'react-native';
-import moment from 'moment';
+// import React, { useState } from 'react';
+// import { View, Text, TouchableOpacity, Image } from 'react-native';
+// import Modal from "react-native-modal";
+
+// const SettingsModal = ({ isVisible, onClose }) => {
+//   const [isModalVisible, setIsModalVisible] = useState(isVisible);
+
+//   const handleModal = () => {
+//     setIsModalVisible(!isModalVisible);
+//     onClose(); // Call onClose callback to notify parent component
+//   };
+
+//   return (
+//     <Modal isVisible={isModalVisible} animationIn="fadeIn" animationOut="fadeOut">
+//       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+//         <View style={{ borderRadius: 30, backgroundColor: '#bcdac2', padding: 20 }}>
+//           <TouchableOpacity onPress={handleModal} style={{ alignSelf: 'flex-end' }}>
+//             <Image source={require('../../assets/close.png')} style={{ width: 20, height: 20 }} />
+//           </TouchableOpacity>
+//           <Text style={{ fontSize: 18, marginTop: 20 }}>Your password has been changed</Text>
+//         </View>
+//       </View>
+//     </Modal>
+//   );
+// };
+import { useState } from 'react';
 import { Modal } from 'react-native';
-const footerimg = require('../../assets/head1.png');
 
-const MainScreenHead = () => {
+const SettingsModal= () => {
   // Get the current date and day using moment
-  const currentDate = moment().format('MMMM D, YYYY');
-  const currentDay = moment().format('dddd');
-
   const [isModalVisible, setisModalVisible] = useState(false);
   const handleModal = () => setisModalVisible(() => !isModalVisible);
   
-  // const [modalVisible, setModalVisible] = useState(false);
-  // const openModal = () => {
-  //   setModalVisible(true);
-  // };
-
-  // const closeModal = () => {
-  //   setModalVisible(false);
-  // };
-
-  return (
-    <ImageBackground
-      source={footerimg} // Set the path to your background image
-      style={styles.backgroundImage}
-      //resizeMode="cover"
-    >
-      <View style={styles.container}>
-        {/* Left side */}
-        <View style={styles.leftContainer}>
-          <Text style={styles.textLeft}>Hi There!</Text>
-          <Text style={styles.textLeft}>Zain! 😆</Text>
-        </View>
-
-        {/* Right side */}
-        <View style={styles.rightContainer}>
-          <Text style={styles.textRight}>{currentDate}</Text>
-          <Text style={styles.textRight}>{currentDay}</Text>
-        </View>
-        <View style={styles.nav}>
-          <TouchableOpacity 
-            style={{color: 'black'}} 
-            onPress={handleModal}
-          >
-            <Image 
-              source={require("../../assets/settings.png")} 
-              style={{ width: 30, height:30}}
-            />
-            <Modal visible={isModalVisible} animationType="fade">
+    return(
+        <Modal visible={isModalVisible} animationType="fade">
               <View style={{flex: 1,
                 borderRadius: 30,
                 marginLeft: 20,
@@ -136,60 +118,9 @@ const MainScreenHead = () => {
             </View>
         </View>
     </Modal>
-            {/* <Button title="Open Settings" onPress={openModal} />
-            <SettingsModal isVisible={modalVisible} onClose={closeModal} /> */}
-          </TouchableOpacity>
-        </View>
-      </View>
-    </ImageBackground>
-  );
-};
 
-const { height } = Dimensions.get('window');
-const componentHeight = height * 0.2;
+    )
+}
 
-const styles = StyleSheet.create({
-  backgroundImage: {
-    width: '100%',
-    height: '10',
-    resizeMode: 'contain',
-  },
-  container: {
-    flexDirection: "row",
-    height: componentHeight,
-    // backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    padding: 10,
-  },
-  nav: {
-    margin: "3%",
-    flexDirection: 'row',
-    //width: 100,
-  },
-  leftContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-    marginTop: 30,
-    marginLeft: 40,
-  },
-  rightContainer: {
-    marginTop: 30,
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'flex-end',
-  },
-  textLeft: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginBottom: 5,
-    color: 'black',
-  },
-  textRight: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginBottom: 5,
-    color: 'black',
-  },
-});
+export default SettingsModal;
 
-export default MainScreenHead;

@@ -29,6 +29,10 @@ const Signin = ({navigation}) => {
   const navigateLogin = () => {
     navigation.replace("Signup");
   };
+
+  const navigateForgetPassword = () => {
+    navigation.replace("ForgetPassword");
+  };
   return (
     <View style={styles.container}>
       <ImageBackground source={backgroundimg} style={styles.background}>
@@ -36,6 +40,7 @@ const Signin = ({navigation}) => {
           <Image source={require("../assets/logo.png")} style={styles.logo} />
           <Text style={styles.logoText}>CROPCHECK</Text>
         </View>
+        
         <View style={styles.containerTwo}>
           <Text
             style={{
@@ -66,7 +71,7 @@ const Signin = ({navigation}) => {
               shadowRadius: 3.84,
               elevation: 5,
               marginRight: "5%",
-              marginTop: "8%", // Custom height
+              // marginTop: "1%", // Custom height
               justifyContent: "center",
               alignItems: "center",
             }}
@@ -78,7 +83,7 @@ const Signin = ({navigation}) => {
           </TouchableOpacity>
           <Image
             source={require("../assets/image.png")}
-            style={{ width: "100%", height: "3%", marginTop: "12%" }}
+            style={{ width: "100%", height: "3%", marginTop: "8%" }}
           />
           {/* email button */}
 
@@ -168,7 +173,10 @@ const Signin = ({navigation}) => {
           <View style={{ display: 'flex', flexDirection: 'row', marginLeft: '10%', marginRight: '10%', marginTop: '5%' }}>
           <CheckBox value={isChecked} onValueChange={setChecked} color={'green'} />
           <Text style={{fontSize: 16, marginLeft: 3, paddingLeft: 12}}>Remember Me</Text>
-          <Text style={{fontSize: 16, marginLeft: '30%'}}>Forgot Password?</Text>
+          {/* <Text style={{fontSize: 16, marginLeft: '30%'}}>Forgot Password?</Text> */}
+          <Text style={{ color: "green", marginLeft: 'auto' }} onPress={navigateForgetPassword}>
+              Forget Password?
+            </Text>
           </View>
           <TouchableOpacity
           onPress={handleSignin}
@@ -243,7 +251,7 @@ const styles = StyleSheet.create({
     width: 132,
     height: 107,
     alignSelf: "center",
-    marginTop: "10%",
+    marginTop: "30%",
   },
 });
 
