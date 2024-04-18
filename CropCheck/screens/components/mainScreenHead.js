@@ -4,6 +4,7 @@ import {useState} from "react";
 import { View, Text, StyleSheet, Dimensions, ImageBackground, TouchableOpacity, Image} from 'react-native';
 import moment from 'moment';
 import { Modal } from 'react-native';
+import SettingsModal from './SettingsModal';
 const footerimg = require('../../assets/head1.png');
 
 const MainScreenHead = () => {
@@ -44,13 +45,13 @@ const MainScreenHead = () => {
         <View style={styles.nav}>
           <TouchableOpacity 
             style={{color: 'black'}} 
-            onPress={handleModal}
+            onPress={SettingsModal}
           >
             <Image 
               source={require("../../assets/settings.png")} 
               style={{ width: 30, height:30}}
             />
-            <Modal visible={isModalVisible} animationType="fade">
+            {/* <Modal visible={isModalVisible} animationType="fade">
               <View style={{flex: 1,
                 borderRadius: 30,
                 marginLeft: 20,
@@ -135,7 +136,7 @@ const MainScreenHead = () => {
                     </TouchableOpacity>
             </View>
         </View>
-    </Modal>
+    </Modal> */}
             {/* <Button title="Open Settings" onPress={openModal} />
             <SettingsModal isVisible={modalVisible} onClose={closeModal} /> */}
           </TouchableOpacity>
