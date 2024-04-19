@@ -16,15 +16,6 @@ const MainScreenHead = () => {
   const handleModalClick = () => {
     setisModalVisible(!isModalVisible); // Toggle modal visibility
   }
-  
-  // const [modalVisible, setModalVisible] = useState(false);
-  // const openModal = () => {
-  //   setModalVisible(true);
-  // };
-
-  // const closeModal = () => {
-  //   setModalVisible(false);
-  // };
 
   return (
     <ImageBackground
@@ -55,94 +46,6 @@ const MainScreenHead = () => {
               source={require("../../assets/settings.png")} 
               style={{ width: 30, height:30}}
             />
-            {/* <Modal visible={isModalVisible} animationType="fade">
-              <View style={{flex: 1,
-                borderRadius: 30,
-                marginLeft: 20,
-                marginRight: 10,
-                marginTop: "10%",
-                marginBottom: "90%",
-                justifyContent: "center",
-                backgroundColor: "#bcdac2",
-                alignItems: "center",
-                height: "0%",
-                width: "90%",
-                marginVertical: "12%",}}>
-              <View style={{opacity: "1", height: '100%',width:'100%',marginLeft: '13%'}}>
-                <TouchableOpacity 
-                  style={{paddingTop: 25}} 
-                  onPress={handleModal}
-                >
-                    <Image 
-                            source={require("../../assets/close.png")} 
-                            style={{ width: "6%", height: "20%"}}
-                    />
-                </TouchableOpacity>
-                        <TouchableOpacity
-                        // onPress={handleSignUpGoogle}
-                            style={{
-                            flexDirection: "row",
-                            backgroundColor: "#e3f3fb", // Green background color
-                            borderRadius: 50, // Custom border radius
-                            width: "80%", // Custom width
-                            height: "18%",
-                            marginLeft: "4%",
-                            marginBottom: "7%",
-                            shadowColor: "#000",
-                            shadowOffset: {
-                            width: 0,
-                            height: 2,
-                            },
-                            shadowOpacity: 0.25,
-                            shadowRadius: 3.84,
-                            elevation: 5,
-                            marginRight: "5%",
-                            // marginTop: "1%", // Custom height
-                            justifyContent: "center",
-                            alignItems: "center",
-                            }}
-                        >
-                          <Text style={{fontSize: 18,paddingRight: 50}}>Choose Language</Text>
-                          <Image 
-                            source={require("../../assets/dropdown.png")} 
-                            style={{ width: "7%", height: "30%"}}
-                          />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        // onPress={handleSignUpGoogle}
-                            style={{
-                            flexDirection: "row",
-                            backgroundColor: "#e3f3fb", // Green background color
-                            borderRadius: 50, // Custom border radius
-                            width: "80%", // Custom width
-                            height: "18%",
-                            marginLeft: "4%",
-                            marginTop: "4%",
-                            shadowColor: "#000",
-                            shadowOffset: {
-                            width: 0,
-                            height: 2,
-                            },
-                            shadowOpacity: 0.25,
-                            shadowRadius: 3.84,
-                            elevation: 5,
-                            marginRight: "5%",
-                            // marginTop: "1%", // Custom height
-                            justifyContent: "center",
-                            alignItems: "center",
-                            }}
-                        >
-                          <Text style={{fontSize: 18,paddingRight: 120}}>Log Out</Text>
-                          <Image 
-                            source={require("../../assets/logout.png")} 
-                            style={{ width: "7%", height: "30%"}}
-                          />
-                    </TouchableOpacity>
-            </View>
-        </View>
-    </Modal> */}
-            {/* <Button title="Open Settings" onPress={openModal} />
-            <SettingsModal isVisible={modalVisible} onClose={closeModal} /> */}
           </TouchableOpacity>
         </View>
       </View>

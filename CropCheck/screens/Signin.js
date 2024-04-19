@@ -17,7 +17,7 @@ const Signin = ({navigation}) => {
   const [show, setShow] = useState(true);
   const [isChecked, setChecked] = useState(false);
 
-  const handleSignin = () => {
+ const handleSignin = () => {
     navigation.replace("MainScreen");
   }
   

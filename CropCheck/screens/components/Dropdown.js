@@ -26,7 +26,6 @@ const Dropdown = ({onSelect}) => {
 
     return (
       <View style={{backgroundColor: 'white', borderRadius: 10, padding: 10,width: "90%"}}>
-        {/* <Text style={{fontSize: 18, paddingRight: 60}}>Select an option</Text> */}
         <RNPickerSelect
           placeholder={placeholder}
           items={options}

@@ -1,7 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
 import { Modal, View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
-//import DropDownPicker from 'react-native-dropdown-picker';
 import Dropdown from './Dropdown';
 
 const SettingsModal= ({onClose}) => {
@@ -62,7 +61,6 @@ const SettingsModal= ({onClose}) => {
                             width: "100%", // Custom width
                             height: 50,
                             marginLeft: "4%",
-                            //marginBottom: 40,
                             shadowColor: "#000",
                             shadowOffset: {
                             width: 0,
@@ -84,9 +82,8 @@ const SettingsModal= ({onClose}) => {
                           </Image>
                     </TouchableOpacity>
                     {isDropdownVisible && <Dropdown onSelect={handleLanguageChange} />}
-                    {/* {isDropdownVisible && <Dropdown />} */}
                     <TouchableOpacity
-                        // onPress={handleSignUpGoogle}
+                        // onPress=Log out
                         style={{
                           flexDirection: "row",
                           backgroundColor: "#e3f3fb", // Green background color
