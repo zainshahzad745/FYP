@@ -3,7 +3,6 @@ import React from 'react';
 import {useState} from "react";
 import { View, Text, StyleSheet, Dimensions, ImageBackground, TouchableOpacity, Image} from 'react-native';
 import moment from 'moment';
-import { Modal } from 'react-native';
 import SettingsModal from './SettingsModal';
 const footerimg = require('../../assets/head1.png');
 
@@ -13,7 +12,10 @@ const MainScreenHead = () => {
   const currentDay = moment().format('dddd');
 
   const [isModalVisible, setisModalVisible] = useState(false);
-  const handleModal = () => setisModalVisible(() => !isModalVisible);
+  
+  const handleModalClick = () => {
+    setisModalVisible(!isModalVisible); // Toggle modal visibility
+  }
   
   // const [modalVisible, setModalVisible] = useState(false);
   // const openModal = () => {
@@ -42,10 +44,12 @@ const MainScreenHead = () => {
           <Text style={styles.textRight}>{currentDate}</Text>
           <Text style={styles.textRight}>{currentDay}</Text>
         </View>
+        {/* {/* Modal */}
+        {isModalVisible && <SettingsModal onClose={() => setisModalVisible(false)} />}
         <View style={styles.nav}>
           <TouchableOpacity 
             style={{color: 'black'}} 
-            onPress={SettingsModal}
+            onPress={handleModalClick}
           >
             <Image 
               source={require("../../assets/settings.png")} 
