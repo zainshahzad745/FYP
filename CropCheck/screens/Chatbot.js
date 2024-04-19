@@ -47,23 +47,6 @@ const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 const styles = StyleSheet.create({
-<<<<<<< Updated upstream
-  navContainer: {
-    marginTop: "35%",
-  },
-  text: {
-    textAlign: "center",
-    fontSize: 32,
-    fontWeight: "bold",
-  },
-  textView: {
-    marginTop: "15%",
-  },
-  chat: {
-    height: "60%",
-    marginTop: "15%",
-  },
-=======
     navContainer: {
         height: windowHeight*0.06,
     },
@@ -83,7 +66,6 @@ const styles = StyleSheet.create({
         // padding: "5%",
         // backgroundColor: "white",
     },
->>>>>>> Stashed changes
 });
 
 export default Chatbot;

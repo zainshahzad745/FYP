@@ -12,7 +12,11 @@ import {
 } from "react-native";
 import { FIREBASE_AUTH } from "../Auth/FirebaseConfig";
 import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
+
 const backgroundimg = require("../assets/backgroundimg.jpg");
+
+
+
 
 const Signup = ({navigation}) => {
   const [email, onChangeEmail] = React.useState("");

@@ -23,7 +23,7 @@ const MainScreen = ({ navigation }) => {
         source={backgroundimg}
         style={styles.background}
       >
-        <MainScreenHead />
+        <MainScreenHead navigation={navigation} />
         <Text style={styles.text}>Recently Scanned</Text>
         <View style={styles.imageContainer}>
           <ImageComponent

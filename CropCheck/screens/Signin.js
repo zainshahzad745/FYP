@@ -9,21 +9,78 @@ import {
   TextInput,
   Alert,
   ActivityIndicator,
+  Button,
 } from "react-native";
 import CheckBox from "expo-checkbox";
 import { FIREBASE_AUTH } from "../Auth/FirebaseConfig";
 import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
 const backgroundimg = require("../assets/backgroundimg.jpg");
+import * as Localization from "expo-localization";
+import { I18n } from "i18n-js";
+import SettingsModal2 from "./components/SettingModal2";
+const translations = {
+  en: {
+      Login: "Login", 
+      Email: "Enter Email"
+  }, 
+
+  ur: {
+      Login: "لاگ ان",
+      Email: "ایمیل درج کریں", 
+      EnterPass: "پاسورڈ درج کریں",
+      Remember: "مجھے یاد رکھیں", 
+      Pass: "پاسورڈ بھول گئے؟", 
+      Signin: "سائن ان کریں"
+  }, 
+
+  pn: {
+      Login: "لاگ ان"
+  }, 
+
+  ps : {
+      Login: "لاگ ان"
+  }, 
+
+  sn : {
+      Login: "لاگ ان"
+  }, 
+  bl: {
+      Login: "لاگ ان"
+  }
+};
+
+const i18n = new I18n(translations);
+i18n.locale = Localization.locale
+i18n.enableFallback = true; 
 
 
 const Signin = ({navigation}) => {
+  const [isModalVisible, setisModalVisible] = useState(false);
+
+  const handleModalClick = () => {
+    setisModalVisible(!isModalVisible); // Toggle modal visibility
+  }
+
+
+  const [locale, setLocale] = useState(i18n.locale);
+  const changeLocale = (locale) => {
+    i18n.locale = locale;
+    setLocale(locale);
+  }
+  // changeLocale('ur')
   const [email, onChangeEmail] = useState("");
   const [password, onChangePassword] = useState("");
   const [show, setShow] = useState(true);
   const [ loading, setLoading ] = useState(false);
   const [isChecked, setChecked] = useState(false);
   const auth = FIREBASE_AUTH;
+  const changeLocaleL = () => {
+
+    changeLocale('ur')
+
+  }
   const handleSignin = async () => {
+
     setLoading(true);
     try{
       const response = await signInWithEmailAndPassword(auth, email, password);
@@ -72,7 +129,7 @@ const Signin = ({navigation}) => {
 
             }}
           >
-            Login
+            {i18n.t('Login')}
           </Text>
           <TouchableOpacity
             // onPress={handleSignUpGoogle}
@@ -135,7 +192,7 @@ const Signin = ({navigation}) => {
               style={{ width: "100%", height: "100%", textAlign: "center" }}
               onChangeText={onChangeEmail}
               value={email}
-              placeholder="Enter Email"
+              placeholder={i18n.t('Email')}
               autoComplete="email"
               // keyboardType="numeric"
             />
@@ -176,7 +233,7 @@ const Signin = ({navigation}) => {
               }}
               onChangeText={onChangePassword}
               value={password}
-              placeholder="Enter Password"
+              placeholder={i18n.t('EnterPass')}
               secureTextEntry={show}
               // keyboardType="numeric"
             ></TextInput>
@@ -192,8 +249,8 @@ const Signin = ({navigation}) => {
           </TouchableOpacity>
           <View style={{ display: 'flex', flexDirection: 'row', marginLeft: '10%', marginRight: '10%', marginTop: '5%' }}>
           <CheckBox value={isChecked} onValueChange={setChecked} color={'green'} />
-          <Text style={{fontSize: 16, marginLeft: 3, paddingLeft: 12}}>Remember Me</Text>
-          <Text style={{fontSize: 16, marginLeft: '30%'}}>Forgot Password?</Text>
+          <Text style={{fontSize: 16, marginLeft: 3, paddingLeft: 12}}>{i18n.t('Remember')}</Text>
+          <Text style={{fontSize: 16, marginLeft: '30%'}}>{i18n.t('Pass')}</Text>
           </View>
           <TouchableOpacity
           onPress={handleSignin}
@@ -211,7 +268,25 @@ const Signin = ({navigation}) => {
           }}
         >
             
-          <Text style={{ color: "white", fontWeight: "bold" }}>SignIn</Text>
+          <Text style={{ color: "white", fontWeight: "bold" }}>{i18n.t('Signin')}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={changeLocaleL}
+          style={{
+            backgroundColor: "green", // Green background color
+            opacity: 0.8, // Semi-transparent
+            borderRadius: 20, // Custom border radius
+            width: "50%", // Custom width
+            height: "8%",
+            marginLeft: "25%",
+            marginRight: "25%",
+            marginTop: "8%", // Custom height
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+            
+          <Text style={{ color: "white", fontWeight: "bold" }}>changeLocale</Text>
         </TouchableOpacity>
           <Text
             style={{ width: "100%", fontSize: 18, height: "5%", textAlign: "center", marginTop: '12%' }}
@@ -227,7 +302,7 @@ const Signin = ({navigation}) => {
         <View style={styles.activityIndicatorContainer}>
           <ActivityIndicator size={120} color="green" />
         </View>
-      )}
+      )}      
       </ImageBackground>
     </View>
   );

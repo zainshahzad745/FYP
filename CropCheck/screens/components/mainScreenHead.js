@@ -1,13 +1,19 @@
 // MainScreenHead.js
-import React from 'react';
-import { View, Text, StyleSheet, Dimensions, ImageBackground } from 'react-native';
+import React, {useState} from 'react';
+import { View, Text, StyleSheet, Dimensions, ImageBackground, Touchable, TouchableOpacity, Image } from 'react-native';
 import moment from 'moment';
+import SettingsModal2 from './SettingModal2';
 const footerimg = require('../../assets/head1.png');
 
-const MainScreenHead = () => {
+
+const MainScreenHead = ({navigation}) => {
   // Get the current date and day using moment
   const currentDate = moment().format('MMMM D, YYYY');
   const currentDay = moment().format('dddd');
+  const [isModalVisible, setisModalVisible] = useState(false);
+  const handleModalClick = () => {
+    setisModalVisible(!isModalVisible); // Toggle modal visibility
+  }
 
   return (
     <ImageBackground
@@ -17,6 +23,7 @@ const MainScreenHead = () => {
     >
       <View style={styles.container}>
         {/* Left side */}
+        
         <View style={styles.leftContainer}>
           <Text style={styles.textLeft}>Hi There!</Text>
           <Text style={styles.textLeft}>Have a great day ! 🌱</Text>
@@ -26,7 +33,14 @@ const MainScreenHead = () => {
         <View style={styles.rightContainer}>
           <Text style={styles.textRight}>{currentDate}</Text>
           <Text style={styles.textRight}>{currentDay}</Text>
+          <TouchableOpacity style={{width: 30, height: 30,}} onPress={handleModalClick}>
+
+            <Image source={require('../../assets/setting.png')} style={{width: 30, height: 30}} />
+          </TouchableOpacity>
         </View>
+        {isModalVisible && <SettingsModal2 onClose={() => setisModalVisible(false)} navigation={navigation}/>}
+
+
       </View>
     </ImageBackground>
   );
@@ -42,17 +56,21 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   container: {
+    display: 'flex',
     flexDirection: 'row',
     height: componentHeight,
+    // backgroundColor: 'green',
     // backgroundColor: 'rgba(0, 0, 0, 0.5)',
     padding: 10,
   },
   leftContainer: {
+    padding: 10,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'flex-start',
   },
   rightContainer: {
+    padding: 10,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'flex-end',
