@@ -80,7 +80,11 @@ const WaterModule = () => {
         }}
       > 
       <View style={{justifyContent: "center", height: "96%", paddingLeft: "5%", paddingRight: "5%", height: windowHeight*0.94}}>
-        <Text style={{fontSize: 22, marginBottom: 10, fontWeight:"bold", marginHorizontal: "5%", marginLeft: '15%', marginRight: "15%"}}>
+        <View style={{flexDirection: "row", marginBottom: "55%",  alignItems:"flex-end"}}>
+          <Text style={{fontSize: 22, fontWeight: "bold"}}>Water Calculator</Text>
+          <Image source={require("../assets/droplet.png")} style={{height: 40, width: 40 }}></Image>
+        </View>
+        <Text style={{fontSize: 22, marginBottom: 10, fontWeight:"bold", marginHorizontal: "5%",}}>
           Elevating Plant Health with Tailored Watering Guidelines
         </Text>
         <TouchableOpacity onPress={handleCalculateNow} style={{
@@ -94,7 +98,7 @@ const WaterModule = () => {
             justifyContent: "center",
             alignItems: "center",
             flexDirection: "row",
-
+            marginBottom: "35%",
           }}>
           <Text style={{fontSize: 18, color: 'white'}}>Calculate Now!</Text><Image style={{}} source={require("../assets/water.png")}></Image>
         </TouchableOpacity>
@@ -104,7 +108,7 @@ const WaterModule = () => {
           animationType="slide"
           transparent={true}
           visible={isModalVisible}
-          onShow={() => { hideModal(setIsModalVisible,3000), showModal(setIsDataModalVisible,3000); }}
+          onShow={() => { hideModal(setIsModalVisible,2200), showModal(setIsDataModalVisible,2200); }}
           >
             <View style={{
               flex: 1,
@@ -146,7 +150,7 @@ const WaterModule = () => {
           transparent={true}
           visible={isDataModalVisible}
           // onShow={() => { hideModal(setIsDataModalVisible, 10000); }}
-          // onRequestClose={() => setIsDataModalVisible(false)}
+          onRequestClose={() => setIsDataModalVisible(false)}
           >
             <View style={{
               flex: 1,
@@ -175,17 +179,21 @@ const WaterModule = () => {
                   <Image source={require("../assets/humidity.png")} style={{height: 50, width: 50, marginHorizontal: 5,}}></Image>
                   <Text style={{fontSize: 20,}}>{humidity}%</Text>
                 </View>
+                <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginTop: 9, }}>
+                  <Text style={{fontSize: 20, }}>Location</Text>
+                  <Image source={require("../assets/location.png")} style={{height: 60, width: 48,}}></Image>
+                  <Text style={{fontSize: 20,}}>{location}</Text>
+                  {/* <Dropdown label="Enter here" data={places} style={{padding:0, backgroundColor: "#A5CEA7",}}></Dropdown> */}
+                </View>
+                <View>
+                  <Text style={{fontSize: 20, }}>Plant Type</Text>
+                  <Image source={require("../assets/planttype.png")} style={{height: 50, width: 50,}}></Image>
+                </View>
                 <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginTop: 9,}}>
                   <Text style={{fontSize: 20, }}>Pot Diameter</Text>
                   <Image source={require("../assets/pot.png")} style={{height: 37, width: 50, marginHorizontal: 5,}}></Image>
                   <TextInput style={{width: 75, height: 22, textAlign: "center", backgroundColor: "white",}} 
                   value={diameter} placeholder={"Enter here"} onChangeText={inputDiameter}></TextInput>
-                </View>
-                <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginTop: 9, }}>
-                  <Text style={{fontSize: 20, }}>Location</Text>
-                  <Image source={require("../assets/location.png")} style={{height: 60, width: 48,}}></Image>
-                  <Text style={{fontSize: 20,}}>{location}.</Text>
-                  {/* <Dropdown label="Enter here" data={places} style={{padding:0, backgroundColor: "#A5CEA7",}}></Dropdown> */}
                 </View>
                 <View style={{marginTop: "5%", height: "10%", marginTop: "7%",}}>
                 <TouchableOpacity onPress={test}
