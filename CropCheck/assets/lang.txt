@@ -1,0 +1,24 @@
+const translations = {
+    en: {
+        Login: "Login"
+    }, 
+
+    ur: {
+        Login: "لاگ ان"
+    }, 
+
+    pn: {
+        Login: "لاگ ان"
+    }, 
+
+    ps : {
+        Login: "لاگ ان"
+    }, 
+
+    sn : {
+        Login: "لاگ ان"
+    }, 
+    bl: {
+        Login: "لاگ ان"
+    }
+};

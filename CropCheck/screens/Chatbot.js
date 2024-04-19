@@ -2,16 +2,19 @@ import React from "react";
 import {
   View,
   TextInput,
-  TouchableOpacity,
   Text,
   ImageBackground,
   Dimensions,
   StyleSheet,
+  KeyboardAvoidingView,
+  Keyboard,
+  Platform,
 } from "react-native";
 import Chatbox from "./components/Chatbox";
 import Navbar from "./components/Navbar";
 
 const backgroundimg = require("../assets/chatbotbg.png");
+
 const Chatbot = () => {
   return (
     <ImageBackground
@@ -20,26 +23,32 @@ const Chatbot = () => {
         width: Dimensions.get("window").width,
         height: Dimensions.get("window").height,
         resizeMode: "stretch",
-        }}
+      }}
     >
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{ flex: 1 }}
+      >
         <View style={styles.textView}>
-            <Text style={styles.text}>AI Chatbot</Text>
+          <Text style={styles.text}>AI Chatbot</Text>
         </View>
         <View style={styles.chat}>
-            <Chatbox />
+          <Chatbox />
         </View>
         <View style={styles.navContainer}>
-            <Navbar />
+          <Navbar />
         </View>
+      </KeyboardAvoidingView>
     </ImageBackground>
-    );
+  );
 };
 
 const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 
 const styles = StyleSheet.create({
     navContainer: {
-        marginTop: "35%",
+        height: windowHeight*0.06,
     },
     text: {
         textAlign: "center",
@@ -47,11 +56,13 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
     },
     textView: {
-        marginTop: "15%",
+        paddingTop: "15%",
+        height: windowHeight*0.2,
+        // backgroundColor: "red",
     },
     chat: {
-        height: "60%",
-        marginTop: "15%",
+        height: windowHeight*0.74,
+        // marginTop: "15%",
         // padding: "5%",
         // backgroundColor: "white",
     },

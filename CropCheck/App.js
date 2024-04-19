@@ -16,6 +16,9 @@ import Signin from './screens/Signin';
 import Signup from './screens/Signup';
 import Chatbot from './screens/Chatbot';
 import WaterModule from './screens/WaterModule';
+// import { Settings } from 'react-native';
+// import 
+import MainScreenHead from './screens/components/mainScreenHead';
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -27,6 +30,8 @@ const App = () => {
       >
         <Stack.Screen name="SplashScreen" component={SplashScreen} />
         <Stack.Screen name="Signup" component={Signup} />
+        {/* <Stack.Screen naem "logout" component={SettingsModal2} /> */}
+        <Stack.Screen name="mainScreenHead" component={MainScreenHead} /> 
         <Stack.Screen name="Signin" component={Signin} />
         <Stack.Screen name="MainScreen" component={MainScreen} />
         <Stack.Screen name="DetailedScreen" component={DetailedScreen} />
