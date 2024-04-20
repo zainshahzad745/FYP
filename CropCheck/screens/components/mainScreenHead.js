@@ -13,7 +13,17 @@ const MainScreenHead = ({navigation}) => {
   const [isModalVisible, setisModalVisible] = useState(false);
   const handleModalClick = () => {
     setisModalVisible(!isModalVisible); // Toggle modal visibility
-  }
+  };
+  const Languages = {
+    values: {
+        'en': 'English',
+        'ur': 'Urdu',
+        'pn': 'Punjabi',
+        'ps': 'Pushto',
+        'sn': 'Sindhi',
+        'bl': 'Balochi'
+    } 
+  };
 
   return (
     <ImageBackground
@@ -38,7 +48,7 @@ const MainScreenHead = ({navigation}) => {
             <Image source={require('../../assets/setting.png')} style={{width: 30, height: 30}} />
           </TouchableOpacity>
         </View>
-        {isModalVisible && <SettingsModal2 onClose={() => setisModalVisible(false)} navigation={navigation}/>}
+        {isModalVisible && <SettingsModal2 options={Languages} onClose={() => setisModalVisible(false)} navigation={navigation}/>}
 
 
       </View>

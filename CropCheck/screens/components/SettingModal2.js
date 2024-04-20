@@ -2,27 +2,27 @@ import React, { useState } from "react";
 import { Modal, View, Text, StyleSheet, TouchableOpacity, Image, Dimensions } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 
-const SettingsModal2 = ({ onClose, navigation }) => {
+const SettingsModal2 = ({ options, onClose, navigation }) => {
 
     const logout = () => {
         navigation.replace('Signin');
     }
 
-    const Languages = {
-        values: {
-            'en': 'English',
-            'ur': 'Urdu',
-            'pn': 'Punjabi',
-            'ps': 'Pushto',
-            'sn': 'Sindhi',
-            'bl': 'Balochi'
-        }
-    };
+    // const Languages = {
+    //     values: {
+    //         'en': 'English',
+    //         'ur': 'Urdu',
+    //         'pn': 'Punjabi',
+    //         'ps': 'Pushto',
+    //         'sn': 'Sindhi',
+    //         'bl': 'Balochi'
+    //     }
+    // };
 
     const [selectedLanguage, setSelectedLanguage] = useState('');
 
-    const languageItems = Object.keys(Languages.values).map((key) => (
-        <Picker.Item key={key} label={Languages.values[key]} value={key} />
+    const languageItems = Object.keys(options.values).map((key) => (
+        <Picker.Item key={key} label={options.values[key]} value={key} />
     ));
 
     console.log(iterateLanguages());
@@ -30,7 +30,7 @@ const SettingsModal2 = ({ onClose, navigation }) => {
     function iterateLanguages() {
         const keyValuePairs = [];
 
-        for (const [key, value] of Object.entries(Languages.values)) {
+        for (const [key, value] of Object.entries(options.values)) {
             keyValuePairs.push({ [key]: value });
         }
 
