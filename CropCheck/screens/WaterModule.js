@@ -185,7 +185,7 @@ const WaterModule = () => {
                   <Text style={{fontSize: 20,}}>{location}</Text>
                   {/* <Dropdown label="Enter here" data={places} style={{padding:0, backgroundColor: "#A5CEA7",}}></Dropdown> */}
                 </View>
-                <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
+                <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginTop: 9,}}>
                   <Text style={{fontSize: 20, }}>Plant Type</Text>
                   <Image source={require("../assets/planttype.png")} style={{height: 50, width: 50,}}></Image>
                 </View>
