@@ -14,11 +14,22 @@ import MainScan from './screens/MainScan';
 import PossibleSol  from './screens/PossibleSol';
 import Signin from './screens/Signin';
 import Signup from './screens/Signup';
+<<<<<<< HEAD
 import ForgetPassword from './screens/ForgetPassword';
+=======
+import Chatbot from './screens/Chatbot';
+import WaterModule from './screens/WaterModule';
+import TranslationProvider from './providers/TranslationProvider';
+// import { Settings } from 'react-native';
+// import 
+import MainScreenHead from './screens/components/mainScreenHead';
+>>>>>>> 15fd280a12032afe3cbb08dff2bf7f705ba79816
 const Stack = createStackNavigator();
 
 const App = () => {
   return (
+
+    <TranslationProvider>
     <NavigationContainer>
       <Stack.Navigator
         initialRouteName="SplashScreen"
@@ -26,6 +37,8 @@ const App = () => {
       >
         <Stack.Screen name="SplashScreen" component={SplashScreen} />
         <Stack.Screen name="Signup" component={Signup} />
+        {/* <Stack.Screen naem "logout" component={SettingsModal2} /> */}
+        <Stack.Screen name="mainScreenHead" component={MainScreenHead} /> 
         <Stack.Screen name="Signin" component={Signin} />
         <Stack.Screen name="ForgetPassword" component={ForgetPassword} />
         <Stack.Screen name="MainScreen" component={MainScreen} />
@@ -37,8 +50,11 @@ const App = () => {
         <Stack.Screen name="Analyze" component={Analyzing} />
         <Stack.Screen name="MainScan" component={MainScan} />
         <Stack.Screen name="PossibleSol" component={PossibleSol} />
+        <Stack.Screen name="Chatbot" component={Chatbot} />
+        <Stack.Screen name="WaterModule" component={WaterModule} />
       </Stack.Navigator>
     </NavigationContainer>
+    </TranslationProvider>
   );
 };
 

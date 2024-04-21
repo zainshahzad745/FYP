@@ -1,21 +1,14 @@
 // MainScreenHead.js
 import React from 'react';
-import {useState} from "react";
-import { View, Text, StyleSheet, Dimensions, ImageBackground, TouchableOpacity, Image} from 'react-native';
+import { View, Text, StyleSheet, Dimensions, ImageBackground } from 'react-native';
 import moment from 'moment';
-import SettingsModal from './SettingsModal';
 const footerimg = require('../../assets/head1.png');
 
-const MainScreenHead = () => {
+
+const MainScreenHead = ({navigation}) => {
   // Get the current date and day using moment
   const currentDate = moment().format('MMMM D, YYYY');
   const currentDay = moment().format('dddd');
-
-  const [isModalVisible, setisModalVisible] = useState(false);
-  
-  const handleModalClick = () => {
-    setisModalVisible(!isModalVisible); // Toggle modal visibility
-  }
 
   return (
     <ImageBackground
@@ -25,28 +18,21 @@ const MainScreenHead = () => {
     >
       <View style={styles.container}>
         {/* Left side */}
+        
         <View style={styles.leftContainer}>
           <Text style={styles.textLeft}>Hi There!</Text>
-          <Text style={styles.textLeft}>Zain! 😆</Text>
+          <Text style={styles.textLeft}>Have a great day ! 🌱</Text>
         </View>
 
         {/* Right side */}
         <View style={styles.rightContainer}>
           <Text style={styles.textRight}>{currentDate}</Text>
           <Text style={styles.textRight}>{currentDay}</Text>
-        </View>
-        {/* {/* Modal */}
-        {isModalVisible && <SettingsModal onClose={() => setisModalVisible(false)} />}
-        <View style={styles.nav}>
-          <TouchableOpacity 
-            style={{color: 'black'}} 
-            onPress={handleModalClick}
-          >
-            <Image 
-              source={require("../../assets/settings.png")} 
-              style={{ width: 30, height:30}}
-            />
+          <TouchableOpacity style={{width: 30, height: 30, alignItems: 'center'}} onPress={handleLogout}>
+
+            <Image source={require('../../assets/logout.png')} style={{width: 31, height: 33, marginRight: '35%'}} />
           </TouchableOpacity>
+          <Text style={{fontSize: 15, color: 'red', marginRight: '1%', fontWeight: '800', backgroundColor: 'white', marginTop: '5%', borderRadius: 5}}>Logout</Text>
         </View>
       </View>
     </ImageBackground>
@@ -63,8 +49,9 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   container: {
-    flexDirection: "row",
+    flexDirection: 'row',
     height: componentHeight,
+    // backgroundColor: 'green',
     // backgroundColor: 'rgba(0, 0, 0, 0.5)',
     padding: 10,
   },
@@ -74,6 +61,7 @@ const styles = StyleSheet.create({
     //width: 100,
   },
   leftContainer: {
+    padding: 10,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'flex-start',
@@ -81,7 +69,6 @@ const styles = StyleSheet.create({
     marginLeft: 40,
   },
   rightContainer: {
-    marginTop: 30,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'flex-end',
