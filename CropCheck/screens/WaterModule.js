@@ -4,10 +4,14 @@ import { StyleSheet, View, Text, ImageBackground, Image, Button, Dimensions, Tou
 import Modal from "react-native-modal";
 import Navbar from "./components/Navbar";
 // import {Dropdown} from "react-native-material-dropdown-v2-fixed";
-import axios from 'axios'
+import axios from 'axios';
+import { Picker } from '@react-native-picker/picker';
+
 const backgroundimg = require("../assets/backgroundimg.jpg");
 
 const WaterModule = () => {
+  // API Functionality
+
   const [temp, setTemp ] = useState('')
   const [humidity, setHumidity] = useState('')
   const [location, setLocation] = useState('')
@@ -34,7 +38,6 @@ const WaterModule = () => {
       console.error('Error fetching weather data:', error);
     }
   };
-  
 
   const handleCalculateNow = () => {
     fetchWeatherData();
@@ -43,14 +46,13 @@ const WaterModule = () => {
     setIsModalVisible(true);
   }
 
+  // Modal Functionality
+
   const [isModalVisible, setIsModalVisible] = useState(false); // State for plant modal visibility
   const [isDataModalVisible, setIsDataModalVisible] = useState(false); //State for data modal
   const [isResultModalVisible, setIsResultModalVisible] = useState(false); //State for result modal
-  const [diameter, inputDiameter] = useState(''); // State and function to handle diameter input field
-  const [selectedPlace, setSelectedPlace] = useState(null);
 
-
-  const test = () => {
+  function goTo() {
     setIsDataModalVisible(false)
     console.log('2nd modal', isDataModalVisible)
     setIsResultModalVisible(true)
@@ -67,6 +69,75 @@ const WaterModule = () => {
       whichModal(true);
     }, delay);
   };
+
+// Water Requirements
+
+  const [diameter, setDiameter] = useState(''); // State and function to handle diameter input field
+  const [coefficient, setCoefficient] = useState(0);
+  const [result, setResult] = useState('');
+  const [tempFactor, setTempFactor] = useState('');
+  const [humFactor, setHumFactor] = useState('');
+
+  const Plants = {
+    values: {
+        'ap' : 'Apple',
+        'bp' : 'Bell Pepper',
+        'bl' : 'Blueberry',
+        'ch' : 'Cherry',
+        'co' : 'Corn',
+        'gr' : 'Grape',
+        'po' : 'Potato'
+    }
+};
+
+  const coefficients = {'ap':2.5, 'bp':3.5, 'bl':3.5, 'ch':2.5, 'co':3, 'gr':3.4, 'po':3};
+  console.log(coefficients);
+
+  const [selectedPlant, setSelectedPlant] = useState('');
+
+  const plantItems = Object.keys(Plants.values).map((key) => (
+    <Picker.Item key={key} label={Plants.values[key]} value={key} />
+));
+
+  
+  function settingCoefficient() {
+    for (const [key, value] of Object.entries(coefficients)) {
+        if (key == selectedPlant) {
+          setCoefficient(value);
+        }
+    }
+};
+
+  function settingFactors(humidity, temp) {
+    if (humidity >= 30 && humidity <= 50 ) {
+      setHumFactor(0.8);
+    }
+    else  if (humidity > 50){
+      setHumFactor(1);
+    }
+    else if (humidiy < 30) {
+      setHumFactor(0.6)
+    }
+    if (temp = 20) {
+      setTempFactor(0.4);
+    }
+    else if (temp > 20) {
+      tempFactor = 0.4 + ( (temp-20)/10 )*0.1;
+      setTempFactor(tempFactor);
+    }
+    else if (temp < 20) {
+      tempFactor= 0.4 - ((20-temp)/10)*0.1;
+      setTempFactor(tempFactor);
+    }
+  }
+
+  function waterRequirement(diameter, humidity, temp) {
+    settingCoefficient();
+    settingFactors(humidity, temp);
+    const result = diameter * coefficient * humFactor * tempFactor;
+    setResult(result);
+    console.log(result, tempFactor, humFactor, coefficient);
+};
 
   return (
     <View style={{width: Dimensions.get("window").width,
@@ -187,17 +258,27 @@ const WaterModule = () => {
                 </View>
                 <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginTop: 9,}}>
                   <Text style={{fontSize: 20, }}>Plant Type</Text>
-                  <Image source={require("../assets/planttype.png")} style={{height: 50, width: 50,}}></Image>
+                  <Image source={require("../assets/planttype.png")} style={{height: 74, width: 74,}}></Image>
+                  <View 
+                        style={{backgroundColor: '#e3f3fb', height: 35, width: 125, borderRadius: 50, justifyContent: "center", alignItems: "center"}}
+                    >
+                        <Picker style={{ fontSize: 12,  height: "80%", width: "100%"}}
+                            selectedValue={selectedPlant}
+                            onValueChange={(itemValue) => setSelectedPlant(itemValue)}
+                        >
+                            {plantItems}
+                        </Picker>
+                    </View>
                 </View>
                 <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginTop: 9,}}>
                   <Text style={{fontSize: 20, }}>Pot Diameter</Text>
                   <Image source={require("../assets/pot.png")} style={{height: 37, width: 50, marginHorizontal: 5,}}></Image>
-                  <TextInput style={{width: 75, height: 22, textAlign: "center", backgroundColor: "white",}} 
-                  value={diameter} placeholder={"Enter here"} onChangeText={inputDiameter}></TextInput>
+                  <TextInput style={{width: 125, height: 35, textAlign: "center", backgroundColor: "#e3f3fb", fontSize: 18, borderRadius: 50,}} 
+                  value={diameter} placeholder={"Enter here"} onChangeText={(diameter) => setDiameter(diameter)}></TextInput>
                 </View>
-                <View style={{marginTop: "5%", height: "10%", marginTop: "7%",}}>
-                <TouchableOpacity onPress={test}
-                style={{backgroundColor: "green", width: "40%", height: "88%", marginLeft: "60%", borderRadius: 20, justifyContent: "center", alignItems: "center", flexDirection: "row"}}><Text style={{fontSize: 18, color: "white"}}>Next</Text><Image source={require("../assets/arrow.png")} style={{marginLeft: "6%"}}></Image></TouchableOpacity>
+                <View style={{height: "10%", marginTop: 19,}}>
+                <TouchableOpacity onPress={()=> {goTo(), waterRequirement(diameter, humidity, temp);}}
+                style={{backgroundColor: "green", width: "40%", height: "80%", marginLeft: "60%", borderRadius: 20, justifyContent: "center", alignItems: "center", flexDirection: "row"}}><Text style={{fontSize: 18, color: "white"}}>Next</Text><Image source={require("../assets/arrow.png")} style={{marginLeft: "6%"}}></Image></TouchableOpacity>
                 </View>
               </View>
             </View>
@@ -233,9 +314,10 @@ const WaterModule = () => {
                     <Image source={require("../assets/tick.png")} style={{height: 65, width: 70, marginLeft: "8%",}}></Image>
                   </View>
                     <View style={{backgroundColor: "#ECF3FA", marginBottom: "10%", alignItems: "center", borderRadius: 20, padding: 17,}}>
-                      <Text style={{fontSize: 19, marginTop: "4%",}}>Your Plant needs <Text style={{color: "#49a3d7",}}>10 Liters</Text> of Water Per Week!</Text>
+                      <Text style={{fontSize: 19, marginTop: "4%",}}>Your Plant needs <Text style={{color: "#49a3d7",}}>{result} ml</Text> of Water Per Day!*</Text>
                       <Image source={require("../assets/droplets.png")} style={{height: 135, width: 90, marginBottom: "4%",}}></Image>
                     </View>
+                    <Text style={{marginBottom: "10%"}}>*Please, note that this is just a suggestion and might not be accurate for all plants.</Text>
                 </View>
             </View>
           </Modal>
