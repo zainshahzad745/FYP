@@ -22,12 +22,10 @@ const Navbar = () => {
 
   const handleAskAI = () => {
     // Handle the Ask AI button click
-    navigation.navigate('Chatbot');
   };
 
   const handleWaterCalculator = () => {
     // Handle the Water Calculator button click
-    navigation.navigate('WaterModule');
   };
 
   return (
@@ -107,3 +105,4 @@ const styles = StyleSheet.create({
 });
 
 export default Navbar;
+//Done
