@@ -15,6 +15,10 @@ const MainScreenHead = ({navigation}) => {
     setisModalVisible(!isModalVisible); // Toggle modal visibility
   }
 
+  const handleLogout = () => {
+      navigation.replace('Signin')
+  }
+
   return (
     <ImageBackground
       source={footerimg} // Set the path to your background image
@@ -33,12 +37,13 @@ const MainScreenHead = ({navigation}) => {
         <View style={styles.rightContainer}>
           <Text style={styles.textRight}>{currentDate}</Text>
           <Text style={styles.textRight}>{currentDay}</Text>
-          <TouchableOpacity style={{width: 30, height: 30,}} onPress={handleModalClick}>
+          <TouchableOpacity style={{width: 30, height: 30, alignItems: 'center'}} onPress={handleLogout}>
 
-            <Image source={require('../../assets/setting.png')} style={{width: 30, height: 30}} />
+            <Image source={require('../../assets/logout.png')} style={{width: 31, height: 33, marginRight: '35%'}} />
           </TouchableOpacity>
+          <Text style={{fontSize: 15, color: 'red', marginRight: '1%', fontWeight: '800', backgroundColor: 'white', marginTop: '5%', borderRadius: 5}}>Logout</Text>
         </View>
-        {isModalVisible && <SettingsModal2 onClose={() => setisModalVisible(false)} navigation={navigation}/>}
+        {/* {isModalVisible && <SettingsModal2 onClose={() => setisModalVisible(false)} navigation={navigation}/>} */}
 
 
       </View>
@@ -70,6 +75,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
   },
   rightContainer: {
+    marginTop: '12%',
     padding: 10,
     flex: 1,
     justifyContent: 'center',

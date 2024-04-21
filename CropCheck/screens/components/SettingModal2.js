@@ -1,76 +1,65 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from 'react';
 import { Modal, View, Text, StyleSheet, TouchableOpacity, Image, Dimensions } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
+import { TranslationContext } from '../../providers/TranslationProvider';
+
+// Define language options
+const languageOptions = {
+    en: "English",
+    ur: "Urdu",
+    ps: "Pashto",
+    pn: "Punjabi",
+    sn: "Sindhi",
+    bl: "Balochi",
+};
 
 const SettingsModal2 = ({ onClose, navigation }) => {
+    const { language, switchLanguage, t } = useContext(TranslationContext); // Ensure correct variable name
+    const [selectedLanguage, setSelectedLanguage] = useState(language); // Set default to current language
 
-    const logout = () => {
-        navigation.replace('Signin');
-    }
-
-    const Languages = {
-        values: {
-            'en': 'English',
-            'ur': 'Urdu',
-            'pn': 'Punjabi',
-            'ps': 'Pushto',
-            'sn': 'Sindhi',
-            'bl': 'Balochi'
-        }
+    const handleLanguageChange = (itemValue) => {
+        switchLanguage(itemValue); // Change language when a new one is selected
+        setSelectedLanguage(itemValue); // Update local state
     };
 
-    const [selectedLanguage, setSelectedLanguage] = useState('');
-
-    const languageItems = Object.keys(Languages.values).map((key) => (
-        <Picker.Item key={key} label={Languages.values[key]} value={key} />
-    ));
-
-    console.log(iterateLanguages());
-
-    function iterateLanguages() {
-        const keyValuePairs = [];
-
-        for (const [key, value] of Object.entries(Languages.values)) {
-            keyValuePairs.push({ [key]: value });
-        }
-
-        return keyValuePairs;
-    }
+    const logout = () => {
+        navigation.replace('Signin'); // Redirect to Signin screen on logout
+    };
 
     return (
         <Modal
             animationType="slide"
             transparent={true}
-            visible={true} // This should be controlled by the parent component
+            visible={true} // Should be controlled by the parent component
             onRequestClose={onClose}
         >
             <View style={styles.centeredView}>
                 <View style={styles.modalView}>
                     <TouchableOpacity onPress={onClose} style={{ marginLeft: '90%', padding: 10 }}>
-                        <Image 
-                            source={require("../../assets/Close.png")} 
+                        <Image
+                            source={require('../../assets/Close.png')}
                             style={{ width: 20, height: 20 }}
                         />
                     </TouchableOpacity>
 
-                    <Text style={{fontSize: 20, marginBottom: '1%', fontSize: 18}}>Select Language</Text>
+                    <Text style={{fontSize: 20, marginBottom: '1%', fontSize: 28, fontWeight: 'bold'}}>Select Language</Text>
 
                     <TouchableOpacity 
-                        style={{backgroundColor: '#e3f3fb', marginTop: '10%', width: '100%', height: '20%', borderRadius: 50, alignContent: 'center', justifyContent: 'space-between'}}
+                        style={{backgroundColor: '#e3f3fb', marginTop: '20%', width: '100%', height: '22%', borderRadius: 50, alignContent: 'center', justifyContent: 'space-between'}}
                     >
-                        {/* <Text style={{marginTop: '5%', fontSize: 20}}>Choose Language</Text> */}
-                        <Picker style={{ fontSize: 18 }}
-                            selectedValue={selectedLanguage}
-                            onValueChange={(itemValue) => setSelectedLanguage(itemValue)}
-                        >
-                            {languageItems}
-                        </Picker>
-                        {/* <Text style={styles.selectedValue}>
-                            Selected Value: {Languages.values[selectedLanguage]}
-                        </Text> */}
+
+                    <Picker
+                        selectedValue={selectedLanguage} // Default to the current language
+                        style={{fontSize: 18}}
+                        onValueChange={handleLanguageChange} // Handle language change event
+                    >
+                        {Object.entries(languageOptions).map(([code, name]) => (
+                            <Picker.Item key={code} label={name} value={code} />
+                        ))}
+                    </Picker>
                     </TouchableOpacity>
 
-                    <TouchableOpacity 
+                    {/* <TouchableOpacity 
                         style={{backgroundColor: '#e3f3fb', marginTop: '10%', width: '100%', height: '20%', borderRadius: 50, alignItems: 'center', justifyContent: 'space-evenly', display: 'flex', flexDirection: 'row'}}
                         onPress={logout}
                     >
@@ -79,12 +68,13 @@ const SettingsModal2 = ({ onClose, navigation }) => {
                             source={require("../../assets/logout.png")} 
                             style={{ width: 28, height: 30 }}
                         />
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
+
                 </View>
             </View>
         </Modal>
     );
-}
+};
 
 const styles = StyleSheet.create({
     centeredView: {
@@ -104,10 +94,25 @@ const styles = StyleSheet.create({
         alignItems: "center",
         width: '70%',
     },
-    selectedValue: {
-        fontSize: 18,
-        marginTop: 10,
-    }
+    title: {
+        fontSize: 20,
+    },
+    picker: {
+        height: 50,
+        width: '100%',
+    },
+    logoutButton: {
+        backgroundColor: '#e3f3fb',
+        marginTop: '10%',
+        width: '100%',
+        height: 50,
+        borderRadius: 20,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
 });
 
 export default SettingsModal2;
+
+
