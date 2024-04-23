@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {
   View,
   Text,
@@ -14,59 +14,35 @@ import {
 import CheckBox from "expo-checkbox";
 import { FIREBASE_AUTH } from "../Auth/FirebaseConfig";
 import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
-const backgroundimg = require("../assets/backgroundimg.jpg");
-import * as Localization from "expo-localization";
-import { I18n } from "i18n-js";
+import { TranslationContext } from "../providers/TranslationProvider";
 import SettingsModal2 from "./components/SettingModal2";
-const translations = {
-  en: {
-      Login: "Login", 
-      Email: "Enter Email"
-  }, 
+const backgroundimg = require("../assets/backgroundimg.jpg");
 
-  ur: {
-      Login: "لاگ ان",
-      Email: "ایمیل درج کریں", 
-      EnterPass: "پاسورڈ درج کریں",
-      Remember: "مجھے یاد رکھیں", 
-      Pass: "پاسورڈ بھول گئے؟", 
-      Signin: "سائن ان کریں"
-  }, 
+// import * as Localization from "expo-localization";
+// import { I18n } from "i18n-js";
+// import SettingsModal2 from "./components/SettingModal2";
 
-  pn: {
-      Login: "لاگ ان"
-  }, 
 
-  ps : {
-      Login: "لاگ ان"
-  }, 
-
-  sn : {
-      Login: "لاگ ان"
-  }, 
-  bl: {
-      Login: "لاگ ان"
-  }
-};
-
-const i18n = new I18n(translations);
-i18n.locale = Localization.locale
-i18n.enableFallback = true; 
+// const i18n = new I18n(translations);
+// i18n.locale = Localization.locale
+// i18n.enableFallback = true; 
 
 
 const Signin = ({navigation}) => {
+  const {t, switchLanguage} = useContext(TranslationContext); 
   const [isModalVisible, setisModalVisible] = useState(false);
+
 
   const handleModalClick = () => {
     setisModalVisible(!isModalVisible); // Toggle modal visibility
   }
 
 
-  const [locale, setLocale] = useState(i18n.locale);
-  const changeLocale = (locale) => {
-    i18n.locale = locale;
-    setLocale(locale);
-  }
+  // const [locale, setLocale] = useState(i18n.locale);
+  // const changeLocale = (locale) => {
+  //   i18n.locale = locale;
+  //   setLocale(locale);
+  // }
   // changeLocale('ur')
   const [email, onChangeEmail] = useState("");
   const [password, onChangePassword] = useState("");
@@ -120,6 +96,7 @@ const Signin = ({navigation}) => {
           <Text style={styles.logoText}>CROPCHECK</Text>
         </View>
         <View style={styles.containerTwo}>
+          <View style={{display: 'flex', flexDirection:'row', justifyContent: 'space-between'}}> 
           <Text
             style={{
               fontSize: 28,
@@ -129,8 +106,22 @@ const Signin = ({navigation}) => {
 
             }}
           >
-            {i18n.t('Login')}
+            {t('Login')}
           </Text>
+          
+          {/* switcher button */}
+          <TouchableOpacity style={{width: 60, height: 30, alignItems: 'center', marginRight: '10'}} onPress={handleModalClick} >
+
+            <Image source={require('../assets/setting.png')} style={{width: 32, height: 33, marginRight: '35%', marginTop: '25%'}} />
+            <Text style={{width: '100%', marginRight: '20%'}}>Language</Text>
+          </TouchableOpacity>
+          
+          
+          </View>
+
+          
+          
+          
           <TouchableOpacity
             // onPress={handleSignUpGoogle}
             style={{
@@ -192,7 +183,7 @@ const Signin = ({navigation}) => {
               style={{ width: "100%", height: "100%", textAlign: "center" }}
               onChangeText={onChangeEmail}
               value={email}
-              placeholder={i18n.t('Email')}
+              placeholder={t('Email')}
               autoComplete="email"
               // keyboardType="numeric"
             />
@@ -233,7 +224,7 @@ const Signin = ({navigation}) => {
               }}
               onChangeText={onChangePassword}
               value={password}
-              placeholder={i18n.t('EnterPass')}
+              placeholder={t('EnterPass')}
               secureTextEntry={show}
               // keyboardType="numeric"
             ></TextInput>
@@ -249,8 +240,8 @@ const Signin = ({navigation}) => {
           </TouchableOpacity>
           <View style={{ display: 'flex', flexDirection: 'row', marginLeft: '10%', marginRight: '10%', marginTop: '5%' }}>
           <CheckBox value={isChecked} onValueChange={setChecked} color={'green'} />
-          <Text style={{fontSize: 16, marginLeft: 3, paddingLeft: 12}}>{i18n.t('Remember')}</Text>
-          <Text style={{fontSize: 16, marginLeft: '30%'}}>{i18n.t('Pass')}</Text>
+          <Text style={{fontSize: 16, marginLeft: 3, paddingLeft: 12}}>{t('Remember')}</Text>
+          <Text style={{fontSize: 16, marginLeft: '30%'}}>{t('Pass')}</Text>
           </View>
           <TouchableOpacity
           onPress={handleSignin}
@@ -268,10 +259,10 @@ const Signin = ({navigation}) => {
           }}
         >
             
-          <Text style={{ color: "white", fontWeight: "bold" }}>{i18n.t('Signin')}</Text>
+          <Text style={{ color: "white", fontWeight: "bold" }}>{t('Signin')}</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={changeLocaleL}
+        {/* <TouchableOpacity
+          onPress={ () => switchLanguage("sn")}
           style={{
             backgroundColor: "green", // Green background color
             opacity: 0.8, // Semi-transparent
@@ -287,7 +278,7 @@ const Signin = ({navigation}) => {
         >
             
           <Text style={{ color: "white", fontWeight: "bold" }}>changeLocale</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
           <Text
             style={{ width: "100%", fontSize: 18, height: "5%", textAlign: "center", marginTop: '12%' }}
           >
@@ -302,7 +293,8 @@ const Signin = ({navigation}) => {
         <View style={styles.activityIndicatorContainer}>
           <ActivityIndicator size={120} color="green" />
         </View>
-      )}      
+      )}
+            {isModalVisible && <SettingsModal2 onClose={() => setisModalVisible(false)} navigation={navigation}/>}
       </ImageBackground>
     </View>
   );
@@ -332,6 +324,7 @@ const styles = StyleSheet.create({
     // backgroundColor: "red",
     width: "100%",
     height: "80%",
+    // display: 'flex'
     // mar
   },
 

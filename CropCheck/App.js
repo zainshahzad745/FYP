@@ -16,6 +16,7 @@ import Signin from './screens/Signin';
 import Signup from './screens/Signup';
 import Chatbot from './screens/Chatbot';
 import WaterModule from './screens/WaterModule';
+import TranslationProvider from './providers/TranslationProvider';
 // import { Settings } from 'react-native';
 // import 
 import MainScreenHead from './screens/components/mainScreenHead';
@@ -23,6 +24,8 @@ const Stack = createStackNavigator();
 
 const App = () => {
   return (
+
+    <TranslationProvider>
     <NavigationContainer>
       <Stack.Navigator
         initialRouteName="SplashScreen"
@@ -46,6 +49,7 @@ const App = () => {
         <Stack.Screen name="WaterModule" component={WaterModule} />
       </Stack.Navigator>
     </NavigationContainer>
+    </TranslationProvider>
   );
 };
 
