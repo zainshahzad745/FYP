@@ -73,9 +73,9 @@ const WaterModule = () => {
 
   const [diameter, setDiameter] = useState(''); // State and function to handle diameter input field
   const [coefficient, setCoefficient] = useState(0);
-  const [result, setResult] = useState('');
-  const [tempFactor, setTempFactor] = useState('');
-  const [humFactor, setHumFactor] = useState('');
+  let [result, setResult] = useState(0);
+  let [tempFactor, setTempFactor] = useState(0);
+  let [humFactor, setHumFactor] = useState(0);
 
   const Plants = {
     values: {
@@ -101,39 +101,68 @@ const WaterModule = () => {
     for (const [key, value] of Object.entries(coefficients)) {
         if (key == selectedPlant) {
           setCoefficient(value);
+          console.log('initial coefficeient', value);
         }
     }
 };
 
-  function settingFactors(humidity, temp) {
+  // function settingFactors(humidity, temp) {
+  //   if (humidity >= 30 && humidity <= 50 ) {
+  //     setHumFactor(0.8);
+  //   }
+  //   else  if (humidity > 50){
+  //     setHumFactor(1);
+  //   }
+  //   else if (humidiy < 30) {
+  //     setHumFactor(0.6)
+  //   }
+  //   if (temp = 20) {
+  //     setTempFactor(0.4);
+  //   }
+  //   else if (temp > 20) {
+  //     tempFactor = 0.4 + ( (temp-20)/10 )*0.1;
+  //     setTempFactor(tempFactor);
+  //   }
+  //   else if (temp < 20) {
+  //     tempFactor= 0.4 - ((20-temp)/10)*0.1;
+  //     setTempFactor(tempFactor);
+  //   }
+  // }
+
+  function waterRequirement(diameter, humidity, temp) {
+    settingCoefficient();
+    console.log('humidity temp diameter', humidity, temp, diameter);
     if (humidity >= 30 && humidity <= 50 ) {
       setHumFactor(0.8);
+      // console.log('setHumFactor 0.8', humFactor);
     }
     else  if (humidity > 50){
       setHumFactor(1);
+      // console.log('setHumFactor 1', humFactor);
     }
     else if (humidiy < 30) {
-      setHumFactor(0.6)
+      setHumFactor(0.6);
+      // console.log('setHumFactor 0.6', humFactor);
     }
-    if (temp = 20) {
+    if (temp == 20) {
       setTempFactor(0.4);
+      // console.log('setTempFactor 0.4', tempFactor);
     }
     else if (temp > 20) {
       tempFactor = 0.4 + ( (temp-20)/10 )*0.1;
       setTempFactor(tempFactor);
+      // console.log('setTempFactor', tempFactor);
     }
     else if (temp < 20) {
       tempFactor= 0.4 - ((20-temp)/10)*0.1;
       setTempFactor(tempFactor);
+      // console.log('setTempFactor', tempFactor);
     }
-  }
-
-  function waterRequirement(diameter, humidity, temp) {
-    settingCoefficient();
-    settingFactors(humidity, temp);
+    // settingFactors(humidity, temp);
+    console.log('factors', humFactor, tempFactor);
     const result = diameter * coefficient * humFactor * tempFactor;
     setResult(result);
-    console.log(result, tempFactor, humFactor, coefficient);
+    console.log('result', result);
 };
 
   return (
@@ -271,7 +300,7 @@ const WaterModule = () => {
                   <Text style={{fontSize: 20, }}>Pot Diameter</Text>
                   <Image source={require("../assets/pot.png")} style={{height: 37, width: 50, marginHorizontal: 5,}}></Image>
                   <TextInput style={{width: 125, height: 35, textAlign: "center", backgroundColor: "#e3f3fb", fontSize: 18, borderRadius: 50,}} 
-                  value={diameter} placeholder={"Enter here"} onChangeText={(diameter) => setDiameter(diameter)}></TextInput>
+                  value={diameter} placeholder={"Enter here"} onChangeText={(diameter) => {setDiameter(diameter), waterRequirement(diameter, humidity, temp)}}></TextInput>
                 </View>
                 <View style={{height: "10%", marginTop: 19,}}>
                 <TouchableOpacity onPress={()=> {goTo(), waterRequirement(diameter, humidity, temp);}}

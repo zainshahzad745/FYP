@@ -1,8 +1,7 @@
 // MainScreenHead.js
 import React, {useState} from 'react';
-import { View, Text, StyleSheet, Dimensions, ImageBackground, Touchable, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, ImageBackground, Touchable, TouchableOpacity, Image, Modal } from 'react-native';
 import moment from 'moment';
-import SettingsModal2 from './SettingModal2';
 const footerimg = require('../../assets/head1.png');
 
 
@@ -37,13 +36,51 @@ const MainScreenHead = ({navigation}) => {
         <View style={styles.rightContainer}>
           <Text style={styles.textRight}>{currentDate}</Text>
           <Text style={styles.textRight}>{currentDay}</Text>
-          <TouchableOpacity style={{width: 30, height: 30, alignItems: 'center'}} onPress={handleLogout}>
+          <TouchableOpacity style={{width: 30, height: 30, alignItems: 'center'}} onPress={handleModalClick}>
 
             <Image source={require('../../assets/logout.png')} style={{width: 31, height: 33, marginRight: '35%'}} />
           </TouchableOpacity>
           <Text style={{fontSize: 15, color: 'red', marginRight: '1%', fontWeight: '800', backgroundColor: 'white', marginTop: '5%', borderRadius: 5}}>Logout</Text>
         </View>
-        {/* {isModalVisible && <SettingsModal2 onClose={() => setisModalVisible(false)} navigation={navigation}/>} */}
+        <Modal
+          animation="slide"
+          transparent={true}
+          visible={isModalVisible}
+          onRequestClose={() => {setisModalVisible(false)}}
+        >
+          <View style={{
+            width: Dimensions.get('window').width,
+            height: 300,
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: 'rgba(0, 0, 0, 0.2)', 
+          }}>
+            <View style={{
+              display: 'flex',
+              backgroundColor: "#bcdac2",
+              height: 200,
+              borderRadius: 20,
+              padding: 16,
+              alignItems: "center",
+              width: '60%',
+            }}>
+              <TouchableOpacity onPress={handleModalClick} style={{ marginLeft: '90%', padding: 10 }}>
+                        <Image
+                            source={require('../../assets/Close.png')}
+                            style={{ width: 20, height: 20 }}
+                        />
+                    </TouchableOpacity>
+                    <Text style={{fontSize: 15, marginBottom: '1%', fontSize: 28,}}>Are you sure?</Text>
+                    <TouchableOpacity onPress={handleLogout}
+                        style={{backgroundColor: '#e3f3fb', marginTop: '10%', width: '60%', height: '22%', borderRadius: 50, alignItems: 'center', justifyContent: 'center'}}>
+                        <Text style={{fontSize: 18, color: "red"}}>Log Out</Text>
+                    </TouchableOpacity>
+
+            </View>
+
+          </View>
+        </Modal>
 
 
       </View>

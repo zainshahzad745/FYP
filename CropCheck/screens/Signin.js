@@ -50,11 +50,6 @@ const Signin = ({navigation}) => {
   const [ loading, setLoading ] = useState(false);
   const [isChecked, setChecked] = useState(false);
   const auth = FIREBASE_AUTH;
-  const changeLocaleL = () => {
-
-    changeLocale('ur')
-
-  }
   const handleSignin = async () => {
 
     setLoading(true);
@@ -110,10 +105,10 @@ const Signin = ({navigation}) => {
           </Text>
           
           {/* switcher button */}
-          <TouchableOpacity style={{width: 60, height: 30, alignItems: 'center', marginRight: '10'}} onPress={handleModalClick} >
+          <TouchableOpacity style={{width: 80, height: 70, alignItems: "center", justifyContent: "center", marginRight: '5%'}} onPress={handleModalClick} >
 
-            <Image source={require('../assets/setting.png')} style={{width: 32, height: 33, marginRight: '35%', marginTop: '25%'}} />
-            <Text style={{width: '100%', marginRight: '20%'}}>Language</Text>
+            <Image source={require('../assets/setting.png')} style={{width: 32, height: 33,}} />
+            <Text style={{fontSize: 16}}>Language</Text>
           </TouchableOpacity>
           
           
