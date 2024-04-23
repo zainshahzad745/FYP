@@ -54,7 +54,6 @@ const WaterModule = () => {
 
   function goTo() {
     setIsDataModalVisible(false)
-    console.log('2nd modal', isDataModalVisible)
     setIsResultModalVisible(true)
   }
 
@@ -91,8 +90,6 @@ const WaterModule = () => {
 };
 
   const coefficients = {'ap':2.5, 'bp':3.5, 'bl':3.5, 'ch':2.5, 'co':3, 'gr':3.4, 'po':3};
-  console.log(coefficients);
-
   const [selectedPlant, setSelectedPlant] = useState('');
 
   const plantItems = Object.keys(Plants.values).map((key) => (

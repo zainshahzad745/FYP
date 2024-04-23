@@ -20,14 +20,15 @@ const Chatbot = () => {
     <ImageBackground
       source={backgroundimg}
       style={{
-        width: Dimensions.get("window").width,
-        height: Dimensions.get("window").height,
+        position: "absolute",
+        width: windowWidth,
+        height: windowHeight,
         resizeMode: "stretch",
       }}
     >
       <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={{ flex: 1 }}
+        behavior={Platform.OS === "ios" ? "padding" : null}
+        style={{ flex: 1,}}
       >
         <View style={styles.textView}>
           <Text style={styles.text}>AI Chatbot</Text>
@@ -62,6 +63,7 @@ const styles = StyleSheet.create({
     },
     chat: {
         height: windowHeight*0.74,
+        position: "relative",
         // marginTop: "15%",
         // padding: "5%",
         // backgroundColor: "white",

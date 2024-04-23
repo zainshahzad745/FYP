@@ -51,7 +51,9 @@ const MainScreen = ({ navigation }) => {
             imageText={"Peas"}
           />
         </View>
-        <ExpertOpinion />
+        <View style={styles.expert}>
+          <ExpertOpinion />
+        </View>
         <View style={styles.navContainer}>
           <Navbar />
         </View>
@@ -61,6 +63,7 @@ const MainScreen = ({ navigation }) => {
 };
 
 const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 const imageSize = (windowWidth - 20) / 2 - 10;
 
 const styles = StyleSheet.create({
@@ -73,7 +76,7 @@ const styles = StyleSheet.create({
   },
   navContainer: {
     // backgroundColor: 'red',
-    marginTop: Dimensions.get("window").height *0.05
+    height: windowHeight*0.06,
   },
   background: {
     flex: 1,
@@ -90,7 +93,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between", // Adjust as needed
+    height: windowHeight*0.48,
+    marginBottom: "5%"
   },
+  expert: {
+    marginBottom: "5%", // Adjust the margin as needed
+  }
 });
 
 export default MainScreen;
