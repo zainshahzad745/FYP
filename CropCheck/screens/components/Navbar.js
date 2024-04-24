@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { View, TouchableOpacity, Text, Image, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-
+import { TranslationContext } from "../../providers/TranslationProvider";
 const Navbar = () => {
+  const {t, switchLanguage} = useContext(TranslationContext); 
   const navigation = useNavigation();
 
   const handleScanNow = () => {
@@ -34,27 +35,27 @@ const Navbar = () => {
     <View style={styles.navbar}>
       <TouchableOpacity style={styles.button} onPress={handleHome}>
         <Image source={require('../../assets/home.png')} style={styles.icon} />
-        <Text style={styles.buttonText}>Home</Text>
+        <Text style={styles.buttonText}>{t('navbarHome')}</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.button} onPress={handleDiagnose}>
         <Image source={require('../../assets/search.png')} style={styles.icon} />
-        <Text style={styles.buttonText}>Contribute</Text>
+        <Text style={styles.buttonText}>{t('navbarDiagnose')}</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.scanButton} onPress={handleScanNow}>
         <Image source={require('../../assets/scan.png')} style={styles.scanIcon} />
-        <Text style={styles.scanButtonText}>Scan Now</Text>
+        <Text style={styles.scanButtonText}>{t('navbarScan')}</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.button} onPress={handleAskAI}>
         <Image source={require('../../assets/ai.png')} style={styles.icon} />
-        <Text style={styles.buttonText}>Ask AI</Text>
+        <Text style={styles.buttonText}>{t('navbarAskAI')}</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.button} onPress={handleWaterCalculator}>
         <Image source={require('../../assets/water.png')} style={styles.icon} />
-        <Text style={styles.buttonText}>Water Calculator</Text>
+        <Text style={styles.buttonText}>{t('headCalculator')}</Text>
       </TouchableOpacity>
     </View>
   );

@@ -1,12 +1,15 @@
 // MainScreenHead.js
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import { View, Text, StyleSheet, Dimensions, ImageBackground, Touchable, TouchableOpacity, Image } from 'react-native';
 import moment from 'moment';
 import SettingsModal2 from './SettingModal2';
+
+import { TranslationContext } from "../../providers/TranslationProvider";
 const footerimg = require('../../assets/head1.png');
 
 
 const MainScreenHead = ({navigation}) => {
+  const {t, switchLanguage} = useContext(TranslationContext); 
   // Get the current date and day using moment
   const currentDate = moment().format('MMMM D, YYYY');
   const currentDay = moment().format('dddd');
@@ -29,8 +32,8 @@ const MainScreenHead = ({navigation}) => {
         {/* Left side */}
         
         <View style={styles.leftContainer}>
-          <Text style={styles.textLeft}>Hi There!</Text>
-          <Text style={styles.textLeft}>Have a great day ! 🌱</Text>
+          <Text style={styles.textLeft}>{t('greeting')}</Text>
+          <Text style={styles.textLeft}>{t('test')}</Text>
         </View>
 
         {/* Right side */}
@@ -41,7 +44,7 @@ const MainScreenHead = ({navigation}) => {
 
             <Image source={require('../../assets/logout.png')} style={{width: 31, height: 33, marginRight: '35%'}} />
           </TouchableOpacity>
-          <Text style={{fontSize: 15, color: 'red', marginRight: '1%', fontWeight: '800', backgroundColor: 'white', marginTop: '5%', borderRadius: 5}}>Logout</Text>
+          <Text style={{fontSize: 15, color: 'red', marginRight: '1%', fontWeight: '800', backgroundColor: 'white', marginTop: '5%', borderRadius: 5}}>{t('Logout')}</Text>
         </View>
         {/* {isModalVisible && <SettingsModal2 onClose={() => setisModalVisible(false)} navigation={navigation}/>} */}
 

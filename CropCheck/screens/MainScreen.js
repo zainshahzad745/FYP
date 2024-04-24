@@ -1,5 +1,5 @@
 // MainScreen.js
-import React from "react";
+import React, {useContext} from "react";
 import {
   ImageBackground,
   View,
@@ -11,8 +11,11 @@ import MainScreenHead from "./components/mainScreenHead";
 import ImageComponent from "./components/ImageComponent";
 import Navbar from "./components/Navbar";
 import ExpertOpinion from "./components/ExpertOpinion";
+import { TranslationContext } from "../providers/TranslationProvider";
 const backgroundimg = require("../assets/backgroundimg.jpg");
+
 const MainScreen = ({ navigation }) => {
+  const {t, switchLanguage} = useContext(TranslationContext); 
   const handleImageClick = () => {
     navigation.navigate("DetailedScreen");
   };
@@ -24,7 +27,7 @@ const MainScreen = ({ navigation }) => {
         style={styles.background}
       >
         <MainScreenHead navigation={navigation} />
-        <Text style={styles.text}>Recently Scanned</Text>
+        <Text style={styles.text}>{t('mainScan')}</Text>
         <View style={styles.imageContainer}>
           <ImageComponent
             onPress={handleImageClick}

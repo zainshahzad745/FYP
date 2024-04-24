@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { View, Image, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-
+import { TranslationContext } from '../../providers/TranslationProvider';
 const ExpertOpinion = () => {
   const navigation = useNavigation();
-
+  const {t, switchLanguage} = useContext(TranslationContext); 
   const handleClick = () => {
     //navigate to Chatbot
     navigation.navigate('Chatbot');
@@ -17,7 +17,7 @@ const ExpertOpinion = () => {
 
       {/* Right side - Text with solid green background */}
       <View style={styles.textContainer}>
-        <Text style={styles.text}>Get Expert Opinion</Text>
+        <Text style={styles.text}>{t('expertOpinion')}</Text>
       </View>
     </TouchableOpacity>
   );

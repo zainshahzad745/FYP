@@ -110,10 +110,10 @@ const Signin = ({navigation}) => {
           </Text>
           
           {/* switcher button */}
-          <TouchableOpacity style={{width: 60, height: 30, alignItems: 'center', marginRight: '10'}} onPress={handleModalClick} >
+          <TouchableOpacity style={{width: 100, height: 30, alignItems: 'center', marginRight: '1%'}} onPress={handleModalClick} >
 
-            <Image source={require('../assets/setting.png')} style={{width: 32, height: 33, marginRight: '35%', marginTop: '25%'}} />
-            <Text style={{width: '100%', marginRight: '20%'}}>Language</Text>
+            <Image source={require('../assets/setting.png')} style={{width: 32, height: 33, marginRight: '15%', marginTop: '15%', marginLeft: '15%'}} />
+            <Text style={{width: '100%', marginRight: '1%', marginLeft: '1%', fontSize: 14}}>{t('Language')}</Text>
           </TouchableOpacity>
           
           
@@ -282,9 +282,9 @@ const Signin = ({navigation}) => {
           <Text
             style={{ width: "100%", fontSize: 18, height: "5%", textAlign: "center", marginTop: '12%' }}
           >
-            Don't have an account?
+            {t('loginAccount')}
             <Text style={{ color: "green" }} onPress={navigateLogin}>
-              Register
+              {t('Register')}
             </Text>
           </Text>
 

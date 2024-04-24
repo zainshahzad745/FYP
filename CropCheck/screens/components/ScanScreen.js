@@ -60,7 +60,7 @@ const PlantAddScreen = () => {
         // navigation.navigate('Analyze');
         navigation.navigate("MainScan", { savedImageUri: capturedImage.uri });
         const response = await axios.post(
-          "http://192.168.1.7:5000/detect",
+          "http://192.168.176.46:5000/detect",
           formData,
           {
             headers: {
@@ -68,10 +68,16 @@ const PlantAddScreen = () => {
             },
           },
 
-          setTimeout(() => {
-            setLoading(false);
-          }, 5000)
+          
+
+
+          // setTimeout(() => {
+          //   setLoading(false);
+          // }, 5000)
         );
+        if (response && formData) {
+          setLoading(false);
+        }
 
         console.log("FormData:", formData);
 
