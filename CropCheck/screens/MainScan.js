@@ -9,9 +9,11 @@ import {
   Alert,
   ActivityIndicator,
   TouchableOpacity,
+  Dimensions,
 } from "react-native";
 import * as FileSystem from "expo-file-system";
 import { useRoute } from "@react-navigation/native";
+import Navbar from "./components/Navbar";
 
 const imgIcon = require("../assets/Planticon.png");
 const Home = require("../assets/Homeicon.png");
@@ -23,6 +25,7 @@ const backgroundimg = require("../assets/backgroundimg.jpg");
 const HomeIcon = require("../assets/Homeicon.png");
 
 const Main = ({ navigation }) => {
+  const windowHeight = Dimensions.get("window").height;
   const [loading, setLoading] = useState(true);
   const route = useRoute(); // Use useRoute hook to access route object
   const { savedImageUri } = route.params || {}; // Destructure savedImageUri from params
@@ -67,11 +70,11 @@ const Main = ({ navigation }) => {
     navigation.replace("MainScreen");
   };
   return (
-    <View style={{ display: "flex" }}>
-      <ImageBackground
-        source={backgroundimg}
-        style={{ width: "100%", height: "100%" }}
-      >
+    <ImageBackground
+       source={backgroundimg}
+       style={{ width: "100%", height: "100%" }}
+                                  >
+        <View style={{ display: "flex" }}>
         <TouchableOpacity onPress={handleHome}>
           <Image
             source={Home}
@@ -199,8 +202,12 @@ const Main = ({ navigation }) => {
             </View>
           </View>
         </Modal>
-      </ImageBackground>
-    </View>
+        <View style={{height: windowHeight*0.2, backgroundColor: "red"}}>
+          <Navbar />
+        </View>
+      </View>
+    </ImageBackground>
+    
   );
 };
 

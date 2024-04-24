@@ -50,11 +50,6 @@ const Signin = ({navigation}) => {
   const [ loading, setLoading ] = useState(false);
   const [isChecked, setChecked] = useState(false);
   const auth = FIREBASE_AUTH;
-  const changeLocaleL = () => {
-
-    changeLocale('ur')
-
-  }
   const handleSignin = async () => {
 
     setLoading(true);

@@ -10,11 +10,13 @@ import {
   ImageBackground,
   StyleSheet,
   FlatList,
+  Dimensions,
   Modal, // Import Modal
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { Camera } from "expo-camera";
 import Axios from "axios";
+import Navbar from "./components/Navbar";
 
 const PlantAddScreen = ({navigation}) => {
   const [plantName, setPlantName] = useState("");
@@ -113,13 +115,6 @@ const PlantAddScreen = ({navigation}) => {
       style={styles.Background}
     >
       <View style={styles.container}>
-        <TouchableOpacity style={styles.backButton} onPress={handleBack}>
-          <Image
-            source={require("../assets/back.png")}
-            style={styles.backIcon}
-          />
-        </TouchableOpacity>
-
         <TouchableOpacity onPress={openCamera} style={styles.cameraButton}>
           {capturedImage ? (
             <Image
@@ -239,16 +234,22 @@ const PlantAddScreen = ({navigation}) => {
 
         {/* <Button title="Send Data" onPress={sendData} /> */}
       </View>
+      <View style={styles.navContainer}>
+        <Navbar />
+      </View>
     </ImageBackground>
   );
 };
+
+const windowHeight = Dimensions.get("window").height;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
     display: "flex",
-    marginTop: "15%",
+    height: windowHeight*0.90,
+    marginTop: "20%",
     marginLeft: "1%",
   },
   backButton: {
@@ -327,6 +328,9 @@ const styles = StyleSheet.create({
     height: "100%",
     resizeMode: "contain",
   },
+  navContainer: {
+    height: windowHeight*0.1
+  }
 });
 
 export default PlantAddScreen;

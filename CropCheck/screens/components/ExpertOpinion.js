@@ -28,7 +28,6 @@ const styles = StyleSheet.create({
     padding: 10,
     width: '100%', // Adjust the width as needed
     height: 105, // Adjust the height as needed
-    marginTop: '10%', // Adjust the margin as needed
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'white',
