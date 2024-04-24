@@ -1,6 +1,6 @@
 // MainScreenHead.js
 import React, {useState, useContext} from 'react';
-import { View, Text, StyleSheet, Dimensions, ImageBackground, Touchable, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, ImageBackground, Touchable, TouchableOpacity, Image, Modal } from 'react-native';
 import moment from 'moment';
 import SettingsModal2 from './SettingModal2';
 

@@ -134,29 +134,29 @@ const WaterModule = () => {
     console.log('humidity temp diameter', humidity, temp, diameter);
     if (humidity >= 30 && humidity <= 50 ) {
       setHumFactor(0.8);
-      // console.log('setHumFactor 0.8', humFactor);
+      console.log('setHumFactor 0.8', humFactor);
     }
     else  if (humidity > 50){
       setHumFactor(1);
-      // console.log('setHumFactor 1', humFactor);
+      console.log('setHumFactor 1', humFactor);
     }
     else if (humidiy < 30) {
       setHumFactor(0.6);
-      // console.log('setHumFactor 0.6', humFactor);
+      console.log('setHumFactor 0.6', humFactor);
     }
     if (temp == 20) {
       setTempFactor(0.4);
-      // console.log('setTempFactor 0.4', tempFactor);
+      console.log('setTempFactor 0.4', tempFactor);
     }
     else if (temp > 20) {
       tempFactor = 0.4 + ( (temp-20)/10 )*0.1;
       setTempFactor(tempFactor);
-      // console.log('setTempFactor', tempFactor);
+      console.log('setTempFactor', tempFactor);
     }
     else if (temp < 20) {
       tempFactor= 0.4 - ((20-temp)/10)*0.1;
       setTempFactor(tempFactor);
-      // console.log('setTempFactor', tempFactor);
+      console.log('setTempFactor', tempFactor);
     }
     // settingFactors(humidity, temp);
     console.log('factors', humFactor, tempFactor);
