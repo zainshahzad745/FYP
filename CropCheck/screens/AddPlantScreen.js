@@ -18,7 +18,7 @@ import { Camera } from "expo-camera";
 import Axios from "axios";
 import Navbar from "./components/Navbar";
 
-const PlantAddScreen = ({navigation}) => {
+const PlantAddScreen = ({ navigation }) => {
   const [plantName, setPlantName] = useState("");
   const [diseaseType, setDiseaseType] = useState("");
   const [capturedImage, setCapturedImage] = useState(null);
@@ -54,11 +54,11 @@ const PlantAddScreen = ({navigation}) => {
     "Disease 2",
     "Disease 3",
     "Disease 4",
-  ]
+  ];
 
   const handleBack = () => {
     navigation.replace("MainScreen");
-  }
+  };
 
   useEffect(() => {
     (async () => {
@@ -81,12 +81,11 @@ const PlantAddScreen = ({navigation}) => {
     }
   };
 
-  const sendData = async () => {
-    // Send data to the server
+  const handleUploadData = async () => {
     try {
       const formData = new FormData();
-      formData.append("plantName", plantName);
-      formData.append("diseaseType", diseaseType);
+      formData.append("plantName", selectedPlant);
+      formData.append("diseaseType", selectedDisease);
       formData.append("image", {
         uri: capturedImage.uri,
         type: "image/jpeg",
@@ -94,7 +93,7 @@ const PlantAddScreen = ({navigation}) => {
       });
 
       const response = await Axios.post(
-        "http://192.168.1.5:5000/detect",
+        "http://192.168.176.46:5000/uploadPlants",  // replace with your endpoint URL
         formData,
         {
           headers: {
@@ -104,10 +103,72 @@ const PlantAddScreen = ({navigation}) => {
       );
 
       console.log(response.data);
+      // Show an alert to inform the user
+      Alert.alert("Success", "Data uploaded successfully!");
     } catch (error) {
       console.error("Error sending data:", error);
+      // Show an alert to inform the user
+      Alert.alert("Error", "Failed to upload data. Please try again.");
     }
   };
+  // const handleUploadData = async () => {
+  //   try {
+  //     const formData = new FormData();
+  //     formData.append("plantName", selectedPlant);
+  //     formData.append("diseaseType", selectedDisease);
+  //     formData.append("image", {
+  //       uri: capturedImage.uri,
+  //       type: "image/jpeg",
+  //       name: "plant_image.jpg",
+  //     });
+
+  //     const response = await Axios.post(
+  //       "http://your_endpoint_here/uploadPlants",  // replace with your endpoint URL
+  //       formData,
+  //       {
+  //         headers: {
+  //           "Content-Type": "multipart/form-data",
+  //         },
+  //       }
+  //     );
+
+  //     console.log(response.data);
+  //     // Show an alert to inform the user
+  //     Alert.alert("Success", "Data uploaded successfully!");
+  //   } catch (error) {
+  //     console.error("Error sending data:", error);
+  //     // Show an alert to inform the user
+  //     Alert.alert("Error", "Failed to upload data. Please try again.");
+  //   }
+  // };
+
+  // const sendData = async () => {
+  //   // Send data to the server
+  //   try {
+  //     const formData = new FormData();
+  //     formData.append("plantName", plantName);
+  //     formData.append("diseaseType", diseaseType);
+  //     formData.append("image", {
+  //       uri: capturedImage.uri,
+  //       type: "image/jpeg",
+  //       name: "plant_image.jpg",
+  //     });
+
+  //     const response = await Axios.post(
+  //       "http://192.168.1.5:5000/detect",
+  //       formData,
+  //       {
+  //         headers: {
+  //           "Content-Type": "multipart/form-data",
+  //         },
+  //       }
+  //     );
+
+  //     console.log(response.data);
+  //   } catch (error) {
+  //     console.error("Error sending data:", error);
+  //   }
+  // };
 
   return (
     <ImageBackground
@@ -128,7 +189,7 @@ const PlantAddScreen = ({navigation}) => {
           )}
         </TouchableOpacity>
 
-            {/* add plant name */}
+        {/* add plant name */}
         <TouchableOpacity
           onPress={() => setIsModalVisible(true)}
           style={styles.selectItemButton}
@@ -137,7 +198,7 @@ const PlantAddScreen = ({navigation}) => {
             {selectedPlant ? selectedPlant : "Choose Plant Name"}
           </Text>
         </TouchableOpacity>
-            {/* add disease type */}
+        {/* add disease type */}
         <TouchableOpacity
           onPress={() => setIsModalVisibleDisease(true)}
           style={styles.selectItemButton}
@@ -146,7 +207,6 @@ const PlantAddScreen = ({navigation}) => {
             {selectedDisease ? selectedDisease : "Choose Disease Type"}
           </Text>
         </TouchableOpacity>
-
 
         {/* Modal for selecting plant */}
         <Modal
@@ -173,9 +233,6 @@ const PlantAddScreen = ({navigation}) => {
                 )}
                 keyExtractor={(item, index) => index.toString()}
               />
-
-
-              
             </View>
           </View>
         </Modal>
@@ -206,14 +263,12 @@ const PlantAddScreen = ({navigation}) => {
                 )}
                 keyExtractor={(item, index) => index.toString()}
               />
-
-
-              
             </View>
           </View>
         </Modal>
 
         <TouchableOpacity
+        onPress={handleUploadData}
           // onPress={handleUploadImage}
           style={{
             backgroundColor: "green", // Green background color
@@ -226,11 +281,13 @@ const PlantAddScreen = ({navigation}) => {
             marginTop: "8%", // Custom height
             justifyContent: "center",
             alignItems: "center",
+            // onPress: {a},
           }}
         >
-          <Text style={{ color: "white", fontWeight: "bold" }}>Upload Data</Text>
+          <Text style={{ color: "white", fontWeight: "bold" }}>
+            Upload Data
+          </Text>
         </TouchableOpacity>
-
 
         {/* <Button title="Send Data" onPress={sendData} /> */}
       </View>
@@ -248,7 +305,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     display: "flex",
-    height: windowHeight*0.90,
+    height: windowHeight * 0.9,
     marginTop: "20%",
     marginLeft: "1%",
   },
@@ -263,7 +320,7 @@ const styles = StyleSheet.create({
   },
   cameraButton: {
     alignItems: "center",
-    marginBottom: '30%',
+    marginBottom: "30%",
   },
   cameraImage: {
     width: 200,
@@ -329,8 +386,8 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   navContainer: {
-    height: windowHeight*0.1
-  }
+    height: windowHeight * 0.1,
+  },
 });
 
 export default PlantAddScreen;

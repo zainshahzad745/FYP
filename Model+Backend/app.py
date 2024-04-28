@@ -7,6 +7,8 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, Integer, String
 import logging
 from logging.handlers import RotatingFileHandler
+import pyodbc
+
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes in the app
@@ -21,6 +23,15 @@ handler = RotatingFileHandler('server.log', maxBytes=100000, backupCount=1)
 handler.setLevel(logging.INFO)
 app.logger.addHandler(handler)
 
+#DB Setup
+
+SERVER = 'SERVER=DESKTOP-OPOCNHB\SQLEXPRESS'
+DATABASE = 'Upload'
+USERNAME = 'zain'
+PASSWORD = '12345678'
+
+connectionString = f'DRIVER={{ODBC Driver 18 for SQL Server}};SERVER={SERVER};DATABASE={DATABASE};UID={USERNAME};PWD={PASSWORD}'
+
 class Plant(db.Model):
     id = Column(Integer, primary_key=True)
     plant_name = Column(String(500), nullable=False)
@@ -28,38 +39,10 @@ class Plant(db.Model):
     image_path = Column(String(500), nullable=True)
     
 @app.route('/save_plant_record', methods=['POST'])
-def save_plant_record():
-    try:
-        if 'image' not in request.files:
-            return jsonify({'error': 'No file part'})
-        image_file = request.files['image']
-        if image_file.filename == '':
-            return jsonify({'error': 'No selected file'})
-        image_path = 'temp2_image.jpg'
-        image_file.save(image_path)
 
-        plant_name = request.form.get('plant_name')
-        disease_type = request.form.get('disease_type')
-
-        save_plant_record(plant_name, disease_type, image_path)
-
-        return jsonify({'success': True})
-    except Exception as e:
-        return jsonify({'error': str(e)})
-    finally:
-        if image_path and os.path.exists(image_path):
-            os.remove(image_path)
-
-def save_plant_record(plant_name, disease_type, image_path):
-    try:
-        plant = Plant(plant_name=plant_name, disease_type=disease_type, image_path=image_path)
-        db.session.add(plant)
-        db.session.commit()
-    except Exception as e:
-        app.logger.error(f"Exception in save_plant_record: {str(e)}")
-        db.session.rollback()
-
-
+def test(a):
+    conn = pyodbc.connect(a)
+    print(conn)
     
 # Add a console handler for terminal output
 console_handler = logging.StreamHandler()
@@ -126,5 +109,6 @@ def run_yolov5_inference(image_file):
             os.remove(image_path)
 
 if __name__ == '__main__':
+    test(connectionString)
 
     app.run(host='0.0.0.0', port=5000)

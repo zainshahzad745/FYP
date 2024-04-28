@@ -64,7 +64,7 @@ const Signin = ({navigation}) => {
       setLoading(false);
       return;
       }
-      console.log(response);
+      console.log("curr data", response._tokenResponse.email);
       Alert.alert("Success", "Signin Successful", [{ text: "OK", onPress: () => navigation.replace("MainScreen") }]);
     }
     catch(error){

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Plant Records</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #4CAF50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        #plantRecords {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .plantCard {
+            background-color: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .plantCard:hover {
+            transform: scale(1.05);
+        }
+
+        .plantCard img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .plantCard h3 {
+            background-color: #4CAF50;
+            color: #ffffff;
+            margin: 0;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .plantCard p {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Plant Records</h1>
+
+<div id="plantRecords">
+    <!-- Records will be displayed here -->
+</div>
+
+<script>
+    // Function to fetch and display records
+    async function fetchAndDisplayRecords() {
+        try {
+            // Fetch records from the API
+            const response = await axios.get('http://192.168.176.46:5000/getAllPlants');
+            const records = response.data.plants;
+
+            // Get the container div to display records
+            const container = document.getElementById('plantRecords');
+
+            // Iterate over records and display them
+            records.forEach(record => {
+                const recordDiv = document.createElement('div');
+                recordDiv.className = 'plantCard';
+                
+                // Display record fields
+                recordDiv.innerHTML = `
+                    <h3>ID: ${record.id}</h3>
+                    <img src="http://192.168.176.46:5000/image/${record.image}" alt="Plant Image">
+                    <p><strong>Plant Name:</strong> ${record.plantName}</p>
+                    <p><strong>Disease Type:</strong> ${record.diseaseType}</p>
+                `;
+
+                // Append record div to container
+                container.appendChild(recordDiv);
+            });
+        } catch (error) {
+            console.error("Error fetching records:", error);
+        }
+    }
+
+    // Call the function to fetch and display records
+    fetchAndDisplayRecords();
+</script>
+
+</body>
+</html>

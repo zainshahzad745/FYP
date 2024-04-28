@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import { FIREBASE_AUTH } from "../Auth/FirebaseConfig";
 import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
+import axios from "axios";
 
 const backgroundimg = require("../assets/backgroundimg.jpg");
 
@@ -34,9 +35,21 @@ const Signup = ({navigation}) => {
     try {
       const response = await createUserWithEmailAndPassword(auth, email, password);
       const user = response.user;
+      const data = {
+        email: email,
+      };
+      
+      axios.post('http://192.168.1.8:5000/registerUser', data)
+        .then(function (response) {
+          console.log("sent data", response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
       // const user = userCredential.user;
       sendEmailVerification(user);
       console.log(response);
+      // await axios.post('http://192.168.1.8:5000/registerUser', { email: email });
       Alert.alert("Success", "Signup Successful Please verify your email", [{ text: "OK", onPress: () => navigation.replace("Signin") }]);
     } catch (error) {
       console.log(error);
