@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { GiftedChat } from "react-native-gifted-chat";
+import { TranslationContext } from "../providers/TranslationProvider";
 
 const Chatbox = () => {
+    const {t, switchLanguage} = useContext(TranslationContext); 
     const [ messages, setMessages ] = useState([
         {
             _id: 1,
-            text: "I am your Chatbot, how can I help you?",
+            text: t('chatbox'),
             createdAt: new Date(),
             user: { _id: 2, name: "Chatbot" },
         },

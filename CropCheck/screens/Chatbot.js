@@ -12,10 +12,12 @@ import {
 } from "react-native";
 import Chatbox from "./components/Chatbox";
 import Navbar from "./components/Navbar";
+import { TranslationContext } from "../providers/TranslationProvider";
 
 const backgroundimg = require("../assets/chatbotbg.png");
 
 const Chatbot = () => {
+  const {t, switchLanguage} = useContext(TranslationContext);
   return (
     <ImageBackground
       source={backgroundimg}
@@ -31,7 +33,7 @@ const Chatbot = () => {
         style={{ flex: 1,}}
       >
         <View style={styles.textView}>
-          <Text style={styles.text}>AI Chatbot</Text>
+          <Text style={styles.text}>{t('chatbot')}</Text>
         </View>
         <View style={styles.chat}>
           <Chatbox />

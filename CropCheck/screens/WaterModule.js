@@ -6,12 +6,13 @@ import Navbar from "./components/Navbar";
 // import {Dropdown} from "react-native-material-dropdown-v2-fixed";
 import axios from 'axios';
 import { Picker } from '@react-native-picker/picker';
+import { TranslationContext } from "../providers/TranslationProvider";
 
 const backgroundimg = require("../assets/backgroundimg.jpg");
 
 const WaterModule = () => {
   // API Functionality
-
+  const {t, switchLanguage} = useContext(TranslationContext); 
   const [temp, setTemp ] = useState('')
   const [humidity, setHumidity] = useState('')
   const [location, setLocation] = useState('')
@@ -79,13 +80,13 @@ const WaterModule = () => {
 
   const Plants = {
     values: {
-        'ap' : 'Apple',
-        'bp' : 'Bell Pepper',
-        'bl' : 'Blueberry',
-        'ch' : 'Cherry',
-        'co' : 'Corn',
-        'gr' : 'Grape',
-        'po' : 'Potato'
+        'ap' : t('ap'),
+        'bp' : t('bp'),
+        'bl' : t('bl'),
+        'ch' : t('ch'),
+        'co' : t('cp'),
+        'gr' : t('gr'),
+        'po' : t('po')
     }
 };
 
@@ -178,12 +179,10 @@ const WaterModule = () => {
       > 
       <View style={{justifyContent: "center", height: "96%", paddingLeft: "5%", paddingRight: "5%", height: windowHeight*0.94}}>
         <View style={{flexDirection: "row", marginBottom: "55%",  alignItems:"flex-end"}}>
-          <Text style={{fontSize: 22, fontWeight: "bold"}}>Water Calculator</Text>
+          <Text style={{fontSize: 22, fontWeight: "bold"}}>{t('headCalculator')}</Text>
           <Image source={require("../assets/droplet.png")} style={{height: 40, width: 40 }}></Image>
         </View>
-        <Text style={{fontSize: 22, marginBottom: 10, fontWeight:"bold", marginHorizontal: "5%",}}>
-          Elevating Plant Health with Tailored Watering Guidelines
-        </Text>
+        <Text style={{fontSize: 22, marginBottom: 10, fontWeight:"bold", marginHorizontal: "5%",}}>{t('waterText')}</Text>
         <TouchableOpacity onPress={handleCalculateNow} style={{
             backgroundColor: "green", // Green background color
             opacity: 0.8, // Semi-transparent
@@ -197,7 +196,7 @@ const WaterModule = () => {
             flexDirection: "row",
             marginBottom: "35%",
           }}>
-          <Text style={{fontSize: 18, color: 'white'}}>Calculate Now!</Text><Image style={{}} source={require("../assets/water.png")}></Image>
+          <Text style={{fontSize: 18, color: 'white'}}>{t('calculate')}</Text><Image style={{}} source={require("../assets/water.png")}></Image>
         </TouchableOpacity>
 
         {/* Snail Modal */}
@@ -225,12 +224,12 @@ const WaterModule = () => {
                     fontSize: 22,
                     fontWeight: "bold",
                     // color: "white",
-                  }}>Hold Tight!</Text>
+                  }}>{t('holdTxt')}</Text>
                   <Text style={{
                     fontSize: 20,
                     fontWeight: "bold",
                     // color: "white",
-                  }}>Fetching Temperature and Humidity Levels</Text>
+                  }}>{t('waterModaltxt')}</Text>
                   <Image source={require("../assets/snail.png")} style={{
                     width: 300,
                     height: 300,
@@ -265,25 +264,25 @@ const WaterModule = () => {
                 width: "100%",
                 // flexDirection: "column",
               }}>
-                <Text style={{fontSize: 22, fontWeight: "bold", marginTop: "10%",}}>Data</Text>
+                <Text style={{fontSize: 22, fontWeight: "bold", marginTop: "10%",}}>{t('waterData')}</Text>
                 <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginTop: 9,}}>
-                  <Text style={{fontSize: 20,}}>Temperature</Text>
+                  <Text style={{fontSize: 20,}}>{t('waterTemp')}</Text>
                   <Image source={require("../assets/temp.png")} style={{height: 50, width: 50, marginHorizontal: 5,}}></Image>
                   <Text style={{fontSize: 20,}}>{temp}°C</Text>
                 </View>
                 <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginTop: 9,}}>
-                  <Text style={{fontSize: 20,}}>Humidity</Text>
+                  <Text style={{fontSize: 20,}}>{t('waterHumidity')}</Text>
                   <Image source={require("../assets/humidity.png")} style={{height: 50, width: 50, marginHorizontal: 5,}}></Image>
                   <Text style={{fontSize: 20,}}>{humidity}%</Text>
                 </View>
                 <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginTop: 9, }}>
-                  <Text style={{fontSize: 20, }}>Location</Text>
+                  <Text style={{fontSize: 20, }}>{t('waterLoc')}</Text>
                   <Image source={require("../assets/location.png")} style={{height: 60, width: 48,}}></Image>
                   <Text style={{fontSize: 20,}}>{location}</Text>
                   {/* <Dropdown label="Enter here" data={places} style={{padding:0, backgroundColor: "#A5CEA7",}}></Dropdown> */}
                 </View>
                 <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginTop: 9,}}>
-                  <Text style={{fontSize: 20, }}>Plant Type</Text>
+                  <Text style={{fontSize: 20, }}>{t('plantType')}</Text>
                   <Image source={require("../assets/planttype.png")} style={{height: 74, width: 74,}}></Image>
                   <View 
                         style={{backgroundColor: '#e3f3fb', height: 35, width: 125, borderRadius: 50, justifyContent: "center", alignItems: "center"}}
@@ -297,10 +296,10 @@ const WaterModule = () => {
                     </View>
                 </View>
                 <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginTop: 9,}}>
-                  <Text style={{fontSize: 20, }}>Pot Diameter</Text>
+                  <Text style={{fontSize: 20, }}>{t('waterDiameter')}</Text>
                   <Image source={require("../assets/pot.png")} style={{height: 37, width: 50, marginHorizontal: 5,}}></Image>
                   <TextInput style={{width: 125, height: 35, textAlign: "center", backgroundColor: "#e3f3fb", fontSize: 18, borderRadius: 50,}} 
-                  value={diameter} placeholder={"Enter here"} onChangeText={(diameter) => {setDiameter(diameter), waterRequirement(diameter, humidity, temp)}}></TextInput>
+                  value={diameter} placeholder={t('diameter')} onChangeText={(diameter) => {setDiameter(diameter), waterRequirement(diameter, humidity, temp)}}></TextInput>
                 </View>
                 <View style={{height: "10%", marginTop: 19,}}>
                 <TouchableOpacity onPress={()=> {goTo(), waterRequirement(diameter, humidity, temp);}}
@@ -336,11 +335,11 @@ const WaterModule = () => {
                   width: "100%",
                 }}>
                   <View style={{flexDirection: "row", justifyContent: "flex-start", alignItems: "center", marginTop: "8%", marginBottom: "12%",}}>
-                    <Text style={{fontSize: 28, fontWeight: "bold",}}>Result</Text>
+                    <Text style={{fontSize: 28, fontWeight: "bold",}}>{t('waterResult')}</Text>
                     <Image source={require("../assets/tick.png")} style={{height: 65, width: 70, marginLeft: "8%",}}></Image>
                   </View>
                     <View style={{backgroundColor: "#ECF3FA", marginBottom: "10%", alignItems: "center", borderRadius: 20, padding: 17,}}>
-                      <Text style={{fontSize: 19, marginTop: "4%",}}>Your Plant needs <Text style={{color: "#49a3d7",}}>{result} ml</Text> of Water Per Day!*</Text>
+                      <Text style={{fontSize: 19, marginTop: "4%",}}>{t('waterModaltxt1')}<Text style={{color: "#49a3d7",}}>{result} ml</Text>{t('waterModaltxt2')}</Text>
                       <Image source={require("../assets/droplets.png")} style={{height: 135, width: 90, marginBottom: "4%",}}></Image>
                     </View>
                     <Text style={{marginBottom: "10%"}}>*Please, note that this is just a suggestion and might not be accurate for all plants.</Text>

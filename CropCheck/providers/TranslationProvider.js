@@ -62,8 +62,8 @@ const translations = {
     po: "Potato",
     //settingFactor function txt
     waterResult: "Result",
-    waterModaltxt1: "Your Plant needs",
-    waterModaltxt2: "of Water Per Day!",
+    waterModaltxt1: "Your Plant needs ",
+    waterModaltxt2: " of Water Per Day!",
     ml: "ml",
     chatbot: "AI Chatbot",
     chatbox: "I am your Chatbot, how can I help you?",

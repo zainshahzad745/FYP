@@ -17,8 +17,15 @@ import * as ImagePicker from "expo-image-picker";
 import { Camera } from "expo-camera";
 import Axios from "axios";
 import Navbar from "./components/Navbar";
+import { TranslationContext } from "../providers/TranslationProvider";
 
+
+<<<<<<< Updated upstream
 const PlantAddScreen = ({ navigation }) => {
+=======
+const PlantAddScreen = ({navigation}) => {
+  const {t, switchLanguage} = useContext(TranslationContext); 
+>>>>>>> Stashed changes
   const [plantName, setPlantName] = useState("");
   const [diseaseType, setDiseaseType] = useState("");
   const [capturedImage, setCapturedImage] = useState(null);
@@ -195,7 +202,7 @@ const PlantAddScreen = ({ navigation }) => {
           style={styles.selectItemButton}
         >
           <Text style={styles.selectItemText}>
-            {selectedPlant ? selectedPlant : "Choose Plant Name"}
+            {selectedPlant ? selectedPlant : t('plantName')}
           </Text>
         </TouchableOpacity>
         {/* add disease type */}
@@ -204,7 +211,7 @@ const PlantAddScreen = ({ navigation }) => {
           style={styles.selectItemButton}
         >
           <Text style={styles.selectItemText}>
-            {selectedDisease ? selectedDisease : "Choose Disease Type"}
+            {selectedDisease ? selectedDisease : t('chooseDisease')}
           </Text>
         </TouchableOpacity>
 
@@ -217,7 +224,7 @@ const PlantAddScreen = ({ navigation }) => {
         >
           <View style={styles.modalContainer}>
             <View style={styles.modalContent}>
-              <Text style={styles.modalTitle}>Select Item</Text>
+              <Text style={styles.modalTitle}>{t('item')}</Text>
               <FlatList
                 data={availablePlants}
                 renderItem={({ item }) => (
@@ -247,7 +254,7 @@ const PlantAddScreen = ({ navigation }) => {
         >
           <View style={styles.modalContainer}>
             <View style={styles.modalContent}>
-              <Text style={styles.modalTitle}>Select Item</Text>
+              <Text style={styles.modalTitle}>{t('item')}</Text>
               <FlatList
                 data={availableDiseases}
                 renderItem={({ item }) => (
@@ -284,9 +291,13 @@ const PlantAddScreen = ({ navigation }) => {
             // onPress: {a},
           }}
         >
+<<<<<<< Updated upstream
           <Text style={{ color: "white", fontWeight: "bold" }}>
             Upload Data
           </Text>
+=======
+          <Text style={{ color: "white", fontWeight: "bold" }}>{t('uploadData')}</Text>
+>>>>>>> Stashed changes
         </TouchableOpacity>
 
         {/* <Button title="Send Data" onPress={sendData} /> */}
