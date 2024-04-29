@@ -24,13 +24,20 @@ import MainScreen from "./MainScreen";
 const backgroundimg = require("../assets/backgroundimg.jpg");
 const HomeIcon = require("../assets/Homeicon.png");
 
+
+
 const Main = ({ navigation }) => {
+  const names = "Wheat";
+  const disease = "Wheat Rust";
+
   const windowHeight = Dimensions.get("window").height;
   const [loading, setLoading] = useState(true);
   const route = useRoute(); // Use useRoute hook to access route object
   const { savedImageUri } = route.params || {}; // Destructure savedImageUri from params
 
   const [localSavedImageUri, setLocalSavedImageUri] = useState(null);
+
+
 
   useEffect(() => {
     const fetchSavedImage = async () => {
@@ -63,7 +70,8 @@ const Main = ({ navigation }) => {
   }, [loading]);
 
   const GetSol = () => {
-    navigation.navigate("PossibleSol");
+    // navigation.navigate("PossibleSol");
+    navigation.navigate("PossibleSol", { names, disease, imageUri: savedImageUri || localSavedImageUri  });
   };
 
   const handleHome = () => {
@@ -132,12 +140,12 @@ const Main = ({ navigation }) => {
             textAlign: "center",
           }}
         >
-          Wheat
+          {names}
         </Text>
 
         <Text style={{ width: "100%", fontSize: 25, marginLeft: "6%" }}>
-          Recognized Disease {""}
-          <Text style={{ color: "red", fontSize: 20 }}>Wheat Rust</Text>
+          Recognized Disease {" "}
+          <Text style={{ color: "red", fontSize: 20 }}>{disease}</Text>
         </Text>
 
         <Text style={{ width: "100%", fontSize: 25, marginLeft: "6%" }}>
@@ -210,5 +218,7 @@ const Main = ({ navigation }) => {
     
   );
 };
+
+
 
 export default Main;

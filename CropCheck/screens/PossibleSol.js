@@ -4,8 +4,11 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 const backgroundimg = require('../assets/backgroundimg.jpg');
 const potspic= require("../assets/pots.png");
 const Home = require('../assets/Homeicon.png');
-
-const PossibleSol = ({navigation}) => {
+import Data from './MainScan.js'
+const PossibleSol = ({navigation, route}) => {
+  const {names, disease, imageUri} = route.params;
+  console.log(names, disease, imageUri);
+  let solution = "LoremIpsumabjcajkbcjkabcjkabkjcbdkjcbkjbdkjbskjbscjbsdkbcmsn cvwv could'nt"
   const Homie = () => {
     navigation.navigate('MainScreen');
   };
@@ -15,21 +18,19 @@ const PossibleSol = ({navigation}) => {
       <View style={styles.container}>
       <ImageBackground source={backgroundimg} style={styles.Bg_img}>
         <View>
+        {/* <Image source={{ uri: imageUri }} style={{ width: 200, height: 200 }} /> */}
           <TouchableOpacity onPress={Homie}> 
           <Image source={Home} style={styles.icon} ></Image>
           </TouchableOpacity>
         </View>
         <View>  
-          <Image source={potspic} style={styles.img}/>
+          <Image source={{uri: imageUri}} style={styles.img}/>
         </View>
         <View style={styles.TextBOLD}>
         <Text style={styles.TextBold} >Possible Solutions</Text>
         </View>
         <View style={styles.Textlite}>
-          <Text style={{fontSize: 15}}>Loremspem dkmksalllllll kdkssssssssssss kdksaoa kdkkdgjdk amskack daidjv 
-          ksjksskdkc jsdjc sdnkjc ieicxkclc kmdkcc djkskc kdskjc hssuhc asfhcc ydhydhxay doksj idjciss agb usdjaj jshdjsadd yeqatzxv 
-          icduyo iewqc utop wwdx and this plant is full of problems and issues. Green vegetables can't grow dklds kmfdlkd ksslv, kfk 
-          mdkfl dkfk kdmvk kdmc gkev kdkf kldkflv odkfl sdkl</Text>
+          <Text style={{fontSize: 15}}>{solution}</Text>
         </View>
         <Navbar/>
       </ImageBackground>
@@ -50,7 +51,7 @@ const styles = StyleSheet.create({
   },
   img: {
     width: '90%', 
-    height: '30%',
+    height: '50%',
     // marginLeft: 10,
     // alignItems: 'center',
     margin: '5%'
