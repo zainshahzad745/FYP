@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   },
   navContainer: {
     // backgroundColor: 'red',
-    height: windowHeight*0.06,
+    height: windowHeight*0.025,
   },
   background: {
     flex: 1,
@@ -112,11 +112,11 @@ const styles = StyleSheet.create({
     backgroundColor: "red",
     flexWrap: "wrap",
     justifyContent: "space-between", // Adjust as needed
-    height: windowHeight*0.48,
-    marginBottom: "5%"
+    height: windowHeight*0.525,
+    marginBottom: "3%"
   },
   expert: {
-    marginBottom: "5%", // Adjust the margin as needed
+    marginBottom: "7%", // Adjust the margin as needed
   }
 });
 

@@ -1,38 +1,37 @@
-import { StyleSheet, Text, View, Image, ImageBackground } from 'react-native';
+import { useContext } from 'react';
+import { StyleSheet, Text, View, Image, ImageBackground, Dimensions } from 'react-native';
 import Navbar from './components/Navbar.js';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TranslationContext } from "../providers/TranslationProvider";
+
 const backgroundimg = require('../assets/backgroundimg.jpg');
-const potspic= require("../assets/pots.png");
-const Home = require('../assets/Homeicon.png');
-import Data from './MainScan.js'
+const windowHeight = Dimensions.get("window").height
+
+// const potspic= require("../assets/pots.png");
+// const Home = require('../assets/Homeicon.png');
+// import Data from './MainScan.js';
 const PossibleSol = ({navigation, route}) => {
+  const {t, switchLanguage} = useContext(TranslationContext); 
   const {names, disease, imageUri} = route.params;
   console.log(names, disease, imageUri);
-  let solution = "LoremIpsumabjcajkbcjkabcjkabkjcbdkjcbkjbdkjbskjbscjbsdkbcmsn cvwv could'nt"
-  const Homie = () => {
-    navigation.navigate('MainScreen');
-  };
+  let solution = "Lorem Ipsum abj caj kb cjka bcjk abkj cb dkj cbkjb dkjbs kjbsc jbsdk bcmsn cvwv could'nt";
   
   return (
     // <ImageBackground source={backgroundimg} style={styles.Bg_img}>
       <View style={styles.container}>
       <ImageBackground source={backgroundimg} style={styles.Bg_img}>
-        <View>
-        {/* <Image source={{ uri: imageUri }} style={{ width: 200, height: 200 }} /> */}
-          <TouchableOpacity onPress={Homie}> 
-          <Image source={Home} style={styles.icon} ></Image>
-          </TouchableOpacity>
+        <View style={styles.TextView}>
+          <Text style={styles.TextBold}>{t('possibleSol')}</Text>
         </View>
-        <View>  
+        <View style={styles.imgCont}>  
           <Image source={{uri: imageUri}} style={styles.img}/>
         </View>
-        <View style={styles.TextBOLD}>
-        <Text style={styles.TextBold} >Possible Solutions</Text>
-        </View>
         <View style={styles.Textlite}>
-          <Text style={{fontSize: 15}}>{solution}</Text>
+          <Text style={{fontSize: 22}}>{solution}</Text>
         </View>
-        <Navbar/>
+        <View style={{height: windowHeight*0.02}}>
+          <Navbar/>
+        </View>
       </ImageBackground>
       </View>
   );
@@ -40,49 +39,42 @@ const PossibleSol = ({navigation, route}) => {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flex: 1,
+    // backgroundColor: '#fff',
+    // alignItems: 'center',
+    // justifyContent: 'center',
   },
   Bg_img: {
     width: '100%', 
     height: '100%',
   },
+  imgCont: {
+    // backgroundColor: "blue",
+    height: windowHeight*0.30,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   img: {
-    width: '90%', 
-    height: '50%',
+    width: '85%', 
+    height: '100%',
     // marginLeft: 10,
     // alignItems: 'center',
-    margin: '5%'
   },
   TextBold: {
-    fontSize: 50, 
+    fontSize: 45, 
     fontWeight: 'medium', 
-    color: 'black',
-
-    // paddingLeft: 40, 
-    // paddingTop: 20,
   },
-  // TextBOLD: {
-  //   justifyContent: 'flex-start',
-  //   // paddingLeft: 45, 
-  //   textAlign: 'center',
-  //   margin: '5%',
-  //   // paddingTop: 7,
-  // },
+  TextView: {
+    // justifyContent: 'flex-start',
+    margin: "7%",
+    marginTop: "20%",
+    // backgroundColor: "yellow",
+    height: windowHeight*0.16,
+  },
   Textlite: {
-    justifyContent: 'center', 
-    alignItems: 'center',
-    // marginLeft: 25,
-    // padding: 25,
-    textAlign: 'center',
-  },
-  icon: {
-    margin: 30,
-    width: 45,
-    height:50,
-    alignItems: 'flex-start',
+    margin: "7%",
+    // backgroundColor: "red",
+    height: windowHeight*0.32,
   },
 });
 
