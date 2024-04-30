@@ -65,6 +65,7 @@ const MainScreen = ({ navigation }) => {
               </ScrollView>
             ))}
           </View>
+          </ScrollView>
         <View style={styles.expert}>
         <ExpertOpinion />
         </View>
@@ -91,7 +92,7 @@ const styles = StyleSheet.create({
   },
   navContainer: {
     // backgroundColor: 'red',
-    height: windowHeight*0.025,
+    // height: windowHeight*0.0020,
   },
   background: {
     flex: 1,
@@ -109,11 +110,22 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     flexDirection: "row",
-    backgroundColor: "red",
     flexWrap: "wrap",
-    justifyContent: "space-between", // Adjust as needed
-    height: windowHeight*0.525,
-    marginBottom: "3%"
+    justifyContent: "space-between",
+    paddingHorizontal: 10, // Added padding horizontally
+    paddingBottom: 10, // Added padding vertically
+  },
+
+
+  image: {
+    width: 175,
+    height: imageSize,
+    resizeMode: "cover",
+    borderRadius: 10,
+  },
+  imageWrapper: {
+    width: "49%",
+    marginBottom: 10,
   },
   expert: {
     marginBottom: "7%", // Adjust the margin as needed

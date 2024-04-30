@@ -8,27 +8,27 @@ const Navbar = () => {
 
   const handleScanNow = () => {
     // Navigate to the ScanScreen for capturing images
-    navigation.navigate('ScanScreen');
+    navigation.replace('ScanScreen');
   };
 
   const handleHome = () => {
     // Handle the Home button click
-    navigation.navigate('MainScreen');
+    navigation.replace('MainScreen');
   };
 
   const handleDiagnose = () => {
     // Handle the Diagnose button click
-    navigation.navigate('PlantAddScreen');
+    navigation.replace('PlantAddScreen');
   };
 
   const handleAskAI = () => {
     // Handle the Ask AI button click
-    navigation.navigate('Chatbot');
+    navigation.replace('Chatbot');
   };
 
   const handleWaterCalculator = () => {
     // Handle the Water Calculator button click
-    navigation.navigate('WaterModule');
+    navigation.replace('WaterModule');
   };
 
   return (
