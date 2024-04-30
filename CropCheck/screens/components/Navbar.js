@@ -33,13 +33,13 @@ const Navbar = () => {
 
   return (
     <View style={styles.navbar}>
-      <TouchableOpacity style={styles.button} onPress={handleHome}>
+      <TouchableOpacity style={{alignItems: 'center', marginLeft: "1%"}} onPress={handleHome}>
         <Image source={require('../../assets/home.png')} style={styles.icon} />
         <Text style={styles.buttonText}>{t('navbarHome')}</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button} onPress={handleDiagnose}>
-        <Image source={require('../../assets/search.png')} style={styles.icon} />
+      <TouchableOpacity style={{alignItems: 'center'}} onPress={handleDiagnose}>
+        <Image source={require('../../assets/search.png')} style={{padding: 10, width: 28}} />
         <Text style={styles.buttonText}>{t('navbarDiagnose')}</Text>
       </TouchableOpacity>
 
@@ -48,14 +48,14 @@ const Navbar = () => {
         <Text style={styles.scanButtonText}>{t('navbarScan')}</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button} onPress={handleAskAI}>
+      <TouchableOpacity style={{alignItems: 'center', marginRight: 6,}} onPress={handleAskAI}>
         <Image source={require('../../assets/ai.png')} style={styles.icon} />
         <Text style={styles.buttonText}>{t('navbarAskAI')}</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button} onPress={handleWaterCalculator}>
-        <Image source={require('../../assets/water.png')} style={styles.icon} />
-        <Text style={styles.buttonText}>{t('headCalculator')}</Text>
+      <TouchableOpacity style={{alignItems: "center", marginRight: 7}} onPress={handleWaterCalculator}>
+        <Image source={require('../../assets/water.png')} style={{padding: 15, width: 31, height: 31, resizeMode: 'contain',}} />
+        <View style={{width:55, height: 28, justifyContent: 'flex-end'}}><Text style={{fontSize: 10, textAlign: 'center',}}>{t('headCalculator')}</Text></View>
       </TouchableOpacity>
     </View>
   );
@@ -74,20 +74,16 @@ const styles = StyleSheet.create({
     opacity: 0.85,
     padding: 10,
   },
-  button: {
-    alignItems: 'center',
-  },
   scanButton: {
     marginTop: -45,
-    marginLeft: 15,
+    marginRight: 4,
     alignItems: 'center',
     padding: 10,
     borderRadius: 10,
-    
   },
   icon: {
     padding: 15,
-    width: 30,
+    width: 28,
     height: 30,
     resizeMode: 'contain',
   },
@@ -99,6 +95,9 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#000',
     marginTop: 5,
+    marginLeft: "0.9%",
+    fontSize: 14,
+    // fontWeight: 500
   },
   scanButtonText: {
     color: 'black',

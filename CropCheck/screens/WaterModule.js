@@ -1,5 +1,5 @@
 // // WaterModule.js
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { StyleSheet, View, Text, ImageBackground, Image, Button, Dimensions, TouchableOpacity, TextInput } from 'react-native';
 import Modal from "react-native-modal";
 import Navbar from "./components/Navbar";
@@ -84,13 +84,18 @@ const WaterModule = () => {
         'bp' : t('bp'),
         'bl' : t('bl'),
         'ch' : t('ch'),
-        'co' : t('cp'),
+        'co' : t('co'),
         'gr' : t('gr'),
-        'po' : t('po')
+        'pe' : t('pe'),
+        'po' : t('po'),
+        'rb' : t('rb'),
+        'sb' : t('sb'),
+        'st' : t('st'),
+        'to' : t('to')
     }
 };
 
-  const coefficients = {'ap':2.5, 'bp':3.5, 'bl':3.5, 'ch':2.5, 'co':3, 'gr':3.4, 'po':3};
+  const coefficients = {'ap':2.5, 'bp':3.5, 'bl':3.5, 'ch':2.5, 'co':3, 'gr':3.4, 'po':3, 'to': 2.7};
   const [selectedPlant, setSelectedPlant] = useState('');
 
   const plantItems = Object.keys(Plants.values).map((key) => (
@@ -141,7 +146,7 @@ const WaterModule = () => {
       setHumFactor(1);
       console.log('setHumFactor 1', humFactor);
     }
-    else if (humidiy < 30) {
+    else if (humidity < 30) {
       setHumFactor(0.6);
       console.log('setHumFactor 0.6', humFactor);
     }
@@ -177,7 +182,7 @@ const WaterModule = () => {
           flex: 1,
         }}
       > 
-      <View style={{justifyContent: "center", height: "96%", paddingLeft: "5%", paddingRight: "5%", height: windowHeight*0.94}}>
+      <View style={{justifyContent: "center", height: "96%", paddingLeft: "5%", paddingRight: "5%", height: windowHeight*0.985}}>
         <View style={{flexDirection: "row", marginBottom: "55%",  alignItems:"flex-end"}}>
           <Text style={{fontSize: 22, fontWeight: "bold"}}>{t('headCalculator')}</Text>
           <Image source={require("../assets/droplet.png")} style={{height: 40, width: 40 }}></Image>
@@ -347,7 +352,7 @@ const WaterModule = () => {
             </View>
           </Modal>
       </View>
-      <View style={{height: Dimensions.get("window").height*0.06}}>
+      <View style={{height: Dimensions.get("window").height*0.015}}>
         <Navbar />
       </View>
       </ImageBackground>

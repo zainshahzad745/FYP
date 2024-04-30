@@ -20,12 +20,8 @@ import Navbar from "./components/Navbar";
 import { TranslationContext } from "../providers/TranslationProvider";
 
 
-<<<<<<< Updated upstream
-const PlantAddScreen = ({ navigation }) => {
-=======
 const PlantAddScreen = ({navigation}) => {
   const {t, switchLanguage} = useContext(TranslationContext); 
->>>>>>> Stashed changes
   const [plantName, setPlantName] = useState("");
   const [diseaseType, setDiseaseType] = useState("");
   const [capturedImage, setCapturedImage] = useState(null);
@@ -36,32 +32,94 @@ const PlantAddScreen = ({navigation}) => {
   const [selectedDisease, setSelectedDisease] = useState(null); // State for selected disease
   const multiSelectRef = useRef(null);
   const uploadimg = require("../assets/uploadimg.png");
+  const [disease, setDisease] = useState(null);
   const availablePlants = [
-    "Garlic",
-    "Wheat",
-    "Tomato ",
-    "Tomato ",
-    "Tomato ",
-    "Tomato ",
-    "Tomato ",
-    "Tomato ",
-    "Tomato ",
-    "Tomato ",
-    "Tomato ",
-    "Tomato ",
-    "Tomato ",
-    "Tomato ",
-    "Tomato ",
-    "Tomato ",
-    "Tomato ",
+    "Tomato1",
+    "Tomato2",
+    "Tomato3",
+    "Tomato4",
+    "Tomato5",
+    "Tomato6",
+    "Tomato7",
+    "Tomato8",
   ]; // Example list of available items
 
-  const availableDiseases = [
-    "Disease 1",
-    "Disease 2",
-    "Disease 3",
-    "Disease 4",
+  const Diseases1 = [
+    "Disease1.1",
+    "Disease1.2",
+    "Disease1.3",
+    "Disease1.4",
   ];
+
+  const Diseases2 = [
+    "Disease2.1",
+    "Disease2.2",
+    "Disease2.3"
+  ];
+
+  const Diseases3 = [
+    "Disease3.1",
+    "Disease3.2",
+    "Disease3.3",
+    "Disease3.4"
+  ];
+
+  const Diseases4 = [
+    "Disease4.1",
+    "Disease4.2"
+  ];
+
+  const Diseases5 = [
+    "Disease5.1",
+    "Disease5.2",
+    "Disease5.3"
+  ];
+
+  const Diseases6 = [
+    "Disease6.1",
+    "Disease6.2",
+    "Disease6.3",
+    "Disease6.4"
+  ];
+
+  const Diseases7 = [
+    "Disease7.1",
+    "Disease7.2"
+  ];
+
+  const Diseases8 = [
+    "Disease8.1",
+    "Disease8.2",
+    "Disease8.3"
+  ];
+
+  function getDisease(plant) {
+    if (plant == "Tomato1") {
+      setDisease(Diseases1)
+    }
+    else if (plant == "Tomato2") {
+      setDisease(Diseases2)
+    }
+    else if (plant == "Tomato3") {
+      setDisease(Diseases3)
+    }
+    else if (plant == "Tomato4") {
+      setDisease(Diseases4)
+    }
+    else if (plant == "Tomato5") {
+      setDisease(Diseases5)
+    }
+    else if (plant == "Tomato6") {
+      setDisease(Diseases6)
+    }
+    else if (plant == "Tomato7") {
+      setDisease(Diseases7)
+    }
+    else if (plant == "Tomato8") {
+      setDisease(Diseases8)
+    }
+  };
+
 
   const handleBack = () => {
     navigation.replace("MainScreen");
@@ -232,6 +290,7 @@ const PlantAddScreen = ({navigation}) => {
                     onPress={() => {
                       setSelectedPlant(item);
                       setIsModalVisible(false);
+                      getDisease(item);
                     }}
                     style={styles.itemButton}
                   >
@@ -256,7 +315,7 @@ const PlantAddScreen = ({navigation}) => {
             <View style={styles.modalContent}>
               <Text style={styles.modalTitle}>{t('item')}</Text>
               <FlatList
-                data={availableDiseases}
+                data={disease}
                 renderItem={({ item }) => (
                   <TouchableOpacity
                     onPress={() => {
@@ -291,13 +350,7 @@ const PlantAddScreen = ({navigation}) => {
             // onPress: {a},
           }}
         >
-<<<<<<< Updated upstream
-          <Text style={{ color: "white", fontWeight: "bold" }}>
-            Upload Data
-          </Text>
-=======
           <Text style={{ color: "white", fontWeight: "bold" }}>{t('uploadData')}</Text>
->>>>>>> Stashed changes
         </TouchableOpacity>
 
         {/* <Button title="Send Data" onPress={sendData} /> */}
@@ -316,7 +369,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     display: "flex",
-    height: windowHeight * 0.9,
+    height: windowHeight*0.893,
     marginTop: "20%",
     marginLeft: "1%",
   },
@@ -360,7 +413,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: "center",
     color: "white",
-
     backgroundColor: "green",
     padding: 10,
     borderRadius: 5,
@@ -397,7 +449,7 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   navContainer: {
-    height: windowHeight * 0.1,
+    height: windowHeight * 0.107,
   },
 });
 

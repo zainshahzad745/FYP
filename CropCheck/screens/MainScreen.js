@@ -1,23 +1,46 @@
-// MainScreen.js
-import React, {useContext} from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {
   ImageBackground,
   View,
   Text,
   StyleSheet,
   Dimensions,
+  Image,
+  TouchableOpacity,
+  ScrollView,
 } from "react-native";
 import MainScreenHead from "./components/mainScreenHead";
-import ImageComponent from "./components/ImageComponent";
 import Navbar from "./components/Navbar";
 import ExpertOpinion from "./components/ExpertOpinion";
 import { TranslationContext } from "../providers/TranslationProvider";
+
 const backgroundimg = require("../assets/backgroundimg.jpg");
 
 const MainScreen = ({ navigation }) => {
-  const {t, switchLanguage} = useContext(TranslationContext); 
+  const { t, switchLanguage } = useContext(TranslationContext);
+  const [plantsData, setPlantsData] = useState([]);
+  const [diseaseNames, setDiseaseNames] = useState([]);
+
   const handleImageClick = () => {
     navigation.navigate("DetailedScreen");
+  };
+
+  useEffect(() => {
+    fetchPlantsData();
+  }, []);
+
+  const fetchPlantsData = async () => {
+    try {
+      const response = await fetch(
+        "http://192.168.100.199:5000/retrieveData?email=zainshahza@gmail.com"
+      );
+      const data = await response.json();
+      setPlantsData(data);
+      const names = data.map((plant) => plant.disease_name);
+      setDiseaseNames(names);
+    } catch (error) {
+      console.error("Error fetching plants data:", error);
+    }
   };
 
   return (
@@ -27,38 +50,26 @@ const MainScreen = ({ navigation }) => {
         style={styles.background}
       >
         <MainScreenHead navigation={navigation} />
-        <Text style={styles.text}>{t('mainScan')}</Text>
-        <View style={styles.imageContainer}>
-          <ImageComponent
-            onPress={handleImageClick}
-            size={imageSize}
-            imageSource={require("../assets/placeholder1.png")}
-            imageText={"Wheat"}
-          />
-          <ImageComponent
-            onPress={handleImageClick}
-            size={imageSize}
-            imageSource={require("../assets/placeholder2.jpg")}
-            imageText={"Flax"}
-          />
-          <ImageComponent
-            onPress={handleImageClick}
-            size={imageSize}
-            imageSource={require("../assets/placeholder3.jpg")}
-            imageText={"Mustard"}
-          />
-          <ImageComponent
-            onPress={handleImageClick}
-            size={imageSize}
-            imageSource={require("../assets/placeholder4.jpg")}
-            imageText={"Peas"}
-          />
-        </View>
+        <Text style={styles.text}>{t("mainScan")}</Text>
+        <ScrollView style={styles.scrollView}>
+          <View style={styles.imageContainer}>
+            {plantsData.map((plant, index) => (
+              <ScrollView key={index} style={styles.imageWrapper}>
+                <TouchableOpacity onPress={handleImageClick}>
+                  <Image
+                    source={{ uri: `data:image/jpeg;base64,${plant.image}` }}
+                    style={styles.image}
+                  />
+                  <Text style={styles.imageText}>{plant.disease_name}</Text>
+                </TouchableOpacity>
+              </ScrollView>
+            ))}
+          </View>
         <View style={styles.expert}>
-          <ExpertOpinion />
+        <ExpertOpinion />
         </View>
         <View style={styles.navContainer}>
-          <Navbar />
+        <Navbar />
         </View>
       </ImageBackground>
     </View>
@@ -67,6 +78,7 @@ const MainScreen = ({ navigation }) => {
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
+
 const imageSize = (windowWidth - 20) / 2 - 10;
 
 const styles = StyleSheet.create({
@@ -92,8 +104,12 @@ const styles = StyleSheet.create({
     padding: 10,
     fontWeight: "bold",
   },
+  scrollView: {
+    flex: 1,
+  },
   imageContainer: {
     flexDirection: "row",
+    backgroundColor: "red",
     flexWrap: "wrap",
     justifyContent: "space-between", // Adjust as needed
     height: windowHeight*0.48,
