@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { GiftedChat } from "react-native-gifted-chat";
-import { TranslationContext } from "../providers/TranslationProvider";
+import { TranslationContext } from "../../providers/TranslationProvider";
 
 const Chatbox = () => {
     const {t, switchLanguage} = useContext(TranslationContext); 

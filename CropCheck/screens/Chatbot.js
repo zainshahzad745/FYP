@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import {
   View,
   TextInput,
@@ -51,7 +51,7 @@ const windowHeight = Dimensions.get("window").height;
 
 const styles = StyleSheet.create({
     navContainer: {
-        height: windowHeight*0.06,
+        height: windowHeight*0.015,
     },
     text: {
         textAlign: "center",
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
         // backgroundColor: "red",
     },
     chat: {
-        height: windowHeight*0.74,
+        height: windowHeight*0.785,
         position: "relative",
         // marginTop: "15%",
         // padding: "5%",

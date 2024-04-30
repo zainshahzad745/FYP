@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   StyleSheet,
   Text,
@@ -14,6 +14,8 @@ import {
 import * as FileSystem from "expo-file-system";
 import { useRoute } from "@react-navigation/native";
 import Navbar from "./components/Navbar";
+import { TranslationContext } from "../providers/TranslationProvider";
+
 
 const imgIcon = require("../assets/Planticon.png");
 const Home = require("../assets/Homeicon.png");
@@ -30,6 +32,7 @@ const Main = ({ navigation }) => {
   const names = "Wheat";
   const disease = "Wheat Rust";
 
+  const {t, switchLanguage} = useContext(TranslationContext); 
   const windowHeight = Dimensions.get("window").height;
   const [loading, setLoading] = useState(true);
   const route = useRoute(); // Use useRoute hook to access route object
@@ -80,43 +83,29 @@ const Main = ({ navigation }) => {
   return (
     <ImageBackground
        source={backgroundimg}
-       style={{ width: "100%", height: "100%" }}
+       style={{ width: "100%", height: windowHeight }}
                                   >
-        <View style={{ display: "flex" }}>
-        <TouchableOpacity onPress={handleHome}>
-          <Image
-            source={Home}
-            style={{
-              width: 40,
-              height: 40,
-              alignContent: "center",
-              marginLeft: 25,
-              marginTop: "15%",
-            }}
-          ></Image>
-        </TouchableOpacity>
-
+        <View style={{ display: "flex", height: windowHeight*0.98 }}>
         <Text
           style={{
             fontSize: 40,
             fontWeight: "bold",
             color: "green",
             marginLeft: 25,
+            marginTop: "20%",
+            marginBottom: "2%"
           }}
-        >
-          Results
-        </Text>
+        >{t('waterResult')}</Text>
 
         <Text
           style={{
             fontWeight: "bold",
-            fontSize: 35,
+            fontSize: 33,
             color: "green",
             marginLeft: 25,
+            marginBottom: "3%"
           }}
-        >
-          Your Plant is
-        </Text>
+        >{t('mainScantxt')}</Text>
 
         {(savedImageUri || localSavedImageUri) && (
           <Image
@@ -136,20 +125,20 @@ const Main = ({ navigation }) => {
           style={{
             width: "100%",
             fontWeight: "bold",
-            fontSize: 35,
+            fontSize: 30,
             textAlign: "center",
           }}
         >
           {names}
         </Text>
 
-        <Text style={{ width: "100%", fontSize: 25, marginLeft: "6%" }}>
-          Recognized Disease {" "}
-          <Text style={{ color: "red", fontSize: 20 }}>{disease}</Text>
+        <Text style={{ width: "100%", fontSize: 22, marginLeft: "6%", }}>
+          {t('scanDisease')}
+          <Text style={{ color: "red", fontSize: 20 }}>Wheat Rust</Text>
         </Text>
 
-        <Text style={{ width: "100%", fontSize: 25, marginLeft: "6%" }}>
-          Crop Type{" "}
+        <Text style={{ width: "100%", fontSize: 22, marginLeft: "6%" }}>
+          {t('crop')}
           <Text style={{ color: "blue", fontSize: 20 }}>Rabi Crops</Text>
         </Text>
 
@@ -163,7 +152,8 @@ const Main = ({ navigation }) => {
             height: "6%",
             marginLeft: "10%",
             marginRight: "10%",
-            marginTop: "8%", // Custom height
+            marginTop: "8%",
+            marginBottom: "15%",
             justifyContent: "center",
             alignItems: "center",
           }}
@@ -210,7 +200,7 @@ const Main = ({ navigation }) => {
             </View>
           </View>
         </Modal>
-        <View style={{height: windowHeight*0.2, backgroundColor: "red"}}>
+        <View style={{height: windowHeight*0.2,}}>
           <Navbar />
         </View>
       </View>
