@@ -21,6 +21,16 @@ const PlantAddScreen = () => {
   const [capturedImage, setCapturedImage] = useState(null);
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    if (loading && capturedImage) {
+      setShowModal(true);
+    } else {
+      setShowModal(false);
+    }
+  }, [loading, capturedImage]);
+
 
   useEffect(() => {
     (async () => {
@@ -156,6 +166,45 @@ const PlantAddScreen = () => {
         </TouchableOpacity>
       {/* <Button title="Upload Image" onPress={handleUploadImage} />
       <Button title="Save Image" onPress={saveCapturedImage} /> */}
+      <Modal
+          isVisible={showModal}
+          animationIn="zoomIn"
+          animationOut="zoomOut"
+          backdropOpacity={0.4}
+        >
+          <View
+            style={{
+              flexDirection: "column",
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <View
+              style={{
+                backgroundColor: "white",
+                padding: 40,
+                borderRadius: 20,
+              }}
+            >
+              <ActivityIndicator size="70" color="green" />
+              <Image
+                source={require("../../assets/cactusicon.png")}
+                style={{ width: 250, height: 250, marginTop: 20 }}
+              />
+              <Text
+                style={{
+                  color: "green",
+                  fontWeight: "bold",
+                  fontSize: 20,
+                  textAlign: "center",
+                }}
+              >
+                Analyzing.....
+              </Text>
+            </View>
+          </View>
+        </Modal>
     </View>
     </ImageBackground>
   );

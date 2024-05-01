@@ -107,8 +107,8 @@ const Signin = ({navigation}) => {
           {/* switcher button */}
           <TouchableOpacity style={{width: 100, height: 30, alignItems: 'center', marginRight: '1%'}} onPress={handleModalClick} >
 
-            <Image source={require('../assets/setting.png')} style={{width: 32, height: 33, marginRight: '15%', marginTop: '15%', marginLeft: '15%'}} />
-            <Text style={{width: '100%', marginRight: '1%', marginLeft: '1%', fontSize: 14}}>{t('Language')}</Text>
+            <Image source={require('../assets/setting.png')} style={{width: 32, height: 33, marginRight: '35%', marginTop: '15%', marginLeft: '15%'}} />
+            <Text style={{width: '100%', marginRight: '25%', marginLeft: '5%', fontSize: 14}}>{t('Language')}</Text>
           </TouchableOpacity>
           
           
@@ -236,7 +236,7 @@ const Signin = ({navigation}) => {
           <View style={{ display: 'flex', flexDirection: 'row', marginLeft: '10%', marginRight: '10%', marginTop: '5%' }}>
           <CheckBox value={isChecked} onValueChange={setChecked} color={'green'} />
           <Text style={{fontSize: 16, marginLeft: 3, paddingLeft: 12}}>{t('Remember')}</Text>
-          <Text style={{fontSize: 16, marginLeft: '30%'}}>{t('Pass')}</Text>
+          <Text style={{fontSize: 16, marginLeft: '20%', marginRight: '20%'}}>{t('Pass')}</Text>
           </View>
           <TouchableOpacity
           onPress={handleSignin}

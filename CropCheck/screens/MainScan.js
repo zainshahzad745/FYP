@@ -64,18 +64,7 @@ const Main = ({ navigation }) => {
   }, []);
 
   // UseEffect to hide the modal after a certain duration
-  useEffect(() => {
-    console.log("Loading:", loading);
-    if (loading) {
-      const hideModalTimer = setTimeout(() => {
-        setLoading(false);
-        console.log("Modal hidden");
-      }, 5000); // Set the duration here (e.g., 10 seconds)
-      console.log("Modal shown");
-      // Clear timeout if component unmounts or when loading is false
-      return () => clearTimeout(hideModalTimer);
-    }
-  }, [loading]);
+
 
   const GetSol = () => {
     // navigation.navigate("PossibleSol");
@@ -166,45 +155,7 @@ const Main = ({ navigation }) => {
           <Text style={{ fontSize: 25, color: "white" }}>Get Solution</Text>
         </TouchableOpacity>
         {/* </View> */}
-        <Modal
-          isVisible={loading}
-          animationIn="zoomIn"
-          animationOut="zoomOut"
-          backdropOpacity={0.4}
-        >
-          <View
-            style={{
-              flexDirection: "column",
-              flex: 1,
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <View
-              style={{
-                backgroundColor: "white",
-                padding: 40,
-                borderRadius: 20,
-              }}
-            >
-              <ActivityIndicator size="70" color="green" />
-              <Image
-                source={require("../assets/cactusicon.png")}
-                style={{ width: 250, height: 250, marginTop: 20 }}
-              />
-              <Text
-                style={{
-                  color: "green",
-                  fontWeight: "bold",
-                  fontSize: 20,
-                  textAlign: "center",
-                }}
-              >
-                Analyzing.....
-              </Text>
-            </View>
-          </View>
-        </Modal>
+        
         <View style={{height: windowHeight*0.2,}}>
           <Navbar />
         </View>

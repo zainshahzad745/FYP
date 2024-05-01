@@ -63,7 +63,7 @@ const MainScreen = ({ navigation }) => {
                     source={{ uri: `data:image/jpeg;base64,${plant.image}` }}
                     style={styles.image}
                   />
-                  <Text style={styles.imageText}>{plant.disease_name}</Text>
+                  <Text style={{fontWeight: 'bold', fontSize: 18, overflow: "scroll", width: '50%'}}>{plant.disease_name}</Text>
                 </TouchableOpacity>
               </ScrollView>
             ))}
