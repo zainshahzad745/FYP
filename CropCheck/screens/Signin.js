@@ -56,8 +56,8 @@ const Signin = ({navigation}) => {
     try{
       const response = await signInWithEmailAndPassword(auth, email, password);
       const currentUser = getAuth().currentUser;
-      console.log('current user data',currentUser);
-      console.log('email verified?', currentUser.emailVerified)
+      // console.log('current user data',currentUser);
+      // console.log('email verified?', currentUser.emailVerified)
       if (!currentUser.emailVerified) {
         // console.log(response);
       Alert.alert("Email Not Verified", "Please verify your email before signing in.", [{ text: "OK" }]);

@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Image, ImageBackground, Dimensions } from 'reac
 import Navbar from './components/Navbar.js';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { TranslationContext } from "../providers/TranslationProvider";
+import { getAuth } from "firebase/auth";
 
 const backgroundimg = require('../assets/backgroundimg.jpg');
 const windowHeight = Dimensions.get("window").height;
@@ -10,14 +11,15 @@ const windowHeight = Dimensions.get("window").height;
 const PossibleSol = ({navigation, route}) => {
   const {t, switchLanguage} = useContext(TranslationContext); 
   const {names, disease, imageUri} = route.params;
-
+  const currentUser = getAuth().currentUser;
+  email = currentUser.email;
   // Sample solution
   const solution = "Lorem Ipsum abj caj kb cjka bcjk abkj cb dkj cbkjb dkjbs kjbsc jbsdk bcmsn cvwv could'nt";
 
   // Function to send data to the API
   const sendDataToAPI = async () => {
     try {
-      const email = "zainshahza@gmail.com"; // Replace with the user's email
+      // const email = "zainshahza@gmail.com"; // Replace with the user's email
       const formData = new FormData();
       formData.append('email', email);
       formData.append('plant_name', names);
@@ -29,7 +31,7 @@ const PossibleSol = ({navigation, route}) => {
         name: 'photo.jpg',
       });
 
-      const response = await fetch('http://192.168.100.199:5000/sendData', {
+      const response = await fetch('http://192.168.1.8:5000/sendData', {
         method: 'POST',
         body: formData,
         headers: {

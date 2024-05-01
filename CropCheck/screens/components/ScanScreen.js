@@ -55,10 +55,8 @@ const PlantAddScreen = () => {
         type: "image/jpeg",
         name: "photo.jpg",
       });
-
+  
       try {
-        // navigation.navigate('Analyze');
-        navigation.navigate("MainScan", { savedImageUri: capturedImage.uri });
         const response = await axios.post(
           "http://192.168.1.8:5000/detect",
           formData,
@@ -66,35 +64,33 @@ const PlantAddScreen = () => {
             headers: {
               "Content-Type": "multipart/form-data",
             },
-          },
-
-          
-
-
-          // setTimeout(() => {
-          //   setLoading(false);
-          // }, 5000)
+          }
         );
-        if (response && formData) {
-          setLoading(false);
-        }
-
-        console.log("FormData:", formData);
-
-        if ("error" in response.data) {
-          console.log(response.data);
+  
+        // Move navigation to after getting the response
+        if (response && "error" in response.data) {
           console.error("Server Error:", response.data.error);
           // Handle the error, show a message to the user, etc.
         } else {
-          // Handle the successful response
-          console.log("Server Response:", response.data);
+          // If there's no error, navigate to the MainScan component
+          navigation.navigate("MainScan", { 
+            savedImageUri: capturedImage.uri, 
+            response: response.data // Pass the response data as a route parameter
+          });
+  
+          // Reset capturedImage state to null to clear the captured image
+          setCapturedImage(null);
         }
+  
+        setLoading(false); // Set loading to false after handling response
       } catch (error) {
         // Handle network or other errors
         console.error("Error uploading image:", error);
+        setLoading(false);
       }
     }
   };
+  
   const saveCapturedImage = async () => {
     if (capturedImage) {
       try {

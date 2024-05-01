@@ -29,16 +29,21 @@ const HomeIcon = require("../assets/Homeicon.png");
 
 
 const Main = ({ navigation }) => {
-  const names = "Wheat";
-  const disease = "Wheat Rust";
+
 
   const {t, switchLanguage} = useContext(TranslationContext); 
   const windowHeight = Dimensions.get("window").height;
   const [loading, setLoading] = useState(true);
   const route = useRoute(); // Use useRoute hook to access route object
-  const { savedImageUri } = route.params || {}; // Destructure savedImageUri from params
+  const { savedImageUri, response } = route.params || {}; // Destructure savedImageUri from params
 
-  const [localSavedImageUri, setLocalSavedImageUri] = useState(null);
+  useEffect(() => {
+    console.log("Response:", response); // Log the response data
+  }, [response]); 
+  const names = response.disease_name;
+  const disease = response.disease_name;
+
+  // const [localSavedImageUri, setLocalSavedImageUri] = useState(null);
 
 
 
@@ -129,10 +134,10 @@ const Main = ({ navigation }) => {
             textAlign: "center",
           }}
         >
-          {names}
+          {disease}
         </Text>
 
-        <Text style={{ width: "100%", fontSize: 22, marginLeft: "6%", }}>
+        {/* <Text style={{ width: "100%", fontSize: 22, marginLeft: "6%", }}>
           {t('scanDisease')}
           <Text style={{ color: "red", fontSize: 20 }}>Wheat Rust</Text>
         </Text>
@@ -140,7 +145,7 @@ const Main = ({ navigation }) => {
         <Text style={{ width: "100%", fontSize: 22, marginLeft: "6%" }}>
           {t('crop')}
           <Text style={{ color: "blue", fontSize: 20 }}>Rabi Crops</Text>
-        </Text>
+        </Text> */}
 
         <TouchableOpacity
           onPress={GetSol}

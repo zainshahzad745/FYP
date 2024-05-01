@@ -13,13 +13,16 @@ import MainScreenHead from "./components/mainScreenHead";
 import Navbar from "./components/Navbar";
 import ExpertOpinion from "./components/ExpertOpinion";
 import { TranslationContext } from "../providers/TranslationProvider";
-
+// import { FIREBASE_AUTH } from "../Auth/FirebaseConfig";
+import { getAuth } from "firebase/auth";
 const backgroundimg = require("../assets/backgroundimg.jpg");
 
 const MainScreen = ({ navigation }) => {
   const { t, switchLanguage } = useContext(TranslationContext);
   const [plantsData, setPlantsData] = useState([]);
   const [diseaseNames, setDiseaseNames] = useState([]);
+  const currentUser = getAuth().currentUser;
+  console.log('mainScreen', currentUser.email);
 
   const handleImageClick = () => {
     navigation.navigate("DetailedScreen");
@@ -32,7 +35,7 @@ const MainScreen = ({ navigation }) => {
   const fetchPlantsData = async () => {
     try {
       const response = await fetch(
-        "http://192.168.100.199:5000/retrieveData?email=zainshahza@gmail.com"
+        `http://192.168.1.8:5000/retrieveData?email=${currentUser.email}`
       );
       const data = await response.json();
       setPlantsData(data);
