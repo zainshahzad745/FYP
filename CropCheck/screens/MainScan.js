@@ -65,12 +65,12 @@ const Main = ({ navigation }) => {
 
   // UseEffect to hide the modal after a certain duration
 
+// if response.disease_name === "detection":  if no detection navigate to this 
 
   const GetSol = () => {
-    // navigation.navigate("PossibleSol");
-    navigation.navigate("PossibleSol", { names, disease, imageUri: savedImageUri || localSavedImageUri  });
+    navigation.navigate("PossibleSol", { names, disease, imageUri: savedImageUri || localSavedImageUri, response });
   };
-
+  
   const handleHome = () => {
     navigation.replace("MainScreen");
   };

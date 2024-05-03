@@ -236,7 +236,7 @@ const Signin = ({navigation}) => {
           <View style={{ display: 'flex', flexDirection: 'row', marginLeft: '10%', marginRight: '10%', marginTop: '5%' }}>
           <CheckBox value={isChecked} onValueChange={setChecked} color={'green'} />
           <Text style={{fontSize: 16, marginLeft: 3, paddingLeft: 12}}>{t('Remember')}</Text>
-          <Text style={{fontSize: 16, marginLeft: '20%', marginRight: '20%'}}>{t('Pass')}</Text>
+          <Text style={{fontSize: 16, marginLeft: '20%', marginRight: '20%'}} ></Text>
           </View>
           <TouchableOpacity
           onPress={handleSignin}

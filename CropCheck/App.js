@@ -16,6 +16,7 @@ import Signin from './screens/Signin';
 import Signup from './screens/Signup';
 import Chatbot from './screens/Chatbot';
 import WaterModule from './screens/WaterModule';
+import ForgetPassword from './screens/ForgetPassword';
 import * as NavigationBar from 'expo-navigation-bar';
 import TranslationProvider from './providers/TranslationProvider';
 // import { Settings } from 'react-native';
@@ -52,6 +53,7 @@ const App = () => {
         <Stack.Screen name="PossibleSol" component={PossibleSol} />
         <Stack.Screen name="Chatbot" component={Chatbot} />
         <Stack.Screen name="WaterModule" component={WaterModule} />
+        <Stack.Screen name="ForgetPassword" component={ForgetPassword} />
       </Stack.Navigator>
     </NavigationContainer>
     </TranslationProvider>

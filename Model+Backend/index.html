@@ -69,7 +69,7 @@
     async function fetchAndDisplayRecords() {
         try {
             // Fetch records from the API
-            const response = await axios.get('http://192.168.1.8:5000/getAllPlants');
+            const response = await axios.get('http://192.168.176.46:5000/getAllPlants');
             const records = response.data.plants;
 
             // Get the container div to display records
@@ -83,7 +83,7 @@
                 // Display record fields
                 recordDiv.innerHTML = `
                     <h3>ID: ${record.id}</h3>
-                    <img src="http://192.168.1.8:5000/image/${record.image}" alt="Plant Image">
+                    <img src="http://192.168.176.46:5000/image/${record.image}" alt="Plant Image">
                     <p><strong>Plant Name:</strong> ${record.plantName}</p>
                     <p><strong>Disease Type:</strong> ${record.diseaseType}</p>
                 `;

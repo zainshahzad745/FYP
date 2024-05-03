@@ -12,10 +12,12 @@
     "@react-native-async-storage/async-storage": "^1.23.1",
     "@react-native-community/checkbox": "^0.5.17",
     "@react-native-community/netinfo": "^11.3.1",
+    "@react-native-picker/picker": "2.4.10",
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/stack": "^6.3.20",
     "@stream-io/flat-list-mvcp": "^0.10.3",
     "axios": "^1.6.8",
+    "base-64": "^1.0.0",
     "eventemitter3": "^5.0.1",
     "expo": "^49.0.0",
     "expo-av": "^13.10.5",
@@ -29,6 +31,7 @@
     "expo-localization": "~14.3.0",
     "expo-media-library": "^15.9.1",
     "expo-modules-core": "^1.11.12",
+    "expo-navigation-bar": "~2.3.0",
     "expo-sharing": "^11.10.0",
     "expo-status-bar": "~1.6.0",
     "firebase": "^10.11.0",
@@ -51,9 +54,7 @@
     "react-native-screens": "~3.22.0",
     "react-native-svg": "^13.9.0",
     "react-native-vector-icons": "^10.0.3",
-    "stream-chat-expo": "^5.27.0",
-    "@react-native-picker/picker": "2.4.10",
-    "expo-navigation-bar": "~2.3.0"
+    "stream-chat-expo": "^5.27.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

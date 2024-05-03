@@ -23,9 +23,10 @@ const MainScreen = ({ navigation }) => {
   const [diseaseNames, setDiseaseNames] = useState([]);
   const currentUser = getAuth().currentUser;
   console.log('mainScreen', currentUser.email);
+  console.log('plantsData', plantsData);  
 
-  const handleImageClick = () => {
-    navigation.navigate("DetailedScreen");
+  const handleImageClick = (data) => {
+    navigation.navigate("Disease", { diseaseData: data});
   };
 
   useEffect(() => {
@@ -35,7 +36,7 @@ const MainScreen = ({ navigation }) => {
   const fetchPlantsData = async () => {
     try {
       const response = await fetch(
-        `http://192.168.1.8:5000/retrieveData?email=${currentUser.email}`
+        `http://192.168.176.46:5000/retrieveData?email=${currentUser.email}`
       );
       const data = await response.json();
       setPlantsData(data);
@@ -58,7 +59,7 @@ const MainScreen = ({ navigation }) => {
           <View style={styles.imageContainer}>
             {plantsData.map((plant, index) => (
               <ScrollView key={index} style={styles.imageWrapper}>
-                <TouchableOpacity onPress={handleImageClick}>
+                <TouchableOpacity onPress={() => handleImageClick(plant)}>
                   <Image
                     source={{ uri: `data:image/jpeg;base64,${plant.image}` }}
                     style={styles.image}

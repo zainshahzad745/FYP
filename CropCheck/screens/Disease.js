@@ -1,19 +1,29 @@
-import React from 'react';
-import { StyleSheet, Text, View, Button, ImageBackground, Image } from "react-native";
+import React, {useEffect} from 'react';
+import { StyleSheet, Text, View, Button, ImageBackground, Image, ScrollView } from "react-native";
 import Navbar from './components/Navbar';
+import { decode } from 'base-64';
 
-const Disease = () => {
+const Disease = ({route}) => {
+  const {diseaseData} = route.params;
+  console.log('at disease.js update ', diseaseData.image);
+  // useEffect(() => {
+  //   const base64Data = diseaseData.image;
+  //   const decodedData = decode(base64Data);
+  //   console.log('decoded data', decodedData);
+  // }, [diseaseData.image]);
   return (
     <ImageBackground source={require('../assets/backgroundimg.jpg')} resizeMode="cover" style={styles.bg}>
       <View style={styles.container}>
-        <Text style={styles.text}>Disease</Text>
-        <Image source={require('../assets/pastscans1.png')} style={styles.img}></Image>
-        <Text style={styles.text2}>Disease Type:  <Text style={styles.text3}>Wheat Rust</Text></Text>
+        <Text style={styles.text}>{diseaseData.disease_name}</Text>
+        <Image source={{ uri: `data:image/jpeg;base64,${diseaseData.image}` }} style={styles.img}></Image>
+        {/* <Text style={styles.text2}>Disease Type:  <Text style={styles.text3}>Wheat Rust</Text></Text> */}
         <Text style={styles.text4}>Proposed Solution</Text>
       </View>
+      <ScrollView>
       <View style={styles.solution}>
-        <Text style={{ fontSize: 16}}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</Text>
+        <Text style={{ fontSize: 16}}>{diseaseData.solution}</Text>
       </View>
+      </ScrollView>
       <View>
         <Text> </Text>
       </View>
@@ -50,6 +60,7 @@ const styles = StyleSheet.create({
     // marginTop: 30,
     // height: 150,
     width: '90%',
+    height: '60%',
     backgroundColor: 'red',
     resizeMode: 'none',
   },

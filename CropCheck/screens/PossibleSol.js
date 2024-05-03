@@ -1,22 +1,80 @@
-import React, { useContext } from 'react';
+import React, { useState, useEffect, useContext} from 'react';
+import { ScrollView } from 'react-native';
 import { StyleSheet, Text, View, Image, ImageBackground, Dimensions } from 'react-native';
 import Navbar from './components/Navbar.js';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { TranslationContext } from "../providers/TranslationProvider";
+// import { TranslationContext } from "../providers/TranslationProvider";
 import { getAuth } from "firebase/auth";
-
+import axios from 'axios'; // Import axios for making HTTP requests
+import { TranslationContext } from '../providers/TranslationProvider';
 const backgroundimg = require('../assets/backgroundimg.jpg');
 const windowHeight = Dimensions.get("window").height;
 
 const PossibleSol = ({navigation, route}) => {
-  const {t, switchLanguage} = useContext(TranslationContext); 
-  const {names, disease, imageUri} = route.params;
+  const { t, switchLanguage, language } = useContext(TranslationContext); 
+  const { names, disease, imageUri, response } = route.params;
+  const output = response.disease_name;
+  console.log('PossibleSol type', output);
   const currentUser = getAuth().currentUser;
   email = currentUser.email;
-  // Sample solution
-  const solution = "Lorem Ipsum abj caj kb cjka bcjk abkj cb dkj cbkjb dkjbs kjbsc jbsdk bcmsn cvwv could'nt";
+  const [suggestions, setSuggestions] = useState([]);
+  const OPENAI_API_KEY = 'sk-proj-p4ngPTuSI0mdcLuq6Dv3T3BlbkFJhKHigu0svPHUTsqRhRsb';
+  console.log('current language in possible sol', language);
 
-  // Function to send data to the API
+  let promptMessage;
+  if (language === 'en') {
+    promptMessage = `My plant has ${response.disease_name}. Can you suggest possible solutions?`;
+  } else if (language === 'ur') {
+    // Translate the prompt message to Urdu if necessary
+    promptMessage = `میرے پودے کو ${response.disease_name} ہے۔ کیا آپ ممکنہ حل سراہ سکتے ہیں؟`;
+  } else if (language === 'ps'){
+    promptMessage = `د مېونه څخه ${response.disease_name} لري. آیا تاسو د ممکنه لارې پيشنهاد کولای شئ؟`;
+  } else if (language === 'sn'){
+    //sindhi translation
+    promptMessage = `منهنجو پلانٽ ${response.disease_name} ۽ آهي. توهان جي ممڪن حلن جي سفارش ڪري سگهو؟`;
+  } else if (language === 'pn'){
+    //punjabi translation
+    promptMessage = `میرے پودے وچ ${response.disease_name} اے۔ کیا توانائی والے حل سجاواں؟`
+  } else if (language === 'bl'){
+    // balochi translation
+    promptMessage = `میرا پودا ${response.disease_name} ئے. کیا توانائی والے حل سوجائین؟`
+  }
+   // Replace with your actual API key
+
+   useEffect(() => {
+    // Function to send disease name to GPT API and get suggestions
+    const fetchSuggestions = async () => {
+      try {
+        const gptResponse = await axios.post(
+          'https://api.openai.com/v1/chat/completions',
+          {
+            "model": "gpt-3.5-turbo",
+            "messages": [
+              {
+                "role": "user",
+                "content": promptMessage
+              }
+            ],
+            "temperature": 0.7
+          },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${OPENAI_API_KEY}`
+            }
+          }
+        );
+
+        // Extract and set suggestions from the API response
+        const generatedSuggestions = gptResponse.data.choices.map(choice => choice.message.content.trim());
+        setSuggestions(generatedSuggestions);
+      } catch (error) {
+        console.error('Error fetching suggestions:', error.message);
+      }
+    };
+
+    fetchSuggestions();
+  }, [response]);
   const sendDataToAPI = async () => {
     try {
       // const email = "zainshahza@gmail.com"; // Replace with the user's email
@@ -24,14 +82,14 @@ const PossibleSol = ({navigation, route}) => {
       formData.append('email', email);
       formData.append('plant_name', names);
       formData.append('disease_name', disease);
-      formData.append('solution', solution);
+      formData.append('solution', suggestions);
       formData.append('image', {
         uri: imageUri,
         type: 'image/jpeg', // Change the type if necessary
         name: 'photo.jpg',
       });
 
-      const response = await fetch('http://192.168.1.8:5000/sendData', {
+      const response = await fetch('http://192.168.176.46:5000/sendData', {
         method: 'POST',
         body: formData,
         headers: {
@@ -63,7 +121,15 @@ const PossibleSol = ({navigation, route}) => {
           <Image source={{uri: imageUri}} style={styles.img}/>
         </View>
         <View style={styles.Textlite}>
-          <Text style={{fontSize: 22}}>{solution}</Text>
+          {/* Display the suggestions */}
+          <ScrollView style={styles.scrollView}>
+          <View style={{}}>
+            {/* Display the suggestions */}
+            {suggestions.map((suggestion, index) => (
+              <Text key={index} style={styles.suggestionText}>{suggestion}</Text>
+            ))}
+          </View>
+        </ScrollView>
         </View>
         <View style={{height: windowHeight*0.02}}>
           <Navbar/>
@@ -84,11 +150,15 @@ const styles = StyleSheet.create({
   imgCont: {
     height: windowHeight*0.30,
     justifyContent: 'center',
+    // backgroundColor: 'red',
     alignItems: 'center',
   },
   img: {
     width: '85%', 
     height: '100%',
+  },
+  scrollView: {
+    flex: 1,
   },
   TextBold: {
     fontSize: 45, 
@@ -102,6 +172,9 @@ const styles = StyleSheet.create({
   Textlite: {
     margin: "7%",
     height: windowHeight*0.32,
+  },
+  suggestionText: {
+    fontSize: 18,
   },
 });
 
