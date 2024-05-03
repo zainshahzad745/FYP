@@ -59,7 +59,12 @@ const translations = {
     ch: "Cherry",
     co: "Corn",
     gr: "Grape",
+    pe: "Peach",
     po: "Potato",
+    rb: "Raspberry",
+    sb: "Soyabean",
+    sq: "Squash",
+    st: "Strawberry",
     //settingFactor function txt
     waterResult: "Result",
     waterModaltxt1: "Your Plant needs ",

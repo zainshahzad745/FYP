@@ -90,6 +90,7 @@ const WaterModule = () => {
         'po' : t('po'),
         'rb' : t('rb'),
         'sb' : t('sb'),
+        'sq' : t('sq'),
         'st' : t('st'),
         'to' : t('to')
     }
