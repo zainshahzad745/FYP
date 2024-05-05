@@ -60,16 +60,16 @@ const Signin = ({navigation}) => {
       // console.log('email verified?', currentUser.emailVerified)
       if (!currentUser.emailVerified) {
         // console.log(response);
-      Alert.alert("Email Not Verified", "Please verify your email before signing in.", [{ text: "OK" }]);
+      Alert.alert(t('notVerify'), t('verify'), [{ text: t('ok') }]);
       setLoading(false);
       return;
       }
       console.log("curr data", response._tokenResponse.email);
-      Alert.alert("Success", "Signin Successful", [{ text: "OK", onPress: () => navigation.replace("MainScreen") }]);
+      Alert.alert(t('success'), t('loginSuccess'), [{ text: t('ok'), onPress: () => navigation.replace("MainScreen") }]);
     }
     catch(error){
       console.log(error);
-      Alert.alert("Signin Failed" + error.message);
+      Alert.alert(t('fail') +' '+ error.message);
     } finally {
       setLoading(false);
     }
@@ -83,6 +83,11 @@ const Signin = ({navigation}) => {
   const navigateLogin = () => {
     navigation.replace("Signup");
   };
+
+  const navigateForget = () => {
+    navigation.replace("ForgetPassword")
+  };
+
   return (
     <View style={styles.container}>
       <ImageBackground source={backgroundimg} style={styles.background}>
@@ -105,10 +110,10 @@ const Signin = ({navigation}) => {
           </Text>
           
           {/* switcher button */}
-          <TouchableOpacity style={{width: 100, height: 30, alignItems: 'center', marginRight: '1%'}} onPress={handleModalClick} >
+          <TouchableOpacity style={{width: 100, height: 35, alignItems: 'center', marginRight: '2%'}} onPress={handleModalClick} >
 
-            <Image source={require('../assets/setting.png')} style={{width: 32, height: 33, marginRight: '35%', marginTop: '15%', marginLeft: '15%'}} />
-            <Text style={{width: '100%', marginRight: '25%', marginLeft: '5%', fontSize: 14}}>{t('Language')}</Text>
+            <Image source={require('../assets/setting.png')} style={{width: 35, height: 36, marginRight: '35%', marginTop: '15%', marginLeft: '15%'}} />
+            <Text style={{width: '100%', marginRight: '25%', marginLeft: '5%', fontSize: 14, textAlign: 'center'}}>{t('Language')}</Text>
           </TouchableOpacity>
           
           
@@ -116,7 +121,7 @@ const Signin = ({navigation}) => {
 
           
           
-          
+          {/* Google Button */}
           <TouchableOpacity
             // onPress={handleSignUpGoogle}
             style={{
@@ -142,7 +147,7 @@ const Signin = ({navigation}) => {
           >
             <Image
               source={require("../assets/signup.png")}
-              style={{ width: "80%", height: "70%", padding: 2 }}
+              style={{ width: "70%", height: "60%", padding: 2 }}
             />
           </TouchableOpacity>
           <Image
@@ -233,10 +238,10 @@ const Signin = ({navigation}) => {
               />
             </TouchableOpacity>
           </TouchableOpacity>
-          <View style={{ display: 'flex', flexDirection: 'row', marginLeft: '10%', marginRight: '10%', marginTop: '5%' }}>
+          <View style={{ display: 'flex', flexDirection: 'row', marginLeft: '10%', marginRight: '10%', marginTop: '5%'}}>
           <CheckBox value={isChecked} onValueChange={setChecked} color={'green'} />
-          <Text style={{fontSize: 16, marginLeft: 3, paddingLeft: 12}}>{t('Remember')}</Text>
-          <Text style={{fontSize: 16, marginLeft: '20%', marginRight: '20%'}} ></Text>
+          <Text style={{fontSize: 16, marginLeft: 1, paddingLeft: 8}}>{t('Remember')}</Text>
+          <Text style={{ fontSize: 16, color: "green", marginLeft: "12%" }} onPress={navigateForget}>{t('Pass')}</Text>
           </View>
           <TouchableOpacity
           onPress={handleSignin}

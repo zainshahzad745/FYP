@@ -40,11 +40,12 @@ const MainScreenHead = ({navigation}) => {
         <View style={styles.rightContainer}>
           <Text style={styles.textRight}>{currentDate}</Text>
           <Text style={styles.textRight}>{currentDay}</Text>
-          <TouchableOpacity style={{width: 30, height: 30, alignItems: 'center'}} onPress={handleModalClick}>
+          <TouchableOpacity style={{width: 30, height: 30, alignItems: 'center', justifyContent: 'center', marginTop: 2}} onPress={handleModalClick}>
 
-            <Image source={require('../../assets/logout.png')} style={{width: 31, height: 33, marginRight: '35%'}} />
+            <Image source={require('../../assets/logout.png')} style={{width: 29, height: 31, marginRight: '35%'}} />
+            <Text style={{fontSize: 15, width: 50, height: 17, color: 'red', marginRight: '55%', fontWeight: '800', backgroundColor: 'white', marginTop: '5%', borderRadius: 5}}>{t('Logout')}</Text>
           </TouchableOpacity>
-          <Text style={{fontSize: 15, color: 'red', marginRight: '1%', fontWeight: '800', backgroundColor: 'white', marginTop: '5%', borderRadius: 5}}>{t('Logout')}</Text>
+          
         </View>
         <Modal
           animation="slide"
@@ -75,10 +76,10 @@ const MainScreenHead = ({navigation}) => {
                             style={{ width: 20, height: 20 }}
                         />
                     </TouchableOpacity>
-                    <Text style={{fontSize: 15, marginBottom: '1%', fontSize: 28,}}>Are you sure?</Text>
+                    <Text style={{fontSize: 15, marginBottom: '1%', fontSize: 28,}}>{t('sure')}</Text>
                     <TouchableOpacity onPress={handleLogout}
                         style={{backgroundColor: '#e3f3fb', marginTop: '10%', width: '60%', height: '22%', borderRadius: 50, alignItems: 'center', justifyContent: 'center'}}>
-                        <Text style={{fontSize: 18, color: "red"}}>Log Out</Text>
+                        <Text style={{fontSize: 18, color: "red"}}>{t('Logout')}</Text>
                     </TouchableOpacity>
 
             </View>
@@ -131,7 +132,7 @@ const styles = StyleSheet.create({
   textRight: {
     fontSize: 16,
     fontWeight: 'bold',
-    marginBottom: 5,
+    marginBottom: 10,
     color: 'black',
   },
 });
