@@ -1,5 +1,5 @@
 //forget screen
-import {useState} from "react";
+import {useState, useContext} from "react";
 import {
   View,
   Text,
@@ -11,9 +11,12 @@ import {
 } from "react-native";
 // import {BlurView} from 'expo-blur'
 import Modal from "react-native-modal";
+import { TranslationContext } from "../providers/TranslationProvider";
+
 const backgroundimg = require("../assets/backgroundimg.jpg");
 
 const ForgetPassword = ({navigation}) => {
+  const {t, switchLanguage} = useContext(TranslationContext); 
   const [email, onChangeEmail] = useState("");
   const [password, onChangePassword] = useState("");
   const [confirmpassword, onConfirmPassword] = useState("");
@@ -46,7 +49,7 @@ const ForgetPassword = ({navigation}) => {
 
             }}
           >
-            Forget your Password?
+            {t("Pass")}
           </Text>  
 
           <TouchableOpacity
@@ -76,7 +79,7 @@ const ForgetPassword = ({navigation}) => {
               style={{ width: "100%", height: "100%", textAlign: "center" }}
               onChangeText={onChangeEmail}
               value={email}
-              placeholder="Enter Email"
+              placeholder={t('Email')}
               autoComplete="email"
               // keyboardType="numeric"
             />
@@ -118,7 +121,7 @@ const ForgetPassword = ({navigation}) => {
               }}
               onChangeText={onChangePassword}
               value={password}
-              placeholder="Enter Password"
+              placeholder={t('EnterPass')}
               secureTextEntry={show}
               // keyboardType="numeric"
             ></TextInput>
@@ -168,7 +171,7 @@ const ForgetPassword = ({navigation}) => {
               }}
               onChangeText={onConfirmPassword}
               value={password}
-              placeholder="Enter Confirm Password"
+              placeholder={t('ConfirmPass')}
               secureTextEntry={show}
               // keyboardType="numeric"
             ></TextInput>
@@ -198,7 +201,7 @@ const ForgetPassword = ({navigation}) => {
             alignItems: "center",
           }}
         >
-          <Text style={{ color: "white", fontWeight: "bold" }}>Next</Text>
+          <Text style={{ color: "white", fontWeight: "bold" }}>{t('Next')}</Text>
           <Modal visible={isModalVisible} animationType="fade">
             
             <View style={{flex: 1,
@@ -228,7 +231,7 @@ const ForgetPassword = ({navigation}) => {
                   <Image source={require("../assets/done.png")} 
                   style={{ width: "30%", height: "25%",marginLeft:"25%"}}/>
                 </View> */}
-                <Text style={{fontSize: 18, marginTop: "10%",marginLeft: '10%'}}>Your password has been changed</Text>
+                <Text style={{fontSize: 18, marginTop: "10%",marginLeft: '10%'}}>{t('passChanged')}</Text>
                 {/* <Image source={require("../assets/done.png")} 
                 style={{ width: "30%", height: "25%",marginLeft:"30%",marginTop: "3%"}}/> */}
               </View>
@@ -238,7 +241,7 @@ const ForgetPassword = ({navigation}) => {
         </TouchableOpacity>
             <Text style={{ color: "black", width: "100%", fontSize: 18, height: "5%", textAlign: "center", marginTop: '23%' }} 
             onPress={navigateLoginBack}>
-              Back to Login
+              {t('Back')}
             </Text>
         </View>
       </ImageBackground>

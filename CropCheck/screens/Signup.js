@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   View,
   Text,
@@ -13,10 +13,10 @@ import {
 import { FIREBASE_AUTH } from "../Auth/FirebaseConfig";
 import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import axios from "axios";
+import { TranslationContext } from '../providers/TranslationProvider';
+
 
 const backgroundimg = require("../assets/backgroundimg.jpg");
-
-
 
 
 const Signup = ({navigation}) => {
@@ -24,6 +24,8 @@ const Signup = ({navigation}) => {
   const [loading, setLoading] = React.useState(false);
   const [password, onChangePassword] = React.useState("");
   const [show, setShow] = React.useState(true);
+  const { language, switchLanguage, t } = useContext(TranslationContext); // Ensure correct variable name
+
   const auth = FIREBASE_AUTH;
 
   const showPass = () => {
@@ -79,7 +81,7 @@ const Signup = ({navigation}) => {
 
             }}
           >
-            Register
+            {t('Register')}
           </Text>
           <TouchableOpacity
             // onPress={handleSignUpGoogle}
@@ -106,7 +108,7 @@ const Signup = ({navigation}) => {
           >
             <Image
               source={require("../assets/signup.png")}
-              style={{ width: "80%", height: "70%", padding: 2 }}
+              style={{ width: "70%", height: "60%", padding: 2 }}
             />
           </TouchableOpacity>
           <Image
@@ -142,7 +144,7 @@ const Signup = ({navigation}) => {
               style={{ width: "100%", height: "100%", textAlign: "center" }}
               onChangeText={onChangeEmail}
               value={email}
-              placeholder="Enter Email"
+              placeholder={t('Email')}
               autoComplete="email"
               // keyboardType="numeric"
             />
@@ -184,7 +186,7 @@ const Signup = ({navigation}) => {
               }}
               onChangeText={onChangePassword}
               value={password}
-              placeholder="Enter Password"
+              placeholder={t('EnterPass')}
               secureTextEntry={show}
               // keyboardType="numeric"
             ></TextInput>
@@ -201,9 +203,9 @@ const Signup = ({navigation}) => {
           <Text
             style={{ width: "100%", fontSize: 18, height: "5%", textAlign: "center", marginTop: '12%' }}
           >
-            Already have an account?
+            {t('registerAccount')}
             <Text style={{ color: "green" }} onPress={navigateLogin}>
-              Login
+              {t('Signin')}
             </Text>
           </Text>
           <TouchableOpacity
@@ -221,7 +223,7 @@ const Signup = ({navigation}) => {
             alignItems: "center",
           }}
         >
-          <Text style={{ color: "white", fontWeight: "bold" }}>Create Account</Text>
+          <Text style={{ color: "white", fontWeight: "bold" }}>{t('Signup')}</Text>
         </TouchableOpacity>
         </View>
         {loading && (

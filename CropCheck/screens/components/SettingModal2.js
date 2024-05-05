@@ -3,27 +3,24 @@ import { Modal, View, Text, StyleSheet, TouchableOpacity, Image, Dimensions } fr
 import { Picker } from '@react-native-picker/picker';
 import { TranslationContext } from '../../providers/TranslationProvider';
 
-// Define language options
-const languageOptions = {
-    en: "English",
-    ur: "Urdu",
-    ps: "Pashto",
-    pn: "Punjabi",
-    sn: "Sindhi",
-    bl: "Balochi",
-};
 
 const SettingsModal2 = ({ onClose, navigation }) => {
     const { language, switchLanguage, t } = useContext(TranslationContext); // Ensure correct variable name
-    const [selectedLanguage, setSelectedLanguage] = useState(language); // Set default to current language
+    // Define language options
+    const languageOptions = {
+        en: t('en'),
+        ur: t('ur'),
+        ps: t('ps'),
+        pn: t('pn'),
+        sn: t('sn'),
+        bl: t('bl'),
+    };
 
+
+    const [selectedLanguage, setSelectedLanguage] = useState(language); // Set default to current language
     const handleLanguageChange = (itemValue) => {
         switchLanguage(itemValue); // Change language when a new one is selected
         setSelectedLanguage(itemValue); // Update local state
-    };
-
-    const logout = () => {
-        navigation.replace('Signin'); // Redirect to Signin screen on logout
     };
 
     return (
@@ -42,7 +39,7 @@ const SettingsModal2 = ({ onClose, navigation }) => {
                         />
                     </TouchableOpacity>
 
-                    <Text style={{fontSize: 20, marginBottom: '1%', fontSize: 28, fontWeight: 'bold'}}>Select Language</Text>
+                    <Text style={{fontSize: 20, marginBottom: '1%', fontSize: 28, fontWeight: 'bold'}}>{t('Language')}</Text>
 
                     <TouchableOpacity 
                         style={{backgroundColor: '#e3f3fb', marginTop: '20%', width: '100%', height: '22%', borderRadius: 50, alignContent: 'center', justifyContent: 'space-between'}}
