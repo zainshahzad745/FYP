@@ -19,6 +19,7 @@ import WaterModule from './screens/WaterModule';
 import ForgetPassword from './screens/ForgetPassword';
 import * as NavigationBar from 'expo-navigation-bar';
 import TranslationProvider from './providers/TranslationProvider';
+import Chat from './screens/Chat';
 // import { Settings } from 'react-native';
 // import 
 import MainScreenHead from './screens/components/mainScreenHead';
@@ -54,6 +55,7 @@ const App = () => {
         <Stack.Screen name="Chatbot" component={Chatbot} />
         <Stack.Screen name="WaterModule" component={WaterModule} />
         <Stack.Screen name="ForgetPassword" component={ForgetPassword} />
+        <Stack.Screen name="Chat" component={Chat} />
       </Stack.Navigator>
     </NavigationContainer>
     </TranslationProvider>

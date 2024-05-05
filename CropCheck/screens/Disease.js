@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import { StyleSheet, Text, View, Button, ImageBackground, Image, ScrollView } from "react-native";
 import Navbar from './components/Navbar';
-import { decode } from 'base-64';
+// import { decode } from 'base-64';
 
 const Disease = ({route}) => {
   const {diseaseData} = route.params;

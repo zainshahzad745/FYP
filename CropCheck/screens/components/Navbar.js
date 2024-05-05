@@ -23,7 +23,7 @@ const Navbar = () => {
 
   const handleAskAI = () => {
     // Handle the Ask AI button click
-    navigation.replace('Chatbot');
+    navigation.replace('Chat');
   };
 
   const handleWaterCalculator = () => {

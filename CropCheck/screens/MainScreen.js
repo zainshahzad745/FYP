@@ -30,7 +30,7 @@ const MainScreen = ({ navigation }) => {
   };
 
   useEffect(() => {
-    fetchPlantsData();
+    // fetchPlantsData();
   }, []);
 
   const fetchPlantsData = async () => {
