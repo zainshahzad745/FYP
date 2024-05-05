@@ -35,16 +35,16 @@ const Chat = () => {
                     "temperature": 0.7
                 },
                 {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${OPENAI_API_KEY}`
-            }
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${OPENAI_API_KEY}`
+                    }
                 }
             );
 
             const promptText = response.data.choices.map(choice => choice.message.content.trim());
             setData([...data, { type: 'user', text: textInput }, { type: 'bot', text: promptText[0] }]);
-        setTextInput('');
+            setTextInput('');
         } catch (error) {
             console.error('Error:', error);
         } finally {
@@ -56,10 +56,10 @@ const Chat = () => {
         <ImageBackground
             source={backgroundimg}
             style={{
-            position: "absolute",
-            width: windowWidth,
-            height: windowHeight,
-            resizeMode: "stretch",
+                position: "absolute",
+                width: windowWidth,
+                height: windowHeight,
+                resizeMode: "stretch",
             }}
         >
             <View style={styles.container}>
@@ -75,7 +75,7 @@ const Chat = () => {
                                         {item.text}
                                     </Text>
                                 </View>
-                        </View>
+                            </View>
                         );
                     }}
                 />
@@ -87,7 +87,7 @@ const Chat = () => {
                     placeholder='Enter your query !'
                 />
                 <TouchableOpacity onPress={handleSend} style={styles.button}>
-                <Text style={styles.buttonText}>Let's Go</Text>
+                    <Text style={styles.buttonText}>Let's Go</Text>
                 </TouchableOpacity>
                 {loading && <ActivityIndicator style={styles.loadingIndicator} size="small" color="#0000ff" />}
                 </View>
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
         marginTop: "25%",
         // flex: 1,
         // alignItems: 'center'
-    },
+      },
     body: {
         width: windowWidth,
         margin: 10
@@ -134,12 +134,12 @@ const styles = StyleSheet.create({
     button: {
         // backgroundColor: "green",
         // color: "black",
-        width: "40%", 
+        width: "40%",
         height: "100%",
         // marginLeft: "60%",
-        borderRadius: 20, 
-        justifyContent: "center", 
-        alignItems: "center", 
+        borderRadius: 20,
+        justifyContent: "center",
+        alignItems: "center",
         flexDirection: "row"
     },
     input: {
