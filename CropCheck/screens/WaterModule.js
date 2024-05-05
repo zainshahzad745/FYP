@@ -13,16 +13,18 @@ const backgroundimg = require("../assets/backgroundimg.jpg");
 const WaterModule = () => {
   // API Functionality
   const {t, switchLanguage} = useContext(TranslationContext); 
-  const [temp, setTemp ] = useState('')
-  const [humidity, setHumidity] = useState('')
-  const [location, setLocation] = useState('')
+  const [temp, setTemp ] = useState('') // State for temperature
+  const [humidity, setHumidity] = useState('') // State for humidity
+  const [location, setLocation] = useState('') // State for location
   const windowWidth = Dimensions.get("window").width;
   const windowHeight = Dimensions.get("window").height;
   // const [weatherData, setWeatherData] = useState(null);
   // let weather = {}
+  // Function to Fahrenheit to Celsius
   const fahrenheitToCelsius = (fahrenheit) => {
     return ((fahrenheit - 32) * 5) / 9;
   };
+  // Function to fetch weather data from weather API
   const fetchWeatherData = async () => {
     try {
       const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Karachi,pk&appid=38046aa8b3800991fcc53f7007d058a3`;
@@ -30,9 +32,8 @@ const WaterModule = () => {
       const tempInKelvin = response.data.main.temp;
       const humidity = response.data.main.humidity;
       const location = response.data.name; 
-      // console.log('temp:', tempInKelvin, 'humidity:', humidity, 'location:', location)
-      setHumidity(humidity)
-      setLocation(location)
+      setHumidity(humidity) // Set humidity value
+      setLocation(location) // Set location value
       const tempInCelsius = fahrenheitToCelsius((tempInKelvin - 273.15) * 9/5 + 32); // Convert Kelvin to Celsius
       setTemp(tempInCelsius.toFixed(2)); // Set temperature in Celsius with 2 decimal places
     } catch (error) {
@@ -42,7 +43,6 @@ const WaterModule = () => {
 
   const handleCalculateNow = () => {
     fetchWeatherData();
-    celsius = 
     // const temp = weatherData.main.temp;
     setIsModalVisible(true);
   }
@@ -73,10 +73,10 @@ const WaterModule = () => {
 // Water Requirements
 
   const [diameter, setDiameter] = useState(''); // State and function to handle diameter input field
-  const [coefficient, setCoefficient] = useState(0);
-  let [result, setResult] = useState(0);
-  let [tempFactor, setTempFactor] = useState(0);
-  let [humFactor, setHumFactor] = useState(0);
+  const [coefficient, setCoefficient] = useState(0); // State for plant watering coefficient
+  let [result, setResult] = useState(0); // State for result that defines watering suggestion
+  let [tempFactor, setTempFactor] = useState(0); // State for temperature factor defining how temperature affects result
+  let [humFactor, setHumFactor] = useState(0); // State for humidity factor defining how humidity affects result
 
   const Plants = {
     values: {
@@ -94,16 +94,16 @@ const WaterModule = () => {
         'st' : t('st'),
         'to' : t('to')
     }
-};
+  };
 
-  const coefficients = {'ap':2.5, 'bp':3.5, 'bl':3.5, 'ch':2.5, 'co':3, 'gr':3.4, 'po':3, 'to': 2.7};
+  const coefficients = {'ap':2.5, 'bp':3.5, 'bl':3.5, 'ch':2.5, 'co':3, 'gr':3.4, 'pe': 2.9,'po':3, 'rb': 3.7, 'sb': 3.7, 'sq': 3.7, 'st': 3.1, 'to': 2.7}; // Object that defines plant watering coefficients
   const [selectedPlant, setSelectedPlant] = useState('');
 
   const plantItems = Object.keys(Plants.values).map((key) => (
     <Picker.Item key={key} label={Plants.values[key]} value={key} />
-));
+  ));
 
-  
+  // Function to set coefficient according to selected plant
   function settingCoefficient() {
     for (const [key, value] of Object.entries(coefficients)) {
         if (key == selectedPlant) {
@@ -111,31 +111,9 @@ const WaterModule = () => {
           console.log('initial coefficeient', value);
         }
     }
-};
+  };
 
-  // function settingFactors(humidity, temp) {
-  //   if (humidity >= 30 && humidity <= 50 ) {
-  //     setHumFactor(0.8);
-  //   }
-  //   else  if (humidity > 50){
-  //     setHumFactor(1);
-  //   }
-  //   else if (humidiy < 30) {
-  //     setHumFactor(0.6)
-  //   }
-  //   if (temp = 20) {
-  //     setTempFactor(0.4);
-  //   }
-  //   else if (temp > 20) {
-  //     tempFactor = 0.4 + ( (temp-20)/10 )*0.1;
-  //     setTempFactor(tempFactor);
-  //   }
-  //   else if (temp < 20) {
-  //     tempFactor= 0.4 - ((20-temp)/10)*0.1;
-  //     setTempFactor(tempFactor);
-  //   }
-  // }
-
+  // Function that calculates watering requirement
   function waterRequirement(diameter, humidity, temp) {
     settingCoefficient();
     console.log('humidity temp diameter', humidity, temp, diameter);
@@ -170,7 +148,7 @@ const WaterModule = () => {
     const result = diameter * coefficient * humFactor * tempFactor;
     setResult(result);
     console.log('result', result);
-};
+  };
 
   return (
     <View style={{width: Dimensions.get("window").width,
