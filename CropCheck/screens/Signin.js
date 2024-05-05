@@ -277,7 +277,7 @@ const Signin = ({navigation}) => {
           <Text
             style={{ width: "100%", fontSize: 18, height: "5%", textAlign: "center", marginTop: '12%' }}
           >
-            {t('loginAccount')}
+            {t('LoginAccount')}
             <Text style={{ color: "green" }} onPress={navigateLogin}>
               {t('Register')}
             </Text>

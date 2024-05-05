@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, FlatList, Dimensions, TextInput, TouchableOpacity, ImageBackground, Image } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Dimensions, TextInput, TouchableOpacity, ImageBackground, ActivityIndicator } from 'react-native';
 import axios from 'axios'; // Import axios for making HTTP requests
 import { getAuth } from "firebase/auth";
 import Navbar from "./components/Navbar";
-
 
 const backgroundimg = require("../assets/chatbotbg.png");
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 const Chat = () => {
+    
     const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(false);
     const OPENAI_API_KEY = 'sk-proj-p4ngPTuSI0mdcLuq6Dv3T3BlbkFJhKHigu0svPHUTsqRhRsb';
     const API_URL = 'https://api.openai.com/v1/chat/completions';
     const currentUser = getAuth().currentUser;
@@ -18,21 +19,39 @@ const Chat = () => {
     const [textInput, setTextInput] = useState('');
 
     const handleSend = async () => {
+        setLoading(true); // Set loading state to true when sending request
         const prompt = textInput;
-        const response = await axios.post(API_URL, {
-            prompt: prompt,
-            max_tokens: 100,
-            temperature: 0.7,
-        },{
+        try {
+            const response = await axios.post(
+                API_URL,
+                {
+                    "model": "gpt-3.5-turbo",
+                    "messages": [
+                        {
+                            "role": "user",
+                            "content": prompt
+                        }
+                    ],
+                    "temperature": 0.7
+                },
+                {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${OPENAI_API_KEY}`
             }
-        });
-        const text = response.data.choices[0].text;
-        setData([...data, {type: 'user', 'text': textInput}, {type: 'bot', 'text': text}]);
+                }
+            );
+
+            const promptText = response.data.choices.map(choice => choice.message.content.trim());
+            setData([...data, { type: 'user', text: textInput }, { type: 'bot', text: promptText[0] }]);
         setTextInput('');
+        } catch (error) {
+            console.error('Error:', error);
+        } finally {
+            setLoading(false); // Set loading state to false when response is received
+        }
     }
+
     return (
         <ImageBackground
             source={backgroundimg}
@@ -48,23 +67,30 @@ const Chat = () => {
                     data={data}
                     keyExtractor={(item, index) => index.toString()}
                     style={styles.body}
-                    renderItem={({item}) => {
-                        <View style={{flexDirection: 'row', padding: 10}}>
-                            <Text style={{fontWeight:'bold', color: item.type === 'user' ? 'green' : 'red'}}>{item.type === 'user' ? {username} : 'Chatbot'}</Text>
-                            <Text style={styles.bot}>{item.text}</Text>
+                    renderItem={({ item }) => {
+                        return (
+                            <View style={{ flexDirection: 'row', justifyContent: item.type === 'user' ? 'flex-end' : 'flex-start', marginBottom: 10 }}>
+                                <View style={[styles.messageBubble, { backgroundColor: item.type === 'user' ? '#DCF8C6' : '#E5E5EA' }]}>
+                                    <Text style={{ fontSize: 16, color: item.type === 'user' ? 'green' : 'black', padding: 10 }}>
+                                        {item.text}
+                                    </Text>
+                                </View>
                         </View>
+                        );
                     }}
                 />
+                <View style={{display: 'flex', flexDirection: 'row', marginTop: '10%', marginBottom: '10%', padding: 5,  borderColor: 'green', borderWidth: 0.7 }}>
                 <TextInput
                     style={styles.input}
                     value={textInput}
-                    onChangeText = {(text) => setTextInput(text)}
-                    placeholder='Enter here'
+                    onChangeText={(text) => setTextInput(text)}
+                    placeholder='Enter your query !'
                 />
-                <TouchableOpacity onPress={() => {handleSend}} style={styles.button}>
-                {/* <Image source={require("../assets/arrow.png")} style={{marginLeft: "6%"}}></Image> */}
+                <TouchableOpacity onPress={handleSend} style={styles.button}>
                 <Text style={styles.buttonText}>Let's Go</Text>
                 </TouchableOpacity>
+                {loading && <ActivityIndicator style={styles.loadingIndicator} size="small" color="#0000ff" />}
+                </View>
             </View>
             <View style={styles.navContainer}>
                 <Navbar />
@@ -77,21 +103,40 @@ export default Chat;
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        alignItems: 'center'
+        // backgroundColor: 'red',
+        // marginRight: 10,
+        width: "100%",
+        height: "85%",
+        marginTop: "25%",
+        // flex: 1,
+        // alignItems: 'center'
     },
     body: {
         width: windowWidth,
         margin: 10
     },
-    bot: {
-        fontSize: 16
+    messageBubble: {
+        borderRadius: 20,
+        maxWidth: '70%',
+        paddingHorizontal: 10,
+        paddingVertical: 5,
+        elevation: 1,
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        marginRight: 10,
+        marginLeft: 10,
     },
     button: {
-        backgroundColor: "green", 
+        // backgroundColor: "green",
+        // color: "black",
         width: "40%", 
-        height: "10%", 
-        marginLeft: "60%", 
+        height: "100%",
+        // marginLeft: "60%",
         borderRadius: 20, 
         justifyContent: "center", 
         alignItems: "center", 
@@ -99,17 +144,27 @@ const styles = StyleSheet.create({
     },
     input: {
         borderWidth: 1,
-        width: "90%",
+        width: "70%",
+        padding: 10,
+        borderColor: 'transparent',
+        fontSize: 23,
         height: 60,
         marginBottom: 2,
         borderRadius: 10
     },
     navContainer: {
-        height: windowHeight*0.015,
+        height: windowHeight * 0.015,
     },
     buttonText: {
-        fontSize: 14,
-        color: "white",
-        fontWeight: "bold"
+        marginTop: '5%',
+        fontSize: 18,
+        color: "black",
+        fontWeight: "bold",
+        marginRight: 5
+    },
+    loadingIndicator: {
+        position: 'absolute',
+        bottom: 20,
+        right: 20,
     }
-})
+});
