@@ -27,7 +27,7 @@ const Disease = ({route}) => {
       <View>
         <Text> </Text>
       </View>
-      <View style={{ marginTop: '32%'}}>
+      <View style={{ marginTop: '36%'}}>
       <Navbar/>
       </View>
     </ImageBackground>
