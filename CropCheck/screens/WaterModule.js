@@ -287,7 +287,9 @@ const WaterModule = () => {
                 </View>
                 <View style={{height: "10%", marginTop: 19,}}>
                 <TouchableOpacity onPress={()=> {goTo(), waterRequirement(diameter, humidity, temp);}}
-                style={{backgroundColor: "green", width: "40%", height: "80%", marginLeft: "60%", borderRadius: 20, justifyContent: "center", alignItems: "center", flexDirection: "row"}}><Text style={{fontSize: 18, color: "white"}}>Next</Text><Image source={require("../assets/arrow.png")} style={{marginLeft: "6%"}}></Image></TouchableOpacity>
+                style={{backgroundColor: "green", width: "40%", height: "80%", marginLeft: "60%", borderRadius: 20, justifyContent: "center", alignItems: "center", flexDirection: "row"}}>
+                  <Text style={{fontSize: 18, color: "white"}}>{t('Next')}</Text>
+                  <Image source={require("../assets/arrow.png")} style={{marginLeft: "6%"}}></Image></TouchableOpacity>
                 </View>
               </View>
             </View>

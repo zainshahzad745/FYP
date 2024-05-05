@@ -25,6 +25,7 @@ const translations = {
     Language: "Select Language",
     Logout: "Log out",
     sure: "Are you sure?",
+    query: "Enter your query !",
     // SettingModal2 Component
     en: "English",
     ur: "Urdu",
@@ -136,6 +137,7 @@ const translations = {
     Signup: "اکاؤنٹ بنائیں",
     Language: "زبان منتخب کریں",
     Logout: "لاگ آوٹ",
+    query: "اپنا سوال درج کریں!",
     // SettingModal2 Component
     en: "انگریزی",
     ur: "اردو",
@@ -245,6 +247,7 @@ const translations = {
     notVerify: "برېښنالیک تصدیق نه کړل شوی",
     ok: "ټه خو",
     sure: "کيا ته منظور دی؟",
+    query: "د خپلوالی شته ورکړئ!",
     // Signup Page
     Register: "راجسټر کړئ",
     registerAccount: "مخلصې اکاونټ لرل",
@@ -348,6 +351,7 @@ const translations = {
     notVerify: " ای میل تصدیق نہیں ہوئی",
     ok: "ٹھیک اے",
     sure: "کیا تسیں نوں منظور اے؟",
+    query: "اپنا سوال درج کریں!",
     // Signup Page
     Register: "رجسٹر",
     registerAccount: "کیا تسیں دا اکاؤنٹ پہلے ہے؟",
@@ -452,6 +456,7 @@ const translations = {
     notVerify: " اي ميل جو تصديق نه ٿيو",
     ok: "ٽيڪ آهي",
     sure: "ڪيا توهان کي منظور آهي؟",
+    query: "توهان جي سوال ٿايلو!",
     // Signup Page
     Register: "رجسٽر",
     registerAccount: "پهرين اڪائونٽ آهي؟",
@@ -555,6 +560,7 @@ const translations = {
     notVerify: " ای میل تصدیق نہیں شد",
     ok: " ٹھیک آہی",
     sure: "توھان مانزور آھی؟",
+    query: "آپنی سوال داخل کریں!",
     // Signup Page
     Register: "رجسٹر",
     registerAccount: "پهرين اکاؤنٹ آھی؟",

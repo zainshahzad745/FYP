@@ -7,7 +7,7 @@ const ExpertOpinion = () => {
   const {t, switchLanguage} = useContext(TranslationContext); 
   const handleClick = () => {
     //navigate to Chatbot
-    navigation.navigate('Chatbot');
+    navigation.navigate('Chat');
   };
   
   return (

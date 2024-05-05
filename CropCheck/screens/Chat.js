@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, FlatList, Dimensions, TextInput, TouchableOpacity, ImageBackground, ActivityIndicator } from 'react-native';
+import React, { useState, useContext } from 'react';
+import { View, Text, StyleSheet, FlatList, Dimensions, TextInput, TouchableOpacity, Image, ImageBackground, ActivityIndicator } from 'react-native';
 import axios from 'axios'; // Import axios for making HTTP requests
 import { getAuth } from "firebase/auth";
 import Navbar from "./components/Navbar";
+import { TranslationContext } from '../providers/TranslationProvider';
 
 const backgroundimg = require("../assets/chatbotbg.png");
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 const Chat = () => {
-    
+    const {t, switchLanguage} = useContext(TranslationContext);
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const OPENAI_API_KEY = 'sk-proj-p4ngPTuSI0mdcLuq6Dv3T3BlbkFJhKHigu0svPHUTsqRhRsb';
@@ -61,8 +62,11 @@ const Chat = () => {
                 height: windowHeight,
                 resizeMode: "stretch",
             }}
-        >
+        ><View style={styles.textView}>
+        <Text style={styles.text}>{t('chatbot')}</Text>
+    </View>
             <View style={styles.container}>
+                
                 <FlatList
                     data={data}
                     keyExtractor={(item, index) => index.toString()}
@@ -84,10 +88,10 @@ const Chat = () => {
                     style={styles.input}
                     value={textInput}
                     onChangeText={(text) => setTextInput(text)}
-                    placeholder='Enter your query !'
+                    placeholder={t('query')}
                 />
                 <TouchableOpacity onPress={handleSend} style={styles.button}>
-                    <Text style={styles.buttonText}>Let's Go</Text>
+                    <Image source={require("../assets/arrow.png")} style={{height: 25, width: 25}}></Image>
                 </TouchableOpacity>
                 {loading && <ActivityIndicator style={styles.loadingIndicator} size="small" color="#0000ff" />}
                 </View>
@@ -106,8 +110,7 @@ const styles = StyleSheet.create({
         // backgroundColor: 'red',
         // marginRight: 10,
         width: "100%",
-        height: "85%",
-        marginTop: "25%",
+        height: windowHeight*0.83,
         // flex: 1,
         // alignItems: 'center'
       },
@@ -132,15 +135,17 @@ const styles = StyleSheet.create({
         marginLeft: 10,
     },
     button: {
-        // backgroundColor: "green",
+        backgroundColor: "green",
         // color: "black",
-        width: "40%",
-        height: "100%",
+        width: "20%",
+        height: "80%",
         // marginLeft: "60%",
         borderRadius: 20,
         justifyContent: "center",
         alignItems: "center",
-        flexDirection: "row"
+        flexDirection: "row",
+        marginLeft: "8%",
+        marginTop: "1%"
     },
     input: {
         borderWidth: 1,
@@ -155,16 +160,19 @@ const styles = StyleSheet.create({
     navContainer: {
         height: windowHeight * 0.015,
     },
-    buttonText: {
-        marginTop: '5%',
-        fontSize: 18,
-        color: "black",
-        fontWeight: "bold",
-        marginRight: 5
-    },
     loadingIndicator: {
         position: 'absolute',
         bottom: 20,
         right: 20,
-    }
+    },
+    text: {
+        textAlign: "center",
+        fontSize: 32,
+        fontWeight: "bold",
+    },
+    textView: {
+        paddingTop: "14%",
+        height: windowHeight*0.15,
+        // backgroundColor: "red",
+    },
 });
