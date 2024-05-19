@@ -5,7 +5,7 @@ import moment from 'moment';
 import SettingsModal2 from './SettingModal2';
 
 import { TranslationContext } from "../../providers/TranslationProvider";
-const footerimg = require('../../assets/head1.png');
+const footerimg = require('../../assets/head.png');
 
 
 const MainScreenHead = ({navigation}) => {
