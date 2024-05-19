@@ -1,170 +1,126 @@
 import React, { useState, useEffect, useContext } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  ImageBackground,
-  Image,
-  Button,
-  Alert,
-  ActivityIndicator,
-  TouchableOpacity,
-  Dimensions,
-} from "react-native";
+import { StyleSheet, Text, View, ImageBackground, Image, Button, Alert, TouchableOpacity, Dimensions } from "react-native";
 import * as FileSystem from "expo-file-system";
 import { useRoute } from "@react-navigation/native";
+import Modal from "react-native-modal";
 import Navbar from "./components/Navbar";
 import { TranslationContext } from "../providers/TranslationProvider";
 
-
-const imgIcon = require("../assets/Planticon.png");
-const Home = require("../assets/Homeicon.png");
-
-import Modal from "react-native-modal";
-import MainScreen from "./MainScreen";
-
 const backgroundimg = require("../assets/backgroundimg.jpg");
-const HomeIcon = require("../assets/Homeicon.png");
-
-
 
 const Main = ({ navigation }) => {
-
-
-  const {t, switchLanguage} = useContext(TranslationContext); 
+  const { t, switchLanguage } = useContext(TranslationContext);
   const windowHeight = Dimensions.get("window").height;
-  const [loading, setLoading] = useState(true);
-  const route = useRoute(); // Use useRoute hook to access route object
-  const { savedImageUri, response } = route.params || {}; // Destructure savedImageUri from params
+  const route = useRoute();
+  const { savedImageUri, response } = route.params || {};
+  const [isModalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
-    console.log("Response:", response); // Log the response data
-  }, [response]); 
-  const names = response.disease_name;
-  const disease = response.disease_name;
+    if (response && response.disease_name === "detections") {
+      setModalVisible(true);
+    }
+  }, [response]);
 
-  // const [localSavedImageUri, setLocalSavedImageUri] = useState(null);
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+    navigation.replace("MainScreen");
+  };
 
-
-
-  useEffect(() => {
-    const fetchSavedImage = async () => {
-      try {
-        const fileUri = FileSystem.documentDirectory + "photo.jpg";
-        const fileExists = await FileSystem.getInfoAsync(fileUri);
-        if (fileExists.exists) {
-          setLocalSavedImageUri(fileUri);
-        }
-      } catch (error) {
-        console.error("Error fetching saved image:", error);
-        Alert.alert("Error", "Failed to fetch saved image.");
-      }
-    };
-    fetchSavedImage();
-  }, []);
-
-  // UseEffect to hide the modal after a certain duration
-
-// if response.disease_name === "detection":  if no detection navigate to this 
+  const names = response ? response.disease_name : "";
+  const disease = response ? response.disease_name : "";
 
   const GetSol = () => {
-    navigation.navigate("PossibleSol", { names, disease, imageUri: savedImageUri || localSavedImageUri, response });
+    navigation.navigate("PossibleSol", { names, disease, imageUri: savedImageUri, response });
   };
   
   const handleHome = () => {
     navigation.replace("MainScreen");
   };
+
   return (
-    <ImageBackground
-       source={backgroundimg}
-       style={{ width: "100%", height: windowHeight }}
-                                  >
-        <View style={{ display: "flex", height: windowHeight*0.98 }}>
-        <Text
-          style={{
-            fontSize: 40,
-            fontWeight: "bold",
-            color: "green",
-            marginLeft: 25,
-            marginTop: "20%",
-            marginBottom: "2%"
-          }}
-        >{t('waterResult')}</Text>
+    <ImageBackground source={backgroundimg} style={{ width: "100%", height: windowHeight }}>
+      <View style={{ display: "flex", height: windowHeight * 0.98 }}>
+        <Modal isVisible={isModalVisible} onBackdropPress={toggleModal}>
+          <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: 'white' }}>
+            <Text style={{ fontSize: 20, fontWeight: "bold" }}>No disease detected</Text>
+            <Button title="Close" onPress={toggleModal} />
+          </View>
+        </Modal>
+        
+        <Text style={styles.title}>{t('waterResult')}</Text>
+        <Text style={styles.subtitle}>{t('mainScantxt')}</Text>
 
-        <Text
-          style={{
-            fontWeight: "bold",
-            fontSize: 33,
-            color: "green",
-            marginLeft: 25,
-            marginBottom: "3%"
-          }}
-        >{t('mainScantxt')}</Text>
-
-        {(savedImageUri || localSavedImageUri) && (
+        {(savedImageUri) && (
           <Image
-            source={{ uri: savedImageUri || localSavedImageUri }}
-            style={{
-              marginLeft: "5%",
-              marginRight: "5%",
-              width: "90%",
-              height: "40%",
-              margin: 20,
-              borderRadius: 20,
-            }}
+            source={{ uri: savedImageUri }}
+            style={styles.image}
           />
         )}
 
-        <Text
-          style={{
-            width: "100%",
-            fontWeight: "bold",
-            fontSize: 30,
-            textAlign: "center",
-          }}
-        >
-          {disease}
-        </Text>
-
-        {/* <Text style={{ width: "100%", fontSize: 22, marginLeft: "6%", }}>
-          {t('scanDisease')}
-          <Text style={{ color: "red", fontSize: 20 }}>Wheat Rust</Text>
-        </Text>
-
-        <Text style={{ width: "100%", fontSize: 22, marginLeft: "6%" }}>
-          {t('crop')}
-          <Text style={{ color: "blue", fontSize: 20 }}>Rabi Crops</Text>
-        </Text> */}
+        <Text style={styles.diseaseText}>{disease}</Text>
 
         <TouchableOpacity
           onPress={GetSol}
-          style={{
-            backgroundColor: "green", // Green background color
-            opacity: 0.8, // Semi-transparent
-            borderRadius: 50, // Custom border radius
-            width: "80%", // Custom width
-            height: "6%",
-            marginLeft: "10%",
-            marginRight: "10%",
-            marginTop: "8%",
-            marginBottom: "15%",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
+          style={styles.button}
         >
-          <Text style={{ fontSize: 25, color: "white" }}>Get Solution</Text>
+          <Text style={styles.buttonText}>Get Solution</Text>
         </TouchableOpacity>
-        {/* </View> */}
         
-        <View style={{height: windowHeight*0.2,}}>
+        <View style={{ height: windowHeight * 0.5, marginTop: '21%'}}>
           <Navbar />
         </View>
       </View>
     </ImageBackground>
-    
   );
 };
 
-
+const styles = StyleSheet.create({
+  title: {
+    fontSize: 40,
+    fontWeight: "bold",
+    color: "green",
+    marginLeft: 25,
+    marginTop: "20%",
+    marginBottom: "2%"
+  },
+  subtitle: {
+    fontWeight: "bold",
+    fontSize: 33,
+    color: "green",
+    marginLeft: 25,
+    marginBottom: "3%"
+  },
+  image: {
+    marginLeft: "5%",
+    marginRight: "5%",
+    width: "90%",
+    height: "40%",
+    margin: 20,
+    borderRadius: 20
+  },
+  diseaseText: {
+    width: "100%",
+    fontWeight: "bold",
+    fontSize: 30,
+    textAlign: "center"
+  },
+  button: {
+    backgroundColor: "green",
+    opacity: 0.8,
+    borderRadius: 50,
+    width: "80%",
+    height: "6%",
+    marginLeft: "10%",
+    marginRight: "10%",
+    marginTop: "8%",
+    marginBottom: "15%",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  buttonText: {
+    fontSize: 25,
+    color: "white"
+  }
+});
 
 export default Main;

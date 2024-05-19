@@ -17,6 +17,7 @@ import Signup from './screens/Signup';
 import Chatbot from './screens/Chatbot';
 import WaterModule from './screens/WaterModule';
 import ForgetPassword from './screens/ForgetPassword';
+import NoDiseaseDetectedScreen from './screens/NoDiseaseDetectedScreen';
 import * as NavigationBar from 'expo-navigation-bar';
 import TranslationProvider from './providers/TranslationProvider';
 import Chat from './screens/Chat';
@@ -55,6 +56,7 @@ const App = () => {
         <Stack.Screen name="Chatbot" component={Chatbot} />
         <Stack.Screen name="WaterModule" component={WaterModule} />
         <Stack.Screen name="ForgetPassword" component={ForgetPassword} />
+        <Stack.Screen name="NoDiseaseDetectedScreen" component={NoDiseaseDetectedScreen} />
         <Stack.Screen name="Chat" component={Chat} />
       </Stack.Navigator>
     </NavigationContainer>

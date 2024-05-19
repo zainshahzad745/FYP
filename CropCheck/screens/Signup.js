@@ -41,7 +41,7 @@ const Signup = ({navigation}) => {
         email: email,
       };
       
-      axios.post('http://192.168.176.46:5000/registerUser', data)
+      axios.post('http://192.168.151.46:5000/registerUser', data)
         .then(function (response) {
           console.log("sent data", response);
         })

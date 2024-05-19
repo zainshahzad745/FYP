@@ -34,7 +34,7 @@ const Navbar = () => {
   return (
     <View style={styles.navbar}>
       <TouchableOpacity style={{alignItems: 'center', marginLeft: "1%"}} onPress={handleHome}>
-        <Image source={require('../../assets/home.png')} style={styles.icon} />
+        <Image source={require('../../assets/home2.png')} style={styles.icon} />
         <Text style={styles.buttonText}>{t('navbarHome')}</Text>
       </TouchableOpacity>
 

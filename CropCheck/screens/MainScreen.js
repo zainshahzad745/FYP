@@ -30,13 +30,13 @@ const MainScreen = ({ navigation }) => {
   };
 
   useEffect(() => {
-    // fetchPlantsData();
+    fetchPlantsData();
   }, []);
 
   const fetchPlantsData = async () => {
     try {
       const response = await fetch(
-        `http://192.168.176.46:5000/retrieveData?email=${currentUser.email}`
+        `http://192.168.151.46:5000/retrieveData?email=${currentUser.email}`
       );
       const data = await response.json();
       setPlantsData(data);

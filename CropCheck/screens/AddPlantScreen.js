@@ -158,7 +158,7 @@ const PlantAddScreen = ({navigation}) => {
       });
 
       const response = await Axios.post(
-        "http://192.168.176.46:5000/uploadPlants",  // replace with your endpoint URL
+        "http://192.168.151.46:5000/uploadPlants",  // replace with your endpoint URL
         formData,
         {
           headers: {

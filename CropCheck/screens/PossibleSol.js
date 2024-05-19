@@ -68,6 +68,7 @@ const PossibleSol = ({navigation, route}) => {
         // Extract and set suggestions from the API response
         const generatedSuggestions = gptResponse.data.choices.map(choice => choice.message.content.trim());
         setSuggestions(generatedSuggestions);
+        console.log(promptMessage);
       } catch (error) {
         console.error('Error fetching suggestions:', error.message);
       }
@@ -89,7 +90,7 @@ const PossibleSol = ({navigation, route}) => {
         name: 'photo.jpg',
       });
 
-      const response = await fetch('http://192.168.176.46:5000/sendData', {
+      const response = await fetch('http://192.168.151.46:5000/sendData', {
         method: 'POST',
         body: formData,
         headers: {
