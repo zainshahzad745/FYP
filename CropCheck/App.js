@@ -7,7 +7,7 @@ import MainScreen from './screens/MainScreen';
 import DetailedScreen from './screens/DetailedScreen';
 import PlantAddScreen from './screens/AddPlantScreen';
 import ScanScreen from './screens/components/ScanScreen';
-import RecentScans from './screens/RecentScans';
+// import RecentScans from './screens/RecentScans';
 import Disease from './screens/Disease';
 import Analyzing from './screens/AnalyzingImage';
 import MainScan from './screens/MainScan';
@@ -48,7 +48,7 @@ const App = () => {
         <Stack.Screen name="DetailedScreen" component={DetailedScreen} />
         <Stack.Screen name="ScanScreen" component={ScanScreen} />
         <Stack.Screen name="PlantAddScreen" component={PlantAddScreen} />
-        <Stack.Screen name="RecentScans" component={RecentScans} />
+        {/* <Stack.Screen name="RecentScans" component={RecentScans} /> */}
         <Stack.Screen name="Disease" component={Disease} />
         <Stack.Screen name="Analyze" component={Analyzing} />
         <Stack.Screen name="MainScan" component={MainScan} />
