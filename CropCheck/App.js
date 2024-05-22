@@ -22,6 +22,7 @@ import Chat from './screens/Chat';
 import MainScreenHead from './screens/components/mainScreenHead';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { StyleSheet } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 
 const Stack = createStackNavigator();
 
@@ -35,6 +36,7 @@ const App = () => {
     <TranslationProvider>
       <SafeAreaProvider>
         <SafeAreaView style={styles.safeArea}>
+        <StatusBar style="light" hidden={true} />
           <NavigationContainer>
             <Stack.Navigator
               initialRouteName="SplashScreen"
