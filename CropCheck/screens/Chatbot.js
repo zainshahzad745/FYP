@@ -51,7 +51,7 @@ const windowHeight = Dimensions.get("window").height;
 
 const styles = StyleSheet.create({
     navContainer: {
-        height: windowHeight*0.015,
+        height: windowHeight*0.107,
     },
     text: {
         textAlign: "center",

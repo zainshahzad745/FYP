@@ -333,7 +333,7 @@ const WaterModule = () => {
             </View>
           </Modal>
       </View>
-      <View style={{height: Dimensions.get("window").height*0.015}}>
+      <View style={{height: Dimensions.get("window").height*0.107}}>
         <Navbar />
       </View>
       </ImageBackground>
