@@ -68,7 +68,7 @@ const PlantAddScreen = () => {
   
       try {
         const response = await axios.post(
-          "http://192.168.151.46:5000/detect",
+          "http://20.194.195.9:5000/detect",
           formData,
           {
             headers: {

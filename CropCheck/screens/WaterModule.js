@@ -161,8 +161,8 @@ const WaterModule = () => {
           flex: 1,
         }}
       > 
-      <View style={{justifyContent: "center", height: "96%", paddingLeft: "5%", paddingRight: "5%", height: windowHeight*0.985}}>
-        <View style={{flexDirection: "row", marginBottom: "55%",  alignItems:"flex-end"}}>
+      <View style={{justifyContent: "center", height: "92%", paddingLeft: "5%", paddingRight: "5%"}}>
+        <View style={{flexDirection: "row", marginBottom: "45%",  alignItems:"flex-end"}}>
           <Text style={{fontSize: 22, fontWeight: "bold"}}>{t('headCalculator')}</Text>
           <Image source={require("../assets/droplet.png")} style={{height: 40, width: 40 }}></Image>
         </View>
@@ -179,6 +179,7 @@ const WaterModule = () => {
             alignItems: "center",
             flexDirection: "row",
             marginBottom: "35%",
+          
           }}>
           <Text style={{fontSize: 18, color: 'white'}}>{t('calculate')}</Text><Image style={{}} source={require("../assets/water.png")}></Image>
         </TouchableOpacity>

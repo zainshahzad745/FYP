@@ -36,7 +36,7 @@ const MainScreen = ({ navigation }) => {
   const fetchPlantsData = async () => {
     try {
       const response = await fetch(
-        `http://192.168.151.46:5000/retrieveData?email=${currentUser.email}`
+        `http://20.194.195.9:5000/retrieveData?email=${currentUser.email}`
       );
       const data = await response.json();
       setPlantsData(data);
@@ -96,7 +96,8 @@ const styles = StyleSheet.create({
   },
   navContainer: {
     // backgroundColor: 'red',
-    // height: windowHeight*0.0020,
+    // marginBottom: '7%',
+    height: windowHeight*0.10,
   },
   background: {
     flex: 1,
@@ -133,6 +134,7 @@ const styles = StyleSheet.create({
   },
   expert: {
     marginBottom: "7%", // Adjust the margin as needed
+    
   }
 });
 

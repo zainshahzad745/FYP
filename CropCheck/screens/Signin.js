@@ -103,6 +103,7 @@ const Signin = ({navigation}) => {
               fontWeight: "bold",
               margin: "5%",
               marginLeft: "8%",
+              marginTop: "15%",
 
             }}
           >
@@ -112,8 +113,8 @@ const Signin = ({navigation}) => {
           {/* switcher button */}
           <TouchableOpacity style={{width: 100, height: 35, alignItems: 'center', marginRight: '2%'}} onPress={handleModalClick} >
 
-            <Image source={require('../assets/setting.png')} style={{width: 35, height: 36, marginRight: '35%', marginTop: '15%', marginLeft: '15%'}} />
-            <Text style={{width: '100%', marginRight: '25%', marginLeft: '5%', fontSize: 14, textAlign: 'center'}}>{t('Language')}</Text>
+            <Image source={require('../assets/setting.png')} style={{width: 35, height: 36, marginRight: '35%', marginTop: '45%', marginLeft: '15%'}} />
+            <Text style={{width: '100%', marginRight: '25%', marginLeft: '5%', fontSize: 14, textAlign: 'center',}}>{t('Language')}</Text>
           </TouchableOpacity>
           
           
@@ -122,7 +123,7 @@ const Signin = ({navigation}) => {
           
           
           {/* Google Button */}
-          <TouchableOpacity
+          {/* <TouchableOpacity
             // onPress={handleSignUpGoogle}
             style={{
               backgroundColor: "#e3f3fb", // Green background color
@@ -153,7 +154,7 @@ const Signin = ({navigation}) => {
           <Image
             source={require("../assets/image.png")}
             style={{ width: "100%", height: "3%", marginTop: "12%" }}
-          />
+          /> */}
           {/* email button */}
 
           <TouchableOpacity
@@ -318,12 +319,14 @@ const styles = StyleSheet.create({
     // backgroundColor: 'red',
     // marginBottom: '120%',
     // backgroundColor: "white",
+    marginTop: "27%",
   },
 
   containerTwo: {
     // backgroundColor: "red",
     width: "100%",
     height: "80%",
+    // margin: '10%',
     // display: 'flex'
     // mar
   },

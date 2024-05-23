@@ -41,7 +41,7 @@ const Signup = ({navigation}) => {
         email: email,
       };
       
-      axios.post('http://192.168.151.46:5000/registerUser', data)
+      axios.post('http://20.194.195.9:5000/registerUser', data)
         .then(function (response) {
           console.log("sent data", response);
         })
@@ -83,7 +83,7 @@ const Signup = ({navigation}) => {
           >
             {t('Register')}
           </Text>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             // onPress={handleSignUpGoogle}
             style={{
               backgroundColor: "#e3f3fb", // Green background color
@@ -110,11 +110,11 @@ const Signup = ({navigation}) => {
               source={require("../assets/signup.png")}
               style={{ width: "70%", height: "60%", padding: 2 }}
             />
-          </TouchableOpacity>
-          <Image
+          </TouchableOpacity> */}
+          {/* <Image
             source={require("../assets/image.png")}
             style={{ width: "100%", height: "3%", marginTop: "12%" }}
-          />
+          /> */}
           {/* email button */}
             
           <TouchableOpacity
@@ -253,6 +253,7 @@ const styles = StyleSheet.create({
   logoContainer: {
     // backgroundColor: 'red',
     // marginBottom: '120%',
+    marginTop: "20%",
     // backgroundColor: "white",
   },
 
@@ -276,7 +277,7 @@ const styles = StyleSheet.create({
     width: 132,
     height: 107,
     alignSelf: "center",
-    marginTop: "10%",
+    marginTop: "30%",
   },
   activityIndicatorContainer: {
     position: 'absolute',

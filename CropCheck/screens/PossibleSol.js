@@ -132,7 +132,7 @@ const PossibleSol = ({navigation, route}) => {
           </View>
         </ScrollView>
         </View>
-        <View style={{height: windowHeight*0.02}}>
+        <View style={{height: windowHeight*0.02, backgroundColor: 'red'}}>
           <Navbar/>
         </View>
       </ImageBackground>
@@ -166,8 +166,8 @@ const styles = StyleSheet.create({
     fontWeight: 'medium', 
   },
   TextView: {
-    margin: "7%",
-    marginTop: "20%",
+    margin: "1%",
+    marginTop: "1%",
     height: windowHeight*0.16,
   },
   Textlite: {
