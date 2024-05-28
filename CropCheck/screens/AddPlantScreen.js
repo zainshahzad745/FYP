@@ -34,63 +34,64 @@ const PlantAddScreen = ({navigation}) => {
   const uploadimg = require("../assets/uploadimg.png");
   const [disease, setDisease] = useState(null);
   const availablePlants = [
-    "Tomato1",
-    "Tomato2",
-    "Tomato3",
-    "Tomato4",
-    "Tomato5",
-    "Tomato6",
-    "Tomato7",
-    "Tomato8",
+    t("Pepper"),
+    t("Pomegranate"),
+    t("Cotton"),
+    t("AloeVera"),
+    t("Cantaloupe"),
+    t("ChickPea"),
+    t("Mango"),
+    t("CurryLeaf"),
   ]; // Example list of available items
 
   const Diseases1 = [
-    "Disease1.1",
-    "Disease1.2",
-    "Disease1.3",
-    "Disease1.4",
+    t("Disesae1_1"),
+    t("Disease1_2"),
+    t("Disesae1_3"),
+    t("Disease1_4"),
+    t("Disease1_5")
   ];
 
   const Diseases2 = [
-    "Disease2.1",
-    "Disease2.2",
-    "Disease2.3"
+    t("Disease2_1"),
+    t("Disease2_2"),
+    t("Disease2_3")
   ];
 
   const Diseases3 = [
-    "Disease3.1",
-    "Disease3.2",
-    "Disease3.3",
-    "Disease3.4"
+    t("Disease3_1"),
+    t("Disease3_2"),
+    t("Disease3_3"),
+    t("Disease3_4")
   ];
 
   const Diseases4 = [
-    "Disease4.1",
-    "Disease4.2"
+    t("Disease4_1"),
+    t("Disease4_2")
   ];
 
   const Diseases5 = [
-    "Disease5.1",
-    "Disease5.2",
-    "Disease5.3"
+    t("Disease5_1"),
+    t("Disease5_2"),
+    t("Disease5_3")
   ];
 
   const Diseases6 = [
-    "Disease6.1",
-    "Disease6.2",
-    "Disease6.3",
-    "Disease6.4"
+    t("Disease6_1"),
+    t("Disease6_2"),
+    t("Disease6_3"),
+    t("Disease6_4")
   ];
 
   const Diseases7 = [
-    "Disease7.1",
-    "Disease7.2"
+    t("Disease7_1"),
+    t("Disease7_2"),
+    t("Disease7_3")
   ];
 
   const Diseases8 = [
-    "Disease8.1",
-    "Disease8.2",
-    "Disease8.3"
+    t("Disease8_1"),
+    t("Disease8_2")
   ];
 
   function getDisease(plant) {
