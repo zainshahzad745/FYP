@@ -58,8 +58,8 @@ const Chat = () => {
             source={backgroundimg}
             style={{
                 position: "absolute",
-                width: windowWidth,
-                height: windowHeight,
+                width: "100%",
+                height: "100%",
                 resizeMode: "stretch",
             }}
         ><View style={styles.textView}>
@@ -158,8 +158,9 @@ const styles = StyleSheet.create({
         borderRadius: 10
     },
     navContainer: {
-        height: windowHeight * 0.015,
-        height: '9%', position: 'absolute', bottom: 0
+        // height: windowHeight * 0.015,
+        height: '9%', position: 'absolute', bottom: 0,
+        // backgroundColor: 'red',
     },
     loadingIndicator: {
         position: 'absolute',

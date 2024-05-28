@@ -22,9 +22,9 @@ const Chatbot = () => {
     <ImageBackground
       source={backgroundimg}
       style={{
-        position: "absolute",
-        width: windowWidth,
-        height: windowHeight,
+        // position: "absolute",
+        width: "100%",
+        height: "100%",
         resizeMode: "stretch",
       }}
     >
@@ -51,7 +51,7 @@ const windowHeight = Dimensions.get("window").height;
 
 const styles = StyleSheet.create({
     navContainer: {
-        height: '30%',
+        height: '9%',
         backgroundColor: 'green',
     },
     text: {
@@ -61,11 +61,11 @@ const styles = StyleSheet.create({
     },
     textView: {
         paddingTop: "15%",
-        height: windowHeight*0.2,
-        // backgroundColor: "red"
+        height: windowHeight*0.15,
+        backgroundColor: "red"
     },
     chat: {
-        height: windowHeight*0.785,
+        height: "60%",
         position: "relative",
         // marginTop: "15%",
         // padding: "5%",
