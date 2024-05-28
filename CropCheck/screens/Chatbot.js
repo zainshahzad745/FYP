@@ -51,7 +51,8 @@ const windowHeight = Dimensions.get("window").height;
 
 const styles = StyleSheet.create({
     navContainer: {
-        height: windowHeight*0.107,
+        height: '30%',
+        backgroundColor: 'green',
     },
     text: {
         textAlign: "center",
@@ -61,7 +62,7 @@ const styles = StyleSheet.create({
     textView: {
         paddingTop: "15%",
         height: windowHeight*0.2,
-        // backgroundColor: "red",
+        // backgroundColor: "red"
     },
     chat: {
         height: windowHeight*0.785,

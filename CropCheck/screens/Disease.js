@@ -19,7 +19,7 @@ const Disease = ({route}) => {
         {/* <Text style={styles.text2}>Disease Type:  <Text style={styles.text3}>Wheat Rust</Text></Text> */}
         <Text style={styles.text4}>Proposed Solution</Text>
       </View>
-      <ScrollView>
+      <ScrollView style={{flex: 1,  height: '50%', marginBottom: '22%'}}>
       <View style={styles.solution}>
         <Text style={{ fontSize: 16}}>{diseaseData.solution}</Text>
       </View>
@@ -27,7 +27,7 @@ const Disease = ({route}) => {
       <View>
         <Text> </Text>
       </View>
-      <View style={{ marginTop: '36%'}}>
+      <View style={{ height: '10%', position: 'absolute', bottom: 0}}>
       <Navbar/>
       </View>
     </ImageBackground>
@@ -62,7 +62,8 @@ const styles = StyleSheet.create({
     width: '90%',
     height: '60%',
     backgroundColor: 'red',
-    resizeMode: 'none',
+    resizeMode: 'contain',
+    borderRadius: 20
   },
   text2:{
     fontSize: 40,
@@ -82,6 +83,7 @@ const styles = StyleSheet.create({
   },
   solution: {
     width: '85%',
+    height: '100%',
     // backgroundColor: 'white',
     marginLeft: '10%', 
     marginRight: '5%',

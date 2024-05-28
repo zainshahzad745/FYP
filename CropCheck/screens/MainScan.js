@@ -38,35 +38,64 @@ const Main = ({ navigation }) => {
   };
 
   return (
-    <ImageBackground source={backgroundimg} style={{ width: "100%", height: windowHeight }}>
+    <ImageBackground
+      source={backgroundimg}
+      style={{ width: "100%", height: windowHeight }}
+    >
       <View style={{ display: "flex", height: windowHeight * 0.98 }}>
         <Modal isVisible={isModalVisible} onBackdropPress={toggleModal}>
-          <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: 'white' }}>
-            <Text style={{ fontSize: 20, fontWeight: "bold" }}>No disease detected</Text>
-            <Button title="Close" onPress={toggleModal} />
-          </View>
+          <ImageBackground
+            source={backgroundimg}
+            style={{ width: "100%", height: "100%" }}
+          >
+            <View
+              style={{
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Text style={{ fontSize: 20, fontWeight: "bold", padding: 20 }}>
+                No disease detected
+              </Text>
+              {/* <Button title="Close" onPress={toggleModal} /> */}
+              <TouchableOpacity
+                onPress={toggleModal}
+                style={{
+                  backgroundColor: "green", // Green background color
+                  opacity: 0.8, // Semi-transparent
+                  borderRadius: 50, // Custom border radius
+                  width: "40%", // Custom width
+                  height: "6%",
+                  marginLeft: "10%",
+                  marginRight: "10%",
+                  marginTop: "8%", // Custom height
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Text style={{ color: "white", fontWeight: "bold" }}>
+                  Return Home
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </ImageBackground>
         </Modal>
-        
-        <Text style={styles.title}>{t('waterResult')}</Text>
-        <Text style={styles.subtitle}>{t('mainScantxt')}</Text>
 
-        {(savedImageUri) && (
-          <Image
-            source={{ uri: savedImageUri }}
-            style={styles.image}
-          />
+        <Text style={styles.title}>{t("waterResult")}</Text>
+        <Text style={styles.subtitle}>{t("mainScantxt")}</Text>
+
+        {savedImageUri && (
+          <Image source={{ uri: savedImageUri }} style={styles.image} />
         )}
 
         <Text style={styles.diseaseText}>{disease}</Text>
 
-        <TouchableOpacity
-          onPress={GetSol}
-          style={styles.button}
-        >
+        <TouchableOpacity onPress={GetSol} style={styles.button}>
           <Text style={styles.buttonText}>Get Solution</Text>
         </TouchableOpacity>
-        
-        <View style={{ height: windowHeight * 0.5, marginTop: '21%'}}>
+
+        <View style={{ height: '7%', position: 'absolute', bottom: 0}}>
           <Navbar />
         </View>
       </View>

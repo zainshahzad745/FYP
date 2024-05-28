@@ -449,7 +449,7 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   navContainer: {
-    height: windowHeight * 0.102,
+  height: '10%', position: 'absolute', bottom: 0
   },
 });
 

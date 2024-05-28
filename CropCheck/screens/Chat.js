@@ -159,6 +159,7 @@ const styles = StyleSheet.create({
     },
     navContainer: {
         height: windowHeight * 0.015,
+        height: '9%', position: 'absolute', bottom: 0
     },
     loadingIndicator: {
         position: 'absolute',

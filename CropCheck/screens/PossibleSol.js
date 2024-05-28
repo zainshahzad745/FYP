@@ -90,7 +90,7 @@ const PossibleSol = ({navigation, route}) => {
         name: 'photo.jpg',
       });
 
-      const response = await fetch('http://192.168.151.46:5000/sendData', {
+      const response = await fetch('http://20.194.195.9:5000/sendData', {
         method: 'POST',
         body: formData,
         headers: {
@@ -109,8 +109,11 @@ const PossibleSol = ({navigation, route}) => {
       console.error('Error sending data to the server:', error.message);
     }
   };
-
-  sendDataToAPI(); 
+setTimeout(() => {
+  sendDataToAPI();
+  
+}, 8000);
+   
 
   return (
     <View style={styles.container}>
@@ -132,7 +135,7 @@ const PossibleSol = ({navigation, route}) => {
           </View>
         </ScrollView>
         </View>
-        <View style={{height: windowHeight*0.02, backgroundColor: 'red'}}>
+        <View style={{height: '10%', marginTop: '12%'}}>
           <Navbar/>
         </View>
       </ImageBackground>
@@ -153,15 +156,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     // backgroundColor: 'red',
     alignItems: 'center',
+
   },
   img: {
     width: '85%', 
     height: '100%',
+    borderRadius: 20,
   },
   scrollView: {
     flex: 1,
   },
   TextBold: {
+    textAlign: 'center',
+    marginTop: "13%", 
     fontSize: 45, 
     fontWeight: 'medium', 
   },
