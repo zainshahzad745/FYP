@@ -146,8 +146,9 @@ const WaterModule = () => {
     // settingFactors(humidity, temp);
     console.log('factors', humFactor, tempFactor);
     const result = diameter * coefficient * humFactor * tempFactor;
-    setResult(result);
-    console.log('result', result);
+    const reducedResult = result.toFixed(3)
+    setResult(reducedResult);
+    console.log('result', reducedResult);
   };
 
   return (
