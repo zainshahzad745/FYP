@@ -95,28 +95,28 @@ const PlantAddScreen = ({navigation}) => {
   ];
 
   function getDisease(plant) {
-    if (plant == "Tomato1") {
+    if (plant == t("Pepper")) {
       setDisease(Diseases1)
     }
-    else if (plant == "Tomato2") {
+    else if (plant == t("Pomegranate")) {
       setDisease(Diseases2)
     }
-    else if (plant == "Tomato3") {
+    else if (plant == t("Cotton")) {
       setDisease(Diseases3)
     }
-    else if (plant == "Tomato4") {
+    else if (plant == t("AloeVera")) {
       setDisease(Diseases4)
     }
-    else if (plant == "Tomato5") {
+    else if (plant == t("Cantaloupe")) {
       setDisease(Diseases5)
     }
-    else if (plant == "Tomato6") {
+    else if (plant == t("ChickPea")) {
       setDisease(Diseases6)
     }
-    else if (plant == "Tomato7") {
+    else if (plant == t("Mango")) {
       setDisease(Diseases7)
     }
-    else if (plant == "Tomato8") {
+    else if (plant == t("CurryLeaf")) {
       setDisease(Diseases8)
     }
   };
